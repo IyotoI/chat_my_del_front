@@ -1,3 +1,5 @@
+import BottomChat from "./components/molecules/bottomChat";
+
 const App = () => {
   return (
     <div className="flex flex-col h-screen">
@@ -6,7 +8,9 @@ const App = () => {
       {/* Conversacion - chat */}
       <div className="flex-1 bg-green-500"></div>
       {/* Parte inferior - chat */}
-      <div className="p-5 bg-blue-500"></div>
+      <div className="p-5 bg-blue-500">
+        <BottomChat />
+      </div>
     </div>
   );
 };

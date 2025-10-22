@@ -9,7 +9,7 @@ export default function Button({
     <button
       type={type}
       onClick={onClick}
-      className={`${className} ${color} text-white font-semibold py-3 px-8 rounded-lg transition cursor-pointer`}
+      className={`${className} ${color} text-white font-semibold py-3 px-8 rounded-full transition cursor-pointer`}
     >
       {children}
     </button>
