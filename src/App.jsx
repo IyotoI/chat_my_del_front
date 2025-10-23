@@ -7,7 +7,7 @@ const App = () => {
       {/* Parte superior - chat */}
       <div className="p-5 bg-red-500"></div>
       {/* Conversacion - chat */}
-      <div className="flex-1 bg-green-500 px-2">
+      <div className="flex-1 bg-green-500 px-2 overflow-y-auto">
         {/* Tarjeta mensaje */}
         <CardMessages className="mb-1 bg-[#242626] mr-20 sm:mr-60" />
         <CardMessages className="mb-1 bg-[#144D37] ml-20 sm:ml-60" />
