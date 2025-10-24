@@ -1,7 +1,7 @@
 export default function CardMessages({ className }) {
   return (
     <div
-      className={`${className} rounded-md break-all p-2 text-base/5 inline-block text-white`}
+      className={`${className} rounded-md break-all p-2 text-base/5 inline-block text-black`}
     >
       <div>
         aaaaadddddddddddddddddddddddddddddddddddaaaaaaaaaaaaaaaaaaaaaaaaaaa

@@ -13,7 +13,7 @@ export default function Input({
       onChange={onChange}
       placeholder={placeholder}
       required={required}
-      className={`${className} p-3 rounded-full bg-gray-700 text-white focus:ring-2 focus:ring-indigo-500 outline-none w-full`}
+      className={`${className} p-3 rounded-full bg-gray-700 focus:ring-2 focus:ring-indigo-500 outline-none w-full`}
     />
   );
 }
