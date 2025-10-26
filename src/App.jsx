@@ -10,7 +10,7 @@ const App = () => {
         <TopChat />
       </div>
       {/* Conversacion - chat */}
-      <div className="flex-1 bg-[#b9adad] px-2 pt-2 overflow-y-auto mb-[56px]">
+      <div className="flex-1 bg-[#b9adad] px-2 pt-2 overflow-y-auto mb-14">
         {/* Tarjeta mensaje */}
         <CardMessages className="mb-1 bg-white mr-20 sm:mr-60" />
         <CardMessages className="mb-1 bg-[#D9FCD2] ml-20 sm:ml-60" />
