@@ -17,7 +17,7 @@ export default function ChatOrganism({ children }) {
         <CardMessages className="mb-1 bg-white mr-20 sm:mr-60" />
       </div>
       {/* Parte inferior - chat */}
-      <div className="p-2 bg-[#F5F2EB] ">
+      <div className="p-3 bg-[#F5F2EB] ">
         <BottomChat />
       </div>
     </>
