@@ -1,7 +1,7 @@
-import ChatPage from "./components/pages/ChatPage";
+import AppRouter from "./routes/AppRouter";
 
 const App = () => {
-  return <ChatPage />;
+  return <AppRouter />;
 };
 
 export default App;
