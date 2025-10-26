@@ -10,14 +10,14 @@ export default function ChatOrganism({ children }) {
         <TopChat />
       </div>
       {/* Conversacion - chat */}
-      <div className="flex-1 bg-[#b9adad] px-2 pt-2 overflow-y-auto mb-14">
+      <div className="flex-1 bg-[#b9adad] px-2 pt-2 overflow-y-auto ">
         {/* Tarjeta mensaje */}
         <CardMessages className="mb-1 bg-white mr-20 sm:mr-60" />
         <CardMessages className="mb-1 bg-[#D9FCD2] ml-20 sm:ml-60" />
         <CardMessages className="mb-1 bg-white mr-20 sm:mr-60" />
       </div>
       {/* Parte inferior - chat */}
-      <div className="p-1 bg-[#b9adad] fixed bottom-0 w-full">
+      <div className="p-2 bg-[#b9adad] ">
         <BottomChat />
       </div>
     </>
