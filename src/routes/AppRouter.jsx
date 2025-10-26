@@ -12,7 +12,7 @@ export default function AppRouter() {
       <Routes>
         <Route path="/chat" element={<ChatPage />} />
         {/* Redirección por defecto */}
-        {/* <Route path="*" element={<Navigate to="/login" replace />} /> */}
+        <Route path="*" element={<Navigate to="/chat" replace />} />
       </Routes>
     </Router>
   );
