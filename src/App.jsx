@@ -17,7 +17,7 @@ const App = () => {
         <CardMessages className="mb-1 bg-white mr-20 sm:mr-60" />
       </div>
       {/* Parte inferior - chat */}
-      <div className="p-1 bg-[#b9adad] absolute bottom-0 w-full">
+      <div className="p-1 bg-[#b9adad] fixed bottom-0 w-full">
         <BottomChat />
       </div>
     </div>
