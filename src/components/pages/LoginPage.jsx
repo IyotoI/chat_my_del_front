@@ -14,7 +14,9 @@ export default function LoginPage() {
     <LoginTemplate>
       <form className="text-center">
         <Input placeholder="Llave" className="mb-4" />
-        <Button onClick={handleLogin}>Crear sala</Button>
+        <Button color="bg-[#1AAD5E]" onClick={handleLogin}>
+          Crear sala
+        </Button>
       </form>
     </LoginTemplate>
   );
