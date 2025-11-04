@@ -11,8 +11,12 @@ const FormLogin = () => {
   };
 
   return (
-    <form className="text-center">
-      <img src={imgOnlineCommunity} alt="Logo" />
+    <form className="text-center md:w-[320px]">
+      <img
+        src={imgOnlineCommunity}
+        alt="Logo"
+        className="mx-auto w-full sm:max-w-md md:max-w-lg lg:max-w-2xl"
+      />
 
       <p class="text-4xl mt-8 mb-4 font-[Arial]">
         <span className="text-[#1AAD5E]">C</span>hatmyd
