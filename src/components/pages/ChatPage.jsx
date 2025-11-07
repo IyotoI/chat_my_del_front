@@ -5,13 +5,15 @@ import { useEffect } from "react";
 
 export default function ChatPage() {
   const socket = useSocket();
-  console.log(socket);
 
   useEffect(() => {
     if (!socket) return;
 
     socket.on("chat:idSocket", (idSocket) => {
-      console.log("🚀 ~ ChatPage ~ idSocket:", idSocket);
+      const validateIdSoket = localStorage.getItem("idSocket");
+      if (!validateIdSoket) {
+        localStorage.setItem("idSocket", idSocket);
+      }
     });
 
     socket.on("chat:message", (value) => {
@@ -25,7 +27,11 @@ export default function ChatPage() {
     socket.on("chat:fieldWriting", (value) => {
       console.log("🚀 ~ ChatPage ~ value:", value);
     });
-  }, []);
+
+    return () => {
+      socket.off("chat:idSocket");
+    };
+  }, [socket]);
 
   return (
     <ChatTemplate>
