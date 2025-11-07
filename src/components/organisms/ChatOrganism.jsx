@@ -6,7 +6,7 @@ export default function ChatOrganism({ children }) {
   return (
     <>
       {/* Parte superior - chat */}
-      <div className="p-3 bg-white">
+      <div className="p-2 bg-white">
         <TopChat />
       </div>
       {/* Conversacion - chat */}
@@ -21,7 +21,7 @@ export default function ChatOrganism({ children }) {
         <CardMessages className="mb-1 bg-[#D9FCD2] ml-20 md:ml-50 xl:ml-118" />
       </div>
       {/* Parte inferior - chat */}
-      <div className="p-3 bg-[#F5F2EB] ">
+      <div className="p-2 bg-[#F5F2EB] ">
         <BottomChat />
       </div>
     </>
