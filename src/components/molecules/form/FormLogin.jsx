@@ -1,15 +1,8 @@
 import Button from "../../atoms/Button";
 import Input from "../../atoms/Input";
 import imgOnlineCommunity from "../../../assets/images/online-community.svg";
-import { useNavigate } from "react-router-dom";
 
-const FormLogin = () => {
-  const navigate = useNavigate();
-
-  const handleLogin = () => {
-    navigate("/chat");
-  };
-
+const FormLogin = ({ keyRoom, setKeyRoom, handleLogin }) => {
   return (
     <form className="text-center md:w-[320px]">
       <img
@@ -18,7 +11,7 @@ const FormLogin = () => {
         className="mx-auto w-full sm:max-w-md md:max-w-lg lg:max-w-2xl"
       />
 
-      <p class="text-4xl mt-8 mb-4 font-[Arial]">
+      <p className="text-4xl mt-8 mb-4 font-[Arial]">
         <span className="text-[#1AAD5E]">C</span>hatmyd
       </p>
 
@@ -27,7 +20,12 @@ const FormLogin = () => {
         comunicarse
       </p>
 
-      <Input placeholder="Llave" className="mb-8" />
+      <Input
+        placeholder="Llave"
+        className="mb-8"
+        value={keyRoom}
+        onChange={(e) => setKeyRoom(e.target.value)}
+      />
       <Button color="bg-[#1AAD5E]" onClick={handleLogin}>
         Crear sala
       </Button>

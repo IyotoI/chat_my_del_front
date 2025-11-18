@@ -2,16 +2,20 @@ import BottomChat from "../molecules/BottomChat";
 import TopChat from "../molecules/TopChat";
 import CardMessages from "../molecules/CardMessages";
 
-export default function ChatOrganism({ children }) {
+export default function ChatOrganism({
+  isFieldWriting,
+  handleChat,
+  fieldChat,
+  setFieldChat,
+}) {
   return (
     <>
       {/* Parte superior - chat */}
       <div className="p-2 bg-white">
-        <TopChat />
+        <TopChat isFieldWriting={isFieldWriting} />
       </div>
       {/* Conversacion - chat */}
       <div className="flex-1 bg-[#F5F2EB] px-2 pt-2 overflow-y-auto ">
-        {/* Tarjeta mensaje */}
         <CardMessages
           className="mb-1 bg-white mr-20 sm:mr-60
         "
@@ -22,7 +26,11 @@ export default function ChatOrganism({ children }) {
       </div>
       {/* Parte inferior - chat */}
       <div className="p-2 bg-[#F5F2EB] ">
-        <BottomChat />
+        <BottomChat
+          handleChat={handleChat}
+          fieldChat={fieldChat}
+          setFieldChat={setFieldChat}
+        />
       </div>
     </>
   );
