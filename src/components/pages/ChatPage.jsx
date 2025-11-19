@@ -1,12 +1,13 @@
 import ChatOrganism from "../organisms/ChatOrganism";
 import ChatTemplate from "../templates/ChatTemplate";
 import { useSocket } from "../../hooks/useSocket";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 export default function ChatPage() {
   const socket = useSocket();
   const [isFieldWriting, setIsFieldWriting] = useState(false);
   const [fieldChat, setFieldChat] = useState("");
+  const documentoRef = useRef(null);
 
   // const fieldChatEmitSokect = (value) => {
   //   const idSocket = localStorage.getItem("idSocket");
@@ -19,7 +20,21 @@ export default function ChatPage() {
   // };
 
   const handleChat = () => {
-    console.log(fieldChat);
+    if (fieldChat === "") {
+      return;
+    }
+
+    const idSocket2 = localStorage.getItem("idSocket");
+    const keyRoom = localStorage.getItem("keyRoom");
+
+    socket.emit("chat:message", {
+      idReceiver: keyRoom,
+      message: fieldChat,
+      idSocket2,
+    });
+
+    setFieldChat("");
+    documentoRef.current.focus();
   };
 
   /* Sokets */
@@ -64,6 +79,7 @@ export default function ChatPage() {
         handleChat={handleChat}
         fieldChat={fieldChat}
         setFieldChat={setFieldChat}
+        ref={documentoRef}
       />
     </ChatTemplate>
   );
