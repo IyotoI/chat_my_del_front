@@ -19,6 +19,18 @@ export default function ChatPage() {
   //   });
   // };
 
+  const handleSetFieldChat = (value) => {
+    setFieldChat(value);
+    const keyRoom = localStorage.getItem("keyRoom");
+    const idSocket = localStorage.getItem("idSocket");
+
+    socket.emit("chat:fieldWriting", {
+      idReceiver: keyRoom,
+      message: value,
+      idSocket,
+    });
+  };
+
   const handleChat = () => {
     if (fieldChat === "") {
       return;
@@ -30,6 +42,12 @@ export default function ChatPage() {
     socket.emit("chat:message", {
       idReceiver: keyRoom,
       message: fieldChat,
+      idSocket2,
+    });
+
+    socket.emit("chat:fieldWriting", {
+      idReceiver: keyRoom,
+      message: "",
       idSocket2,
     });
 
@@ -48,13 +66,9 @@ export default function ChatPage() {
       }
     });
 
-    socket.on("chat:message", (value) => {
-      console.log("🚀 ~ ChatPage ~ value:", value);
-    });
+    socket.on("chat:message", (value) => {});
 
-    socket.on("join-room", (value) => {
-      console.log("🚀 ~ ChatPage ~ value:", value);
-    });
+    socket.on("join-room", (value) => {});
 
     socket.on("chat:fieldWriting", (value) => {
       const idSocket = localStorage.getItem("idSocket");
@@ -78,7 +92,7 @@ export default function ChatPage() {
         isFieldWriting={isFieldWriting}
         handleChat={handleChat}
         fieldChat={fieldChat}
-        setFieldChat={setFieldChat}
+        setFieldChat={handleSetFieldChat}
         ref={documentoRef}
       />
     </ChatTemplate>
