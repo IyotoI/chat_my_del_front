@@ -1,10 +1,10 @@
 import ChatOrganism from "../organisms/ChatOrganism";
 import ChatTemplate from "../templates/ChatTemplate";
-import { useSocket } from "../../hooks/useSocket";
 import { useEffect, useState, useRef } from "react";
+import { useGlobal } from "../../context/GlobalContext";
 
 export default function ChatPage() {
-  const socket = useSocket();
+  const { socket } = useGlobal();
   const [isFieldWriting, setIsFieldWriting] = useState(false);
   const [fieldChat, setFieldChat] = useState("");
   const documentoRef = useRef(null);

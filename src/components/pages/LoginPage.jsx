@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSocket } from "../../hooks/useSocket";
 import FormLogin from "../molecules/form/FormLogin";
 import LoginTemplate from "../templates/LoginTemplate";
+import { useGlobal } from "../../context/GlobalContext";
 
 export default function LoginPage() {
+  const { socket } = useGlobal();
   const [keyRoom, setKeyRoom] = useState("");
   const navigate = useNavigate();
-  const socket = useSocket();
 
   const handleLogin = () => {
     if (keyRoom === "") {
