@@ -8,16 +8,7 @@ export default function ChatPage() {
   const [isFieldWriting, setIsFieldWriting] = useState(false);
   const [fieldChat, setFieldChat] = useState("");
   const documentoRef = useRef(null);
-
-  // const fieldChatEmitSokect = (value) => {
-  //   const idSocket = localStorage.getItem("idSocket");
-
-  //   socket.emit("chat:fieldWriting", {
-  //     // idReceiver: idSocketReceiver.textContent,
-  //     message: value,
-  //     idSocket,
-  //   });
-  // };
+  const [messagesChat, setMessagesChat] = useState([]);
 
   const handleSetFieldChat = (value) => {
     setFieldChat(value);
@@ -66,7 +57,11 @@ export default function ChatPage() {
       }
     });
 
-    socket.on("chat:message", (value) => {});
+    socket.on("chat:message", ({ idReceiver, message, idSocket2 }) => {
+      const idSocket3 = localStorage.getItem("idSocket");
+      const messageUser = { message, idSocket2, idSocket3 };
+      setMessagesChat((prev) => [...prev, messageUser]);
+    });
 
     socket.on("join-room", (value) => {});
 
@@ -94,6 +89,7 @@ export default function ChatPage() {
         fieldChat={fieldChat}
         setFieldChat={handleSetFieldChat}
         ref={documentoRef}
+        messagesChat={messagesChat}
       />
     </ChatTemplate>
   );

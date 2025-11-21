@@ -4,7 +4,12 @@ import CardMessages from "../molecules/CardMessages";
 import { forwardRef } from "react";
 
 const ChatOrganism = forwardRef(
-  ({ isFieldWriting, handleChat, fieldChat, setFieldChat }, ref) => {
+  (
+    { isFieldWriting, handleChat, fieldChat, setFieldChat, messagesChat },
+    ref
+  ) => {
+    const idSocketUser = localStorage.getItem("idSocket");
+
     return (
       <>
         {/* Parte superior - chat */}
@@ -12,14 +17,27 @@ const ChatOrganism = forwardRef(
           <TopChat isFieldWriting={isFieldWriting} />
         </div>
         {/* Conversacion - chat */}
-        <div className="flex-1 bg-[#F5F2EB] px-2 pt-2 overflow-y-auto ">
-          <CardMessages
-            className="mb-1 bg-white mr-20 sm:mr-60
-        "
-          />
-          <CardMessages className="mb-1 bg-[#D9FCD2] ml-20 md:ml-50 xl:ml-118" />
-          <CardMessages className="mb-1 bg-white mr-20 sm:mr-60" />
-          <CardMessages className="mb-1 bg-[#D9FCD2] ml-20 md:ml-50 xl:ml-118" />
+        <div className="flex-1 flex-col flex bg-[#F5F2EB] px-2 pt-2 overflow-y-auto ">
+          {messagesChat.map((value) => {
+            return (
+              <div
+                className={`${
+                  value.idSocket2 === idSocketUser
+                    ? "flex justify-end"
+                    : "flex justify-start"
+                } mb-3`}
+              >
+                <CardMessages
+                  className={
+                    value.idSocket2 !== idSocketUser
+                      ? "bg-white"
+                      : "bg-[#D9FCD2]"
+                  }
+                  value={value}
+                />
+              </div>
+            );
+          })}
         </div>
         {/* Parte inferior - chat */}
         <div className="p-2 bg-[#F5F2EB] ">
