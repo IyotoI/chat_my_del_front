@@ -7,7 +7,11 @@ export function useSocket() {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    const newSocket = io(SOCKET_URL);
+    const newSocket = io(SOCKET_URL, {
+      withCredentials: true,
+      transports: ["websocket", "polling"],
+      path: "/socket.io/",
+    });
     setSocket(newSocket);
 
     return () => {
