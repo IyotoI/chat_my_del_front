@@ -36,6 +36,12 @@ export default function ChatPage() {
   };
 
   const registerServiceWorker = async () => {
+    const permiso = await Notification.requestPermission();
+    if (permiso !== "granted") {
+      alert("Debes permitir notificaciones");
+      return;
+    }
+
     const reg = await navigator.serviceWorker.register("/serviceWorker.js", {
       scope: "/",
     });
