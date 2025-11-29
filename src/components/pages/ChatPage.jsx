@@ -47,7 +47,10 @@ export default function ChatPage() {
 
     await fetch(`${VITE_URL_BACKEND_CHAT}/suscription`, {
       method: "POST",
-      body: JSON.stringify(sub),
+      body: JSON.stringify({
+        idSocket: localStorage.getItem("idSocket"),
+        subscription: sub,
+      }),
       headers: {
         "Content-Type": "application/json",
       },
@@ -80,8 +83,8 @@ export default function ChatPage() {
 
   /* Sokets */
   useEffect(() => {
-    registerServiceWorker();
     if (!socket) return;
+    registerServiceWorker();
 
     socket.on("chat:idSocket", (idSocket) => {
       const validateIdSoket = localStorage.getItem("idSocket");
