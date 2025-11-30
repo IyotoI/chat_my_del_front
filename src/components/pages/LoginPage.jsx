@@ -5,7 +5,7 @@ import LoginTemplate from "../templates/LoginTemplate";
 import { useGlobal } from "../../context/GlobalContext";
 
 export default function LoginPage() {
-  const { socket } = useGlobal();
+  const { socket, setIsOpen } = useGlobal();
   const [keyRoom, setKeyRoom] = useState("");
   const navigate = useNavigate();
   const VITE_PUBLIC_VAPID_KEY = import.meta.env.VITE_PUBLIC_VAPID_KEY;
@@ -66,13 +66,15 @@ export default function LoginPage() {
   };
 
   const handleLogin = () => {
+    // return;
     if (keyRoom === "") {
       alert("Ingresar clave de la sala");
       return;
     }
+    setIsOpen(true);
 
     socket.emit("join-room", {
-      idsoketUser: "User",
+      idsoketUser: localStorage.getItem("idSocket"),
       IdSocketReceiver: keyRoom,
     });
 

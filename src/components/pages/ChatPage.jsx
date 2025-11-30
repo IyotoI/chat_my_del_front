@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import { useGlobal } from "../../context/GlobalContext";
 
 export default function ChatPage() {
-  const { socket } = useGlobal();
+  const { socket, setIsOpen } = useGlobal();
   const [isFieldWriting, setIsFieldWriting] = useState(false);
   const [fieldChat, setFieldChat] = useState("");
   const documentoRef = useRef(null);
@@ -56,7 +56,18 @@ export default function ChatPage() {
       setMessagesChat((prev) => [...prev, messageUser]);
     });
 
-    socket.on("join-room", (value) => {});
+    socket.on("join-room", (value) => {
+      console.log("🚀 ~ ChatPage ~ value:", value);
+      setIsOpen(false);
+
+      socket.emit("closeModal", {
+        isOpen: false,
+      });
+    });
+
+    socket.on("closeModal", (value) => {
+      setIsOpen(false);
+    });
 
     socket.on("chat:fieldWriting", (value) => {
       const idSocket = localStorage.getItem("idSocket");
@@ -69,10 +80,12 @@ export default function ChatPage() {
       setIsFieldWriting(true);
     });
 
-    // return () => {
-    //   socket.off("chat:idSocket");
-    // };
-  }, [socket]);
+    return () => {
+      socket.off("chat:message");
+      socket.off("join-room");
+      socket.off("chat:fieldWriting");
+    };
+  }, []);
 
   return (
     <ChatTemplate>

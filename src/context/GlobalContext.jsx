@@ -5,9 +5,10 @@ const GlobalContext = createContext();
 
 export function GlobalProvider({ children }) {
   const socket = useSocket();
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <GlobalContext.Provider value={{ socket }}>
+    <GlobalContext.Provider value={{ socket, isOpen, setIsOpen }}>
       {children}
     </GlobalContext.Provider>
   );
