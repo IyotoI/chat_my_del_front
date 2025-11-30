@@ -57,7 +57,13 @@ export default function ChatPage() {
     });
 
     socket.on("join-room", (value) => {
-      console.log("🚀 ~ ChatPage ~ value:", value);
+      console.log(value);
+      console.log(localStorage.getItem("idSocket"));
+      console.log(value !== localStorage.getItem("idSocket"));
+
+      if (value === localStorage.getItem("idSocket")) {
+        return;
+      }
       setIsOpen(false);
 
       socket.emit("closeModal", {
@@ -81,9 +87,7 @@ export default function ChatPage() {
     });
 
     return () => {
-      socket.off("chat:message");
       socket.off("join-room");
-      socket.off("chat:fieldWriting");
     };
   }, []);
 
