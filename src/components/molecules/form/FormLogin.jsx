@@ -24,6 +24,7 @@ const FormLogin = ({ keyRoom, setKeyRoom, handleLogin }) => {
         placeholder="Llave"
         className="mb-8"
         value={keyRoom}
+        type="password"
         onChange={(e) => setKeyRoom(e.target.value)}
       />
       <Button color="bg-[#1AAD5E]" onClick={handleLogin}>
