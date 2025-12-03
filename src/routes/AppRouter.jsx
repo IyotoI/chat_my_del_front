@@ -4,13 +4,11 @@ import LoginPage from "../components/pages/LoginPage";
 
 export default function AppRouter() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/chat" element={<ChatPage />} />
-        {/* Redirección por defecto */}
-        <Route path="*" element={<Navigate to="/login" replace />} />
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Navigate to="/login" replace />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/chat" element={<ChatPage />} />
+      {/* Redirección por defecto */}
+    </Routes>
   );
 }
