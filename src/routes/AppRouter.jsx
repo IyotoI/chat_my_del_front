@@ -6,9 +6,10 @@ export default function AppRouter() {
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/login" replace />} />
+      <Route path="*" element={<Navigate to="/login" replace />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/chat" element={<ChatPage />} />
-      {/* Redirección por defecto */}
+      {/* Opcional: ruta 404 */}
     </Routes>
   );
 }
