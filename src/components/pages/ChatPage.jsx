@@ -1,6 +1,6 @@
 import ChatOrganism from "../organisms/ChatOrganism";
 import ChatTemplate from "../templates/ChatTemplate";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useLayoutEffect } from "react";
 import { useGlobal } from "../../context/GlobalContext";
 
 export default function ChatPage() {
@@ -8,6 +8,7 @@ export default function ChatPage() {
   const [isFieldWriting, setIsFieldWriting] = useState(false);
   const [fieldChat, setFieldChat] = useState("");
   const documentoRef = useRef(null);
+  const refListChats = useRef(null);
   const [messagesChat, setMessagesChat] = useState([]);
 
   const handleSetFieldChat = (value) => {
@@ -46,8 +47,16 @@ export default function ChatPage() {
     documentoRef.current.focus();
   };
 
+  useLayoutEffect(() => {
+    if (refListChats.current) {
+      refListChats.current.scrollTop = refListChats.current.scrollHeight;
+    }
+  }, [messagesChat]);
+
   /* Sokets */
   useEffect(() => {
+    refListChats.current.scrollTop = refListChats.current.scrollHeight;
+
     if (!socket) return;
 
     socket.on("chat:message", ({ idReceiver, message, idSocket2 }) => {
@@ -95,6 +104,7 @@ export default function ChatPage() {
         fieldChat={fieldChat}
         setFieldChat={handleSetFieldChat}
         ref={documentoRef}
+        ref2={refListChats}
         messagesChat={messagesChat}
       />
     </ChatTemplate>
