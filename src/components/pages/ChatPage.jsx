@@ -53,11 +53,11 @@ export default function ChatPage() {
     navigate("/login");
   };
 
-  // useLayoutEffect(() => {
-  //   if (refListChats.current) {
-  //     refListChats.current.scrollTop = refListChats.current.scrollHeight;
-  //   }
-  // }, [messagesChat]);
+  useLayoutEffect(() => {
+    if (refListChats.current) {
+      refListChats.current.scrollTop = refListChats.current.scrollHeight;
+    }
+  }, [messagesChat]);
 
   /* Sokets */
   useEffect(() => {
