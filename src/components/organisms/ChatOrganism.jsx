@@ -29,9 +29,10 @@ const ChatOrganism = forwardRef(
           ref={ref2}
           className="flex-1 flex-col flex  bg-[#F5F2EB] px-2 pt-2 overflow-y-auto "
         >
-          {messagesChat.map((value) => {
+          {messagesChat.map((value, index) => {
             return (
               <div
+                key={index}
                 className={`${
                   value.idSocket2 === idSocketUser
                     ? "flex justify-end"

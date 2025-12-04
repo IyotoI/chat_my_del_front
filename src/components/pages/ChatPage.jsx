@@ -103,17 +103,17 @@ export default function ChatPage() {
   }, []);
 
   return (
-    <div className="h-dvh flex flex-col bg-gray-50">
-      {/* Header (barra fija que NO se mueve con el teclado) */}
-      <div className="sticky top-0 z-50 bg-white shadow-sm">ddd</div>
-
-      {/* Contenedor scrollable */}
-      <div className="flex-1 overflow-y-auto">{/*  */}</div>
-
-      {/* Input pegado abajo */}
-      <div className="sticky bottom-0 z-50 bg-white border-t">
-        <input type="text" />
-      </div>
-    </div>
+    <ChatTemplate>
+      <ChatOrganism
+        isFieldWriting={isFieldWriting}
+        handleChat={handleChat}
+        fieldChat={fieldChat}
+        setFieldChat={handleSetFieldChat}
+        ref={documentoRef}
+        ref2={refListChats}
+        messagesChat={messagesChat}
+        onExitChat={exitChat}
+      />
+    </ChatTemplate>
   );
 }
