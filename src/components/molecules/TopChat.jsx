@@ -8,7 +8,7 @@ export default function TopChat({ isFieldWriting, onExitChat }) {
         <div className="w-[47px] h-[47px] rounded-full bg-[#1aad5e1c] mr-2 border border-[#1AAD5E] flex justify-center items-center">
           <IconItem nameIcon="account" className="text-[#1AAD5E]" />
         </div>
-        <div className="leading-[1.2] ">
+        <div className={`${isFieldWriting ? "leading-[1.2]" : "leading-[2]"}`}>
           <div className="text-[1.3rem]">Amigo</div>
           {isFieldWriting && (
             <div className="text-[0.9rem] text-[#1AAD5E]">Escribiendo...</div>
