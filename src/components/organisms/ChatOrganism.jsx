@@ -5,7 +5,15 @@ import { forwardRef } from "react";
 
 const ChatOrganism = forwardRef(
   (
-    { isFieldWriting, handleChat, fieldChat, setFieldChat, messagesChat, ref2 },
+    {
+      isFieldWriting,
+      handleChat,
+      fieldChat,
+      setFieldChat,
+      messagesChat,
+      ref2,
+      onExitChat,
+    },
     ref
   ) => {
     const idSocketUser = localStorage.getItem("idSocket");
@@ -14,7 +22,7 @@ const ChatOrganism = forwardRef(
       <>
         {/* Parte superior - chat */}
         <div className="p-2 bg-white">
-          <TopChat isFieldWriting={isFieldWriting} />
+          <TopChat isFieldWriting={isFieldWriting} onExitChat={onExitChat} />
         </div>
         {/* Conversacion - chat */}
         <div

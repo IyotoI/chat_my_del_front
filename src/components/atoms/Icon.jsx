@@ -7,6 +7,7 @@ import {
   mdiDelete,
   mdiAccountMultiplePlus,
   mdiSend,
+  mdiExitToApp,
 } from "@mdi/js";
 
 export default function IconItem({ color, className, nameIcon, size = 1.2 }) {
@@ -22,6 +23,8 @@ export default function IconItem({ color, className, nameIcon, size = 1.2 }) {
     icnItm = mdiAccountMultiplePlus;
   } else if (nameIcon === "send") {
     icnItm = mdiSend;
+  } else if (nameIcon === "exitToApp") {
+    icnItm = mdiExitToApp;
   } else {
     icnItm = mdiTooltipImageOutline;
   }

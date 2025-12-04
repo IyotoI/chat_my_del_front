@@ -2,6 +2,7 @@ import ChatOrganism from "../organisms/ChatOrganism";
 import ChatTemplate from "../templates/ChatTemplate";
 import { useEffect, useState, useRef, useLayoutEffect } from "react";
 import { useGlobal } from "../../context/GlobalContext";
+import { useNavigate } from "react-router-dom";
 
 export default function ChatPage() {
   const { socket, setIsOpen } = useGlobal();
@@ -10,6 +11,7 @@ export default function ChatPage() {
   const documentoRef = useRef(null);
   const refListChats = useRef(null);
   const [messagesChat, setMessagesChat] = useState([]);
+  const navigate = useNavigate();
 
   const handleSetFieldChat = (value) => {
     setFieldChat(value);
@@ -45,6 +47,10 @@ export default function ChatPage() {
 
     setFieldChat("");
     documentoRef.current.focus();
+  };
+
+  const exitChat = () => {
+    navigate("/login");
   };
 
   useLayoutEffect(() => {
@@ -106,6 +112,7 @@ export default function ChatPage() {
         ref={documentoRef}
         ref2={refListChats}
         messagesChat={messagesChat}
+        onExitChat={exitChat}
       />
     </ChatTemplate>
   );
