@@ -5,8 +5,8 @@ export default function TopChat({ isFieldWriting, onExitChat }) {
   return (
     <div className="flex justify-between">
       <div className="flex">
-        <div className="w-[47px] h-[47px] rounded-full bg-[#1AAD5E] mr-2 flex justify-center items-center">
-          <IconItem nameIcon="account" className="text-white" />
+        <div className="w-[47px] h-[47px] rounded-full bg-[#1aad5e1c] mr-2 border border-[#1AAD5E] flex justify-center items-center">
+          <IconItem nameIcon="account" className="text-[#1AAD5E]" />
         </div>
         <div className="leading-[1.2] ">
           <div className="text-[1.3rem]">Amigo</div>
