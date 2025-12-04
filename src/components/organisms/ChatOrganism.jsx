@@ -21,13 +21,13 @@ const ChatOrganism = forwardRef(
     return (
       <>
         {/* Parte superior - chat */}
-        <div className="p-2 bg-white fixed left-0 right-0 z-95">
+        <div className="p-2 bg-white ">
           <TopChat isFieldWriting={isFieldWriting} onExitChat={onExitChat} />
         </div>
         {/* Conversacion - chat */}
         <div
           ref={ref2}
-          className="flex-1 flex-col flex mt-16 bg-[#F5F2EB] px-2 pt-2 overflow-y-auto "
+          className="flex-1 flex-col flex  bg-[#F5F2EB] px-2 pt-2 overflow-y-auto "
         >
           {messagesChat.map((value) => {
             return (
@@ -51,7 +51,7 @@ const ChatOrganism = forwardRef(
           })}
         </div>
         {/* Parte inferior - chat */}
-        <div className="p-2 bg-[#F5F2EB] ">
+        <div className="p-2 bg-[#F5F2EB]  ">
           <BottomChat
             handleChat={handleChat}
             fieldChat={fieldChat}

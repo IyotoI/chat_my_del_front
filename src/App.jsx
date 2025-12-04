@@ -4,11 +4,13 @@ import { BrowserRouter } from "react-router-dom";
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <ModalOrganism />
-      {/* <div className="p-7"></div> */}
-      <AppRouter />
-    </BrowserRouter>
+    <div class="grid grid-rows-3 h-screen gap-4">
+      <div class="bg-red-300">Espacio 1</div>
+      <div class="bg-green-300">Espacio 2</div>
+      <div class="bg-blue-300">
+        <input type="text" />
+      </div>
+    </div>
   );
 };
 
