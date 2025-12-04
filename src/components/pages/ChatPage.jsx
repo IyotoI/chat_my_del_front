@@ -57,10 +57,6 @@ export default function ChatPage() {
     });
 
     socket.on("join-room", (value) => {
-      console.log(value);
-      console.log(localStorage.getItem("idSocket"));
-      console.log(value !== localStorage.getItem("idSocket"));
-
       if (value === localStorage.getItem("idSocket")) {
         return;
       }
