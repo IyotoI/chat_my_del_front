@@ -12,6 +12,8 @@ export default function ChatPage() {
   const refListChats = useRef(null);
   const [messagesChat, setMessagesChat] = useState([]);
   const navigate = useNavigate();
+  const VITE_PUBLIC_VAPID_KEY = import.meta.env.VITE_PUBLIC_VAPID_KEY;
+  const VITE_URL_BACKEND_CHAT = import.meta.env.VITE_URL_BACKEND_CHAT;
 
   const handleSetFieldChat = (value) => {
     setFieldChat(value);
@@ -54,6 +56,16 @@ export default function ChatPage() {
     localStorage.removeItem("keyRoom");
   };
 
+  const convertUrlBase64ToUint8Array = (base64String) => {
+    const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
+    const base64 = (base64String + padding)
+      .replace(/-/g, "+")
+      .replace(/_/g, "/");
+
+    const rawData = atob(base64);
+    return Uint8Array.from([...rawData].map((c) => c.charCodeAt(0)));
+  };
+
   const enableNotifications = async () => {
     const permissionNotificationResponse =
       await Notification.requestPermission();
@@ -63,9 +75,32 @@ export default function ChatPage() {
       return;
     }
 
+    await registerServiceWorker();
+
     alert("Las notificaciones ya estan activadas");
   };
 
+  const registerServiceWorker = async () => {
+    const reg = await navigator.serviceWorker.register("/serviceWorker.js", {
+      scope: "/",
+    });
+
+    const sub = await reg.pushManager.subscribe({
+      userVisibleOnly: true,
+      applicationServerKey: convertUrlBase64ToUint8Array(VITE_PUBLIC_VAPID_KEY),
+    });
+
+    await fetch(`${VITE_URL_BACKEND_CHAT}/suscription`, {
+      method: "POST",
+      body: JSON.stringify({
+        idSocket: localStorage.getItem("idSocket"),
+        subscription: sub,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  };
   useLayoutEffect(() => {
     if (refListChats.current) {
       refListChats.current.scrollTop = refListChats.current.scrollHeight;
