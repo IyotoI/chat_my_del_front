@@ -81,6 +81,14 @@ export default function ChatPage() {
   };
 
   const registerServiceWorker = async () => {
+    const existsRegisterServiceWorker =
+      await navigator.serviceWorker.getRegistration();
+
+    if (existsRegisterServiceWorker) {
+      console.log("Ya hay un service worker registrado");
+      return existsRegisterServiceWorker;
+    }
+
     const reg = await navigator.serviceWorker.register("/serviceWorker.js", {
       scope: "/",
     });
