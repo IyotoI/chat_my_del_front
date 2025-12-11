@@ -51,6 +51,7 @@ export default function ChatPage() {
 
   const exitChat = () => {
     navigate("/login");
+    localStorage.removeItem("keyRoom");
   };
 
   useLayoutEffect(() => {
