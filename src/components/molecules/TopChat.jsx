@@ -1,7 +1,11 @@
 import IconItem from "../atoms/Icon";
 import Button from "../atoms/Button";
 
-export default function TopChat({ isFieldWriting, onExitChat }) {
+export default function TopChat({
+  isFieldWriting,
+  onExitChat,
+  onEnableNotifications,
+}) {
   return (
     <div className="flex justify-between">
       <div className="flex">
@@ -16,16 +20,28 @@ export default function TopChat({ isFieldWriting, onExitChat }) {
           {/* <div className="text-[0.9rem] text-[#1AAD5E]">Escribiendo...</div> */}
         </div>
       </div>
-      <div className="flex justify-center items-center">
-        <div className="text-[1.3rem] mr-2">Salir</div>
+      <div className="flex">
+        <div className="flex justify-center items-center mr-5">
+          <Button
+            color="bg-[#1AAD5E]"
+            className="px-[6px] h-9 flex justify-center items-center"
+            onClick={onEnableNotifications}
+          >
+            <IconItem nameIcon="bell" size={1} />
+          </Button>
+        </div>
 
-        <Button
-          color="bg-[#1AAD5E]"
-          className="px-[6px] h-9 flex justify-center items-center"
-          onClick={onExitChat}
-        >
-          <IconItem nameIcon="exitToApp" size={1} />
-        </Button>
+        <div className="flex justify-center items-center">
+          <div className="text-[1.3rem] mr-2">Salir</div>
+
+          <Button
+            color="bg-[#1AAD5E]"
+            className="px-[6px] h-9 flex justify-center items-center"
+            onClick={onExitChat}
+          >
+            <IconItem nameIcon="exitToApp" size={1} />
+          </Button>
+        </div>
       </div>
     </div>
   );

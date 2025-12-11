@@ -8,6 +8,7 @@ import {
   mdiAccountMultiplePlus,
   mdiSend,
   mdiExitToApp,
+  mdiBell,
 } from "@mdi/js";
 
 export default function IconItem({ color, className, nameIcon, size = 1.2 }) {
@@ -25,6 +26,8 @@ export default function IconItem({ color, className, nameIcon, size = 1.2 }) {
     icnItm = mdiSend;
   } else if (nameIcon === "exitToApp") {
     icnItm = mdiExitToApp;
+  } else if (nameIcon === "bell") {
+    icnItm = mdiBell;
   } else {
     icnItm = mdiTooltipImageOutline;
   }

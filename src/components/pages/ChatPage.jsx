@@ -54,6 +54,18 @@ export default function ChatPage() {
     localStorage.removeItem("keyRoom");
   };
 
+  const enableNotifications = async () => {
+    const permissionNotificationResponse =
+      await Notification.requestPermission();
+
+    if (permissionNotificationResponse !== "granted") {
+      alert("Debes permitir las notificaciones");
+      return;
+    }
+
+    alert("Las notificaciones ya estan activadas");
+  };
+
   useLayoutEffect(() => {
     if (refListChats.current) {
       refListChats.current.scrollTop = refListChats.current.scrollHeight;
@@ -114,6 +126,7 @@ export default function ChatPage() {
         ref2={refListChats}
         messagesChat={messagesChat}
         onExitChat={exitChat}
+        onEnableNotifications={enableNotifications}
       />
     </ChatTemplate>
   );

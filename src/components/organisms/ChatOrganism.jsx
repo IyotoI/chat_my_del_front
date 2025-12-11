@@ -13,6 +13,7 @@ const ChatOrganism = forwardRef(
       messagesChat,
       ref2,
       onExitChat,
+      onEnableNotifications,
     },
     ref
   ) => {
@@ -22,7 +23,11 @@ const ChatOrganism = forwardRef(
       <>
         {/* Parte superior - chat */}
         <div className="p-2 bg-white ">
-          <TopChat isFieldWriting={isFieldWriting} onExitChat={onExitChat} />
+          <TopChat
+            isFieldWriting={isFieldWriting}
+            onExitChat={onExitChat}
+            onEnableNotifications={onEnableNotifications}
+          />
         </div>
         {/* Conversacion - chat */}
         <div
