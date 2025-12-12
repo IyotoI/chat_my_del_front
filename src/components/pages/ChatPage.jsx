@@ -93,10 +93,10 @@ export default function ChatPage() {
       applicationServerKey: convertUrlBase64ToUint8Array(VITE_PUBLIC_VAPID_KEY),
     });
 
-    if (existsRegisterServiceWorker) {
-      console.log("Ya hay un service worker registrado");
-      return existsRegisterServiceWorker;
-    }
+    // if (existsRegisterServiceWorker) {
+    //   console.log("Ya hay un service worker registrado");
+    //   return existsRegisterServiceWorker;
+    // }
 
     await fetch(`${VITE_URL_BACKEND_CHAT}/suscription`, {
       method: "POST",
