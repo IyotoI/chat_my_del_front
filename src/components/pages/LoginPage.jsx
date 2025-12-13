@@ -8,6 +8,11 @@ export default function LoginPage() {
   const { socket, setIsOpen } = useGlobal();
   const [keyRoom, setKeyRoom] = useState("");
   const navigate = useNavigate();
+  const [payload, setPayload] = useState({
+    userName: "",
+    email: "",
+    password: "",
+  });
 
   useEffect(() => {
     if (!socket) return;
@@ -44,8 +49,8 @@ export default function LoginPage() {
     <LoginTemplate>
       <FormLogin
         handleLogin={handleLogin}
-        keyRoom={keyRoom}
-        setKeyRoom={setKeyRoom}
+        payload={payload}
+        setPayload={setPayload}
       />
     </LoginTemplate>
   );

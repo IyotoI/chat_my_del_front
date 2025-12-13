@@ -38,9 +38,11 @@ const FormRegister = ({ handleLogin, setPayload, payload }) => {
           setPayload((prev) => ({ ...prev, [e.target.name]: e.target.value }))
         }
       />
+
       <Button className="mb-7" color="bg-[#1AAD5E]" type="submit">
         Registrarme
       </Button>
+
       <br />
       <div className="text-[#575757] font-bold">
         Ya tengo una cuenta,&nbsp;
