@@ -9,6 +9,7 @@ const Input = forwardRef(
       placeholder = "Label",
       required = false,
       className,
+      name = "",
     },
     ref
   ) => {
@@ -16,6 +17,7 @@ const Input = forwardRef(
       <input
         type={type}
         value={value}
+        name={name}
         onChange={onChange}
         placeholder={placeholder}
         required={required}

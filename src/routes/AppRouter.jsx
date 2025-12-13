@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import ChatPage from "../components/pages/ChatPage";
 import LoginPage from "../components/pages/LoginPage";
+import RegisterPage from "../components/pages/RegisterPage";
 import ProtectedRoute from "../routes/ProtectedRoute";
 
 export default function AppRouter() {
@@ -17,6 +18,7 @@ export default function AppRouter() {
           </ProtectedRoute>
         }
       />
+      <Route path="/register" element={<RegisterPage />} />
       {/* Opcional: ruta 404 */}
     </Routes>
   );
