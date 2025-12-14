@@ -1,52 +1,60 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FormRegister from "../molecules/form/FormRegister";
 import RegisterTemplate from "../templates/RegisterTemplate";
 import { useGlobal } from "../../context/GlobalContext";
+import authController from "../../controllers/authController";
 
 export default function RegisterPage() {
-  const { socket, setIsOpen } = useGlobal();
-  const [keyRoom, setKeyRoom] = useState("");
+  const { setInitialState } = useGlobal();
+
+  const navigate = useNavigate();
+  const [errors, setErrors] = useState({});
   const [payload, setPayload] = useState({
     userName: "",
     email: "",
     password: "",
   });
 
-  const navigate = useNavigate();
+  const validate = () => {
+    const newErrors = {};
 
-  useEffect(() => {
-    if (!socket) return;
-
-    socket.on("chat:idSocket", (idSocket) => {
-      const validateIdSoket = localStorage.getItem("idSocket");
-      if (!validateIdSoket) {
-        localStorage.setItem("idSocket", idSocket);
-      }
-    });
-
-    return () => {
-      socket.off("chat:idSocket");
-    };
-  }, [socket]);
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-    console.log(payload);
-    return;
-    if (keyRoom === "") {
-      alert("Ingresar clave de la sala");
-      return;
+    if (!payload.userName) {
+      newErrors.userName = "El nombre de usuario es obligatorio";
     }
-    setIsOpen(true);
 
-    socket.emit("join-room", {
-      idsoketUser: localStorage.getItem("idSocket"),
-      IdSocketReceiver: keyRoom,
+    if (!payload.email) {
+      newErrors.email = "El correo es obligatorio";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email)) {
+      newErrors.email = "Correo no válido";
+    }
+
+    if (!payload.password) {
+      newErrors.password = "La contraseña es obligatoria";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    if (!validate()) return;
+    setInitialState({
+      type: "SET_INITIAL_STATE",
+      key: "loading",
+      payload: true,
     });
+    await authController.post.register(payload);
 
-    localStorage.setItem("keyRoom", keyRoom);
-    navigate("/chat");
+    setInitialState({
+      type: "SET_INITIAL_STATE",
+      key: "loading",
+      payload: false,
+    });
+    navigate("/login");
+    alert("Cuenta creada");
   };
 
   return (
@@ -55,6 +63,7 @@ export default function RegisterPage() {
         handleLogin={handleLogin}
         payload={payload}
         setPayload={setPayload}
+        errors={errors}
       />
     </RegisterTemplate>
   );

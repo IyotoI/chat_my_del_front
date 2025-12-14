@@ -1,43 +1,64 @@
 import Button from "../../atoms/Button";
 import Input from "../../atoms/Input";
 import { Link } from "react-router-dom";
-import imgOnlineCommunity from "../../../assets/images/online-community.svg";
 
-const FormRegister = ({ handleLogin, setPayload, payload }) => {
+const FormRegister = ({ handleLogin, setPayload, payload, errors }) => {
   return (
     <form className="text-center md:w-[320px]" onSubmit={handleLogin}>
       <p className="text-3xl mt-8 mb-15 font-[Arial] text-[#1AAD5E] font-bold">
         Crear cuenta
       </p>
 
-      <Input
-        name="userName"
-        placeholder="Nombre de usuario"
-        className="mb-8"
-        value={payload.userName}
-        onChange={(e) =>
-          setPayload((prev) => ({ ...prev, [e.target.name]: e.target.value }))
-        }
-      />
-      <Input
-        name="email"
-        placeholder="Correo"
-        className="mb-8"
-        value={payload.email}
-        onChange={(e) =>
-          setPayload((prev) => ({ ...prev, [e.target.name]: e.target.value }))
-        }
-      />
-      <Input
-        name="password"
-        placeholder="Contraseña"
-        type="password"
-        className="mb-12"
-        value={payload.password}
-        onChange={(e) =>
-          setPayload((prev) => ({ ...prev, [e.target.name]: e.target.value }))
-        }
-      />
+      <div className="mb-3">
+        <Input
+          name="userName"
+          placeholder="Nombre de usuario"
+          value={payload.userName}
+          onChange={(e) =>
+            setPayload((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+          }
+        />
+        <p
+          className={`text-red-500 text-start ${
+            !errors.userName && "invisible"
+          }`}
+        >
+          {errors.userName ? errors.userName : "error"}
+        </p>
+      </div>
+      <div className="mb-3">
+        <Input
+          name="email"
+          placeholder="Correo"
+          value={payload.email}
+          onChange={(e) =>
+            setPayload((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+          }
+        />
+        <p
+          className={`text-red-500 text-start ${!errors.email && "invisible"}`}
+        >
+          {errors.email ? errors.email : "error"}
+        </p>
+      </div>
+      <div className="mb-6">
+        <Input
+          name="password"
+          placeholder="Contraseña"
+          type="password"
+          value={payload.password}
+          onChange={(e) =>
+            setPayload((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+          }
+        />
+        <p
+          className={`text-red-500 text-start ${
+            !errors.password && "invisible"
+          }`}
+        >
+          {errors.password ? errors.password : "error"}
+        </p>
+      </div>
 
       <Button className="mb-7" color="bg-[#1AAD5E]" type="submit">
         Registrarme
