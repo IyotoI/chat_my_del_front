@@ -1,5 +1,6 @@
 export const initialState = {
   loading: false,
+  dataUser: {},
 };
 
 export const appReducer = (state, action) => {

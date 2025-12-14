@@ -1,9 +1,8 @@
 import { Navigate } from "react-router-dom";
+import { useGlobal } from "../../src/context/GlobalContext";
 
 export default function ProtectedRoute({ children }) {
-  const keyRoom = localStorage.getItem("keyRoom");
-
-  if (!keyRoom) return <Navigate to="/login" replace />;
-
+  const { dataUser } = useGlobal();
+  if (dataUser && !dataUser.id) return <Navigate to="/login" />;
   return children;
 }

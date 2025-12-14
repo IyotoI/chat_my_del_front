@@ -7,7 +7,7 @@ import authController from "../../controllers/authController";
 
 export default function LoginPage() {
   const { socket, setInitialState } = useGlobal();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const [payload, setPayload] = useState({
     email: "",
@@ -51,18 +51,25 @@ export default function LoginPage() {
 
     if (!validate()) return;
     setInitialState({
-      key: "loading",
       type: "SET_INITIAL_STATE",
+      key: "loading",
       payload: true,
     });
     const data = await authController.post.login(payload);
+
     setInitialState({
-      key: "loading",
       type: "SET_INITIAL_STATE",
+      key: "loading",
       payload: false,
     });
 
     if (data && !data.id) return alert("Contraseña o correo incorrecto");
+    setInitialState({
+      type: "SET_INITIAL_STATE",
+      key: "dataUser",
+      payload: data,
+    });
+    navigate("/chat");
     alert("Logeado");
   };
 
