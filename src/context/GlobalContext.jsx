@@ -1,14 +1,18 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useReducer } from "react";
 import { useSocket } from "../hooks/useSocket";
+import { appReducer, initialState } from "./appReducer";
 
 const GlobalContext = createContext();
 
 export function GlobalProvider({ children }) {
   const socket = useSocket();
-  const [isOpen, setIsOpen] = useState(false);
+
+  const [state, dispatch] = useReducer(appReducer, initialState);
+
+  const setInitialState = (value) => dispatch(value);
 
   return (
-    <GlobalContext.Provider value={{ socket, isOpen, setIsOpen }}>
+    <GlobalContext.Provider value={{ ...state, socket, setInitialState }}>
       {children}
     </GlobalContext.Provider>
   );

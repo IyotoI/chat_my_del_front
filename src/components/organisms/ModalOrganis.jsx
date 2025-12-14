@@ -3,11 +3,11 @@ import { RiseLoader } from "react-spinners";
 // import { AtomSpinner } from "react-epic-spinners";
 
 const ModalOrganism = () => {
-  const { isOpen, setIsOpen } = useGlobal();
+  const { loading } = useGlobal();
 
   return (
     <>
-      {isOpen && (
+      {loading && (
         <div className="fixed inset-0 flex items-center justify-center bg-white z-50">
           {/* Contenedor del modal */}
           <div className="bg-transparent w-11/12 max-w-md p-6 rounded-xl relative animate-fadeIn flex flex-col justify-center items-center">

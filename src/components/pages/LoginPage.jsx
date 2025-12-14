@@ -6,9 +6,8 @@ import { useGlobal } from "../../context/GlobalContext";
 import authController from "../../controllers/authController";
 
 export default function LoginPage() {
-  const { socket, setIsOpen } = useGlobal();
-  const [keyRoom, setKeyRoom] = useState("");
-  const navigate = useNavigate();
+  const { socket, setInitialState } = useGlobal();
+  // const navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const [payload, setPayload] = useState({
     email: "",
@@ -49,26 +48,22 @@ export default function LoginPage() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+
     if (!validate()) return;
-    setIsOpen(true);
+    setInitialState({
+      key: "loading",
+      type: "SET_INITIAL_STATE",
+      payload: true,
+    });
     const data = await authController.post.login(payload);
-    setIsOpen(false);
+    setInitialState({
+      key: "loading",
+      type: "SET_INITIAL_STATE",
+      payload: false,
+    });
+
     if (data && !data.id) return alert("Contraseña o correo incorrecto");
     alert("Logeado");
-
-    // alert("Te reconosco, bienvenido");
-    // if (keyRoom === "") {
-    //   alert("Ingresar clave de la sala");
-    //   return;
-    // }
-
-    // socket.emit("join-room", {
-    //   idsoketUser: localStorage.getItem("idSocket"),
-    //   IdSocketReceiver: keyRoom,
-    // });
-
-    // localStorage.setItem("keyRoom", keyRoom);
-    // navigate("/chat");
   };
 
   return (
