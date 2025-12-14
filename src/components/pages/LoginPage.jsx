@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import FormLogin from "../molecules/form/FormLogin";
 import LoginTemplate from "../templates/LoginTemplate";
 import { useGlobal } from "../../context/GlobalContext";
+import authController from "../../controllers/authController";
 
 export default function LoginPage() {
   const { socket, setIsOpen } = useGlobal();
@@ -10,7 +11,6 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const [payload, setPayload] = useState({
-    userName: "",
     email: "",
     password: "",
   });
@@ -47,15 +47,20 @@ export default function LoginPage() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     if (!validate()) return;
-    // alert("logeado");
+    setIsOpen(true);
+    const data = await authController.post.login(payload);
+    setIsOpen(false);
+    if (data && !data.id) return alert("Contraseña o correo incorrecto");
+    alert("Logeado");
+
+    // alert("Te reconosco, bienvenido");
     // if (keyRoom === "") {
     //   alert("Ingresar clave de la sala");
     //   return;
     // }
-    // setIsOpen(true);
 
     // socket.emit("join-room", {
     //   idsoketUser: localStorage.getItem("idSocket"),
