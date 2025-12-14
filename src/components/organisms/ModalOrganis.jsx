@@ -20,7 +20,7 @@ const ModalOrganism = () => {
             </button> */}
             {/* <AtomSpinner color="red" /> */}
             <RiseLoader color="#1AAD5E" size={20} />
-            <div className="text-[1.3rem] mt-10">Esperando amigo</div>
+            <div className="text-[1.3rem] mt-10">Cargando...</div>
           </div>
         </div>
       )}
