@@ -8,6 +8,7 @@ export default function LoginPage() {
   const { socket, setIsOpen } = useGlobal();
   const [keyRoom, setKeyRoom] = useState("");
   const navigate = useNavigate();
+  const [errors, setErrors] = useState({});
   const [payload, setPayload] = useState({
     userName: "",
     email: "",
@@ -29,20 +30,40 @@ export default function LoginPage() {
     };
   }, [socket]);
 
-  const handleLogin = () => {
-    if (keyRoom === "") {
-      alert("Ingresar clave de la sala");
-      return;
+  const validate = () => {
+    const newErrors = {};
+
+    if (!payload.email) {
+      newErrors.email = "El correo es obligatorio";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email)) {
+      newErrors.email = "Correo no válido";
     }
-    setIsOpen(true);
 
-    socket.emit("join-room", {
-      idsoketUser: localStorage.getItem("idSocket"),
-      IdSocketReceiver: keyRoom,
-    });
+    if (!payload.password) {
+      newErrors.password = "La contraseña es obligatoria";
+    }
 
-    localStorage.setItem("keyRoom", keyRoom);
-    navigate("/chat");
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (!validate()) return;
+    // alert("logeado");
+    // if (keyRoom === "") {
+    //   alert("Ingresar clave de la sala");
+    //   return;
+    // }
+    // setIsOpen(true);
+
+    // socket.emit("join-room", {
+    //   idsoketUser: localStorage.getItem("idSocket"),
+    //   IdSocketReceiver: keyRoom,
+    // });
+
+    // localStorage.setItem("keyRoom", keyRoom);
+    // navigate("/chat");
   };
 
   return (
@@ -51,6 +72,7 @@ export default function LoginPage() {
         handleLogin={handleLogin}
         payload={payload}
         setPayload={setPayload}
+        errors={errors}
       />
     </LoginTemplate>
   );
