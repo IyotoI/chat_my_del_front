@@ -2,13 +2,14 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import ChatPage from "../components/pages/ChatPage";
 import LoginPage from "../components/pages/LoginPage";
 import RegisterPage from "../components/pages/RegisterPage";
+import WelcomePage from "../components/pages/WelcomePage";
 import ProtectedRoute from "../routes/ProtectedRoute";
 
 export default function AppRouter() {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/login" replace />} />
-      <Route path="*" element={<Navigate to="/login" replace />} />
+      <Route path="/" element={<WelcomePage />} />
+      {/* <Route path="*" element={<Navigate to="/login" replace />} /> */}
       <Route path="/login" element={<LoginPage />} />
       <Route
         path="/chat"
