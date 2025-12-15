@@ -3,6 +3,7 @@ import ChatPage from "../components/pages/ChatPage";
 import LoginPage from "../components/pages/LoginPage";
 import RegisterPage from "../components/pages/RegisterPage";
 import WelcomePage from "../components/pages/WelcomePage";
+import ContactPage from "../components/pages/ContactPage";
 import ProtectedRoute from "../routes/ProtectedRoute";
 
 export default function AppRouter() {
@@ -20,6 +21,7 @@ export default function AppRouter() {
         }
       />
       <Route path="/register" element={<RegisterPage />} />
+      <Route path="/contact" element={<ContactPage />} />
       {/* Opcional: ruta 404 */}
     </Routes>
   );
