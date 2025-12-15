@@ -2,12 +2,13 @@ import IconItem from "../atoms/Icon";
 import Button from "../atoms/Button";
 
 export default function TopContact({
+  className,
   isFieldWriting,
   onExitChat,
   onEnableNotifications,
 }) {
   return (
-    <div className="flex justify-between items-center">
+    <div className={`flex justify-between items-center ${className}`}>
       <p className="text-3xl font-[Arial]">
         <span className="text-[#1AAD5E]">C</span>hatmyd
       </p>
