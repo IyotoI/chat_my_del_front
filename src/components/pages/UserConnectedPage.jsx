@@ -18,7 +18,7 @@ export default function UserConnectedPage() {
 
   return (
     <ContactTemplate>
-      <ContactOrganism userConnected={userConnected} />
+      <ContactOrganism itemsContact={userConnected} />
     </ContactTemplate>
   );
 }
