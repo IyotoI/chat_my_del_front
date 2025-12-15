@@ -24,9 +24,11 @@ const ContactOrganism = forwardRef(
     return (
       <div>
         <TopContact className="mb-5" />
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((item, index) => (
-          <ItemListContact key={index} />
-        ))}
+        <div className="h-[calc(100dvh-93px)] overflow-y-auto">
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((item, index) => (
+            <ItemListContact key={index} />
+          ))}
+        </div>
       </div>
     );
   }
