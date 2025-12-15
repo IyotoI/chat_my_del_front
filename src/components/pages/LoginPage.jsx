@@ -69,7 +69,7 @@ export default function LoginPage() {
       key: "dataUser",
       payload: data,
     });
-    navigate("/chat");
+    navigate("/contacts");
     alert("Logeado");
   };
 

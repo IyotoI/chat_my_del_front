@@ -16,6 +16,7 @@ const ContactOrganism = forwardRef(
       ref2,
       onExitChat,
       onEnableNotifications,
+      userConnected,
     },
     ref
   ) => {
@@ -25,8 +26,8 @@ const ContactOrganism = forwardRef(
       <div>
         <TopContact className="mb-5" />
         <div className="h-[calc(100dvh-93px)] overflow-y-auto">
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((item, index) => (
-            <ItemListContact key={index} />
+          {userConnected.map((item, index) => (
+            <ItemListContact key={index} userName={item.userName} />
           ))}
         </div>
       </div>

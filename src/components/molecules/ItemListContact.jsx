@@ -1,11 +1,11 @@
-export default function ItemListContact({ className, value }) {
+export default function ItemListContact({ className, value, userName }) {
   return (
     <div className={`${className}  py-3  flex`}>
       <div className="w-[47px] h-[47px] rounded-full bg-[#1aad5e1c] mr-2 border border-[#1AAD5E] flex justify-center items-center">
         {/* <IconItem nameIcon="account" className="text-[#1AAD5E]" /> */}
       </div>
       <div>
-        <div>Mininita</div>
+        <div>{userName}</div>
         {/* <div>d</div>  */}
       </div>
       {/* <div className="text-end text-[#A2A2A2]">9:27 p.m.</div> */}
