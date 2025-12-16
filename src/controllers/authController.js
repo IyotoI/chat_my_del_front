@@ -43,6 +43,7 @@ const authController = {
     userConnected: async () => {
       try {
         const res = await fetch(`${VITE_URL_BACKEND_CHAT}/api/user/connected`, {
+          method: "GET",
           credentials: "include",
         });
         const data = await res.json();
