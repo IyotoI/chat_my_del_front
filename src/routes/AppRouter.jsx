@@ -22,8 +22,16 @@ export default function AppRouter() {
         }
       />
       <Route path="/register" element={<RegisterPage />} />
-      <Route path="/contact" element={<ContactPage />} />
-      <Route path="/userConnected" element={<UserConnectedPage />} />
+      <Route
+        path="/contact"
+        element={
+          <ProtectedRoute>
+            <ContactPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route path="/  " element={<UserConnectedPage />} />
       {/* Opcional: ruta 404 */}
     </Routes>
   );
