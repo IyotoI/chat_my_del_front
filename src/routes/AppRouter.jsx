@@ -11,8 +11,9 @@ export default function AppRouter() {
   return (
     <Routes>
       <Route path="/" element={<WelcomePage />} />
-      {/* <Route path="*" element={<Navigate to="/login" replace />} /> */}
+      <Route path="/register" element={<RegisterPage />} />
       <Route path="/login" element={<LoginPage />} />
+
       <Route
         path="/chat"
         element={
@@ -21,7 +22,6 @@ export default function AppRouter() {
           </ProtectedRoute>
         }
       />
-      <Route path="/register" element={<RegisterPage />} />
       <Route
         path="/contact"
         element={
@@ -30,9 +30,14 @@ export default function AppRouter() {
           </ProtectedRoute>
         }
       />
-
-      <Route path="/userConnected" element={<UserConnectedPage />} />
-      {/* Opcional: ruta 404 */}
+      <Route
+        path="/userConnected"
+        element={
+          <ProtectedRoute>
+            <UserConnectedPage />
+          </ProtectedRoute>
+        }
+      />
     </Routes>
   );
 }
