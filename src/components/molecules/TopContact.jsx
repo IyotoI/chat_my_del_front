@@ -6,6 +6,7 @@ export default function TopContact({
   isFieldWriting,
   onExitChat,
   onEnableNotifications,
+  onViewConnectedUsers,
 }) {
   return (
     <div className={`flex justify-between items-center ${className}`}>
@@ -13,6 +14,13 @@ export default function TopContact({
         <span className="text-[#1AAD5E]">C</span>hatmyd
       </p>
       <div className="flex ">
+        <Button
+          color="bg-[#1AAD5E]"
+          className="px-[6px] h-9 flex justify-center items-center mr-3"
+          onClick={onViewConnectedUsers}
+        >
+          <IconItem nameIcon="accountGroup" size={1} />
+        </Button>
         <Button
           color="bg-[#1AAD5E]"
           className="px-[6px] h-9 flex justify-center items-center mr-3"

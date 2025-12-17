@@ -31,7 +31,7 @@ export default function AppRouter() {
         }
       />
 
-      <Route path="/  " element={<UserConnectedPage />} />
+      <Route path="/userConnected" element={<UserConnectedPage />} />
       {/* Opcional: ruta 404 */}
     </Routes>
   );

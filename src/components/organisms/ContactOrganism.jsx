@@ -30,6 +30,7 @@ const ContactOrganism = forwardRef(
       onExitChat,
       onEnableNotifications,
       itemsContact,
+      onViewConnectedUsers,
     },
     ref
   ) => {
@@ -37,7 +38,10 @@ const ContactOrganism = forwardRef(
 
     return (
       <div>
-        <TopContact className="mb-5" />
+        <TopContact
+          className="mb-5"
+          onViewConnectedUsers={onViewConnectedUsers}
+        />
         <div className="h-[calc(100dvh-93px)] overflow-y-auto">
           {itemsContact ? (
             itemsContact.map((item, index) => (

@@ -12,7 +12,6 @@ export default function UserConnectedPage() {
 
   const getUserConnected = async () => {
     const res = await authController.get.userConnected();
-    console.log(res);
     setUserConnected(res);
   };
 

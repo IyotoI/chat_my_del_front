@@ -9,6 +9,7 @@ import {
   mdiSend,
   mdiExitToApp,
   mdiBell,
+  mdiAccountGroup,
 } from "@mdi/js";
 
 export default function IconItem({ color, className, nameIcon, size = 1.2 }) {
@@ -28,6 +29,8 @@ export default function IconItem({ color, className, nameIcon, size = 1.2 }) {
     icnItm = mdiExitToApp;
   } else if (nameIcon === "bell") {
     icnItm = mdiBell;
+  } else if (nameIcon === "accountGroup") {
+    icnItm = mdiAccountGroup;
   } else {
     icnItm = mdiTooltipImageOutline;
   }
