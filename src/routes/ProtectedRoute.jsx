@@ -1,8 +1,8 @@
 import { Navigate } from "react-router-dom";
-import { useGlobal } from "../../src/context/GlobalContext";
+import Cookies from "js-cookie";
 
 export default function ProtectedRoute({ children }) {
-  const { dataUser } = useGlobal();
-  if (dataUser && !dataUser.id) return <Navigate to="/login" />;
+  const cookies = Cookies.get();
+  if (!cookies.token) return <Navigate to="/login" />;
   return children;
 }
