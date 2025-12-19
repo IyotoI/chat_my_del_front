@@ -15,18 +15,18 @@ export default function AppRouter() {
       <Route path="/login" element={<LoginPage />} />
 
       <Route
-        path="/chat"
-        element={
-          <ProtectedRoute>
-            <ChatPage />
-          </ProtectedRoute>
-        }
-      />
-      <Route
         path="/contact"
         element={
           <ProtectedRoute>
             <ContactPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/chat"
+        element={
+          <ProtectedRoute>
+            <ChatPage />
           </ProtectedRoute>
         }
       />

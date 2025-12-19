@@ -1,12 +1,14 @@
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useEffect } from "react";
 
 export default function ProtectedRoute({ children }) {
+  debugger;
+  const navigate = useNavigate();
+
   useEffect(() => {
     const cookies = Cookies.get();
-    console.log("🚀 ~ ProtectedRoute ~ cookies:", cookies.token);
+    if (cookies && !cookies.token) return navigate("/login");
   }, []);
-  // if (!cookies.token) return <Navigate to="/login" />;
   return children;
 }
