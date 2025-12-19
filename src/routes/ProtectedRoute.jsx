@@ -8,7 +8,8 @@ export default function ProtectedRoute({ children }) {
 
   useEffect(() => {
     const cookies = Cookies.get();
-    if (cookies && !cookies.token) return navigate("/login");
+    console.log("🚀 ~ ProtectedRoute ~ cookies:", cookies);
+    // if (cookies && !cookies.token) return navigate("/login");
   }, []);
   return children;
 }

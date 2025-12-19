@@ -10,7 +10,7 @@ import Input from "../atoms/Input";
 
 const MessageIsEmpty = () => {
   return (
-    <form className="text-center mt-16">
+    <form className="text-center mt-5">
       <img src={imgBackground} className="mx-auto w-1/2 mb-12" />
       <Input placeholder="Correo electronico" className="mb-6" />
       <Button color="bg-[#1AAD5E]">Buscar amigo</Button>
@@ -31,6 +31,7 @@ const ContactOrganism = forwardRef(
       onEnableNotifications,
       itemsContact,
       onViewConnectedUsers,
+      sendRequestContact,
     },
     ref
   ) => {
@@ -50,6 +51,9 @@ const ContactOrganism = forwardRef(
           ) : (
             <MessageIsEmpty />
           )}
+
+          <div className="border border-gray-400 mt-9"></div>
+          <ItemListContact sendRequestContact={sendRequestContact} />
         </div>
       </div>
     );
