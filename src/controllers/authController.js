@@ -1,4 +1,5 @@
 const VITE_URL_BACKEND_CHAT = import.meta.env.VITE_URL_BACKEND_CHAT;
+// import { useGlobal } from "../context/GlobalContext";
 
 const authController = {
   post: {
@@ -52,6 +53,35 @@ const authController = {
       } catch (error) {
         console.error("Message server:", error.message);
       }
+    },
+    userIdConnected: async (id) => {
+      // const { setInitialState } = useGlobal();
+      // setInitialState({
+      //   type: "SET_INITIAL_STATE",
+      //   key: "loading",
+      //   payload: true,
+      // });
+
+      try {
+        const res = await fetch(
+          `${VITE_URL_BACKEND_CHAT}/api/user/connected/${id}`,
+          {
+            method: "GET",
+            credentials: "include",
+          }
+        );
+        const data = await res.json();
+
+        return data;
+      } catch (error) {
+        console.error("Message server:", error.message);
+      }
+
+      // setInitialState({
+      //   type: "SET_INITIAL_STATE",
+      //   key: "loading",
+      //   payload: false,
+      // });
     },
   },
 };

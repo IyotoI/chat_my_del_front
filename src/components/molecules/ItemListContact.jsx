@@ -7,6 +7,7 @@ export default function ItemListContact({
   userName = "Indefinido",
   email = "Indefinido",
   sendRequestContact,
+  onSearchContact,
 }) {
   return (
     <div className={`${className}  py-3  flex`}>
@@ -23,6 +24,7 @@ export default function ItemListContact({
             <Button
               color="bg-[#1AAD5E]"
               className="px-[6px] h-9 mr-auto flex justify-center items-center "
+              onClick={onSearchContact}
             >
               <IconItem nameIcon="sendCheck" size={1} />
             </Button>

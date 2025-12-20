@@ -8,12 +8,19 @@ import imgBackground from "../../assets/images/taken_mshk.svg";
 import Button from "../atoms/Button";
 import Input from "../atoms/Input";
 
-const MessageIsEmpty = () => {
+const MessageIsEmpty = ({ onSearchContact, setPayload, payload }) => {
   return (
     <form className="text-center mt-5">
       <img src={imgBackground} className="mx-auto w-1/2 mb-12" />
-      <Input placeholder="Correo electronico" className="mb-6" />
-      <Button color="bg-[#1AAD5E]">Buscar amigo</Button>
+      <Input
+        onChange={(e) => setPayload(e.target.value)}
+        value={payload}
+        placeholder="Correo electronico"
+        className="mb-6"
+      />
+      <Button color="bg-[#1AAD5E]" onClick={onSearchContact}>
+        Buscar amigo
+      </Button>
     </form>
   );
 };
@@ -31,7 +38,11 @@ const ContactOrganism = forwardRef(
       onEnableNotifications,
       itemsContact,
       onViewConnectedUsers,
+      onSearchContact,
       sendRequestContact,
+      setPayload,
+      payload,
+      userFound,
     },
     ref
   ) => {
@@ -49,11 +60,22 @@ const ContactOrganism = forwardRef(
               <ItemListContact key={index} userName={item.userName} />
             ))
           ) : (
-            <MessageIsEmpty />
+            <MessageIsEmpty
+              onSearchContact={onSearchContact}
+              setPayload={setPayload}
+              payload={payload}
+            />
           )}
-
-          <div className="border border-gray-400 mt-9"></div>
-          <ItemListContact sendRequestContact={sendRequestContact} />
+          {userFound && (
+            <>
+              <div className="border border-gray-400 mt-9"></div>
+              <ItemListContact
+                sendRequestContact={sendRequestContact}
+                email={userFound && userFound.email}
+                userName={userFound && userFound.userName}
+              />
+            </>
+          )}
         </div>
       </div>
     );
