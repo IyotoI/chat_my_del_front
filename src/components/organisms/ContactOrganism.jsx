@@ -44,6 +44,7 @@ const ContactOrganism = forwardRef(
       setPayload,
       payload,
       userFound,
+      onOpenModal,
       contactsList,
     },
     ref
@@ -55,6 +56,7 @@ const ContactOrganism = forwardRef(
         <TopContact
           className="mb-5"
           onViewConnectedUsers={onViewConnectedUsers}
+          onOpenModal={onOpenModal}
         />
         <div className="h-[calc(100dvh-93px)] overflow-y-auto">
           {itemsContact ? (

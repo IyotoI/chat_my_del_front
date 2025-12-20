@@ -79,6 +79,14 @@ export default function ContactPage() {
     });
   };
 
+  const openModal = () => {
+    setInitialState({
+      type: "SET_INITIAL_STATE",
+      key: "isModal",
+      payload: true,
+    });
+  };
+
   return (
     <ContactTemplate>
       <ContactOrganism
@@ -90,6 +98,7 @@ export default function ContactPage() {
         onViewConnectedUsers={viewConnectedUsers}
         onSearchContact={searchContact}
         onAddContactList={addContactList}
+        onOpenModal={openModal}
       />
     </ContactTemplate>
   );
