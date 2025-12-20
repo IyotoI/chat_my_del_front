@@ -2,6 +2,22 @@ const VITE_URL_BACKEND_CHAT = import.meta.env.VITE_URL_BACKEND_CHAT;
 // import { useGlobal } from "../context/GlobalContext";
 
 const contactController = {
+  get: {
+    all: async () => {
+      try {
+        const res = await fetch(`${VITE_URL_BACKEND_CHAT}/api/contact`, {
+          method: "GET",
+          credentials: "include",
+        });
+
+        const data = await res.json();
+
+        return data;
+      } catch (error) {
+        console.error("Message server:", error.message);
+      }
+    },
+  },
   post: {
     one: async (payload) => {
       try {

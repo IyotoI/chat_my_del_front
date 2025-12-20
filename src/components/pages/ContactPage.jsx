@@ -13,11 +13,13 @@ export default function ContactPage() {
   const [sendRequestContact, setSendRequestContact] = useState(false);
   const [payload, setPayload] = useState("");
   const [userFound, setUserFound] = useState("");
+  const [contactsList, setContactsList] = useState([]);
 
   useEffect(() => {
     if (pathname === "/contact") {
       setSendRequestContact(true);
     }
+    getAllContacts();
   }, []);
 
   const viewConnectedUsers = () => {
@@ -60,15 +62,33 @@ export default function ContactPage() {
     });
   };
 
+  const getAllContacts = async () => {
+    setInitialState({
+      type: "SET_INITIAL_STATE",
+      key: "loading",
+      payload: true,
+    });
+
+    const data = await contactController.get.all();
+    setContactsList(data);
+
+    setInitialState({
+      type: "SET_INITIAL_STATE",
+      key: "loading",
+      payload: false,
+    });
+  };
+
   return (
     <ContactTemplate>
       <ContactOrganism
-        onViewConnectedUsers={viewConnectedUsers}
         sendRequestContact={sendRequestContact}
-        onSearchContact={searchContact}
         setPayload={setPayload}
         payload={payload}
         userFound={userFound}
+        itemsContact={contactsList}
+        onViewConnectedUsers={viewConnectedUsers}
+        onSearchContact={searchContact}
         onAddContactList={addContactList}
       />
     </ContactTemplate>

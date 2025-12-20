@@ -44,6 +44,7 @@ const ContactOrganism = forwardRef(
       setPayload,
       payload,
       userFound,
+      contactsList,
     },
     ref
   ) => {
