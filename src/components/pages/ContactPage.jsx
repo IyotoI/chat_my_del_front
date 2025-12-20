@@ -1,12 +1,13 @@
 import ContactOrganism from "../organisms/ContactOrganism";
 import ContactTemplate from "../templates/ContactTemplate";
 import authController from "../../controllers/authController";
+import contactController from "../../controllers/contactController";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useGlobal } from "../../context/GlobalContext";
 
 export default function ContactPage() {
-  const { setInitialState } = useGlobal();
+  const { setInitialState, dataUser } = useGlobal();
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const [sendRequestContact, setSendRequestContact] = useState(false);
@@ -30,12 +31,33 @@ export default function ContactPage() {
       payload: true,
     });
     const data = await authController.get.userIdConnected(payload);
+    setUserFound(data);
+    alert("Amigo encontrado");
     setInitialState({
       type: "SET_INITIAL_STATE",
       key: "loading",
       payload: false,
     });
-    setUserFound(data);
+  };
+
+  const addContactList = async () => {
+    setInitialState({
+      type: "SET_INITIAL_STATE",
+      key: "loading",
+      payload: true,
+    });
+
+    const data = await contactController.post.one({
+      ...userFound,
+      userIdLogeado: dataUser.id,
+    });
+    alert("Amigo agregado");
+
+    setInitialState({
+      type: "SET_INITIAL_STATE",
+      key: "loading",
+      payload: false,
+    });
   };
 
   return (
@@ -47,6 +69,7 @@ export default function ContactPage() {
         setPayload={setPayload}
         payload={payload}
         userFound={userFound}
+        onAddContactList={addContactList}
       />
     </ContactTemplate>
   );

@@ -39,6 +39,7 @@ const ContactOrganism = forwardRef(
       itemsContact,
       onViewConnectedUsers,
       onSearchContact,
+      onAddContactList,
       sendRequestContact,
       setPayload,
       payload,
@@ -46,7 +47,7 @@ const ContactOrganism = forwardRef(
     },
     ref
   ) => {
-    const idSocketUser = localStorage.getItem("idSocket");
+    // const idSocketUser = localStorage.getItem("idSocket");
 
     return (
       <div>
@@ -71,6 +72,7 @@ const ContactOrganism = forwardRef(
               <div className="border border-gray-400 mt-9"></div>
               <ItemListContact
                 sendRequestContact={sendRequestContact}
+                onAddContactList={onAddContactList}
                 email={userFound && userFound.email}
                 userName={userFound && userFound.userName}
               />
