@@ -41,5 +41,5 @@ export default function IconItem({ color, className, nameIcon, size = 1.2 }) {
     icnItm = mdiTooltipImageOutline;
   }
 
-  return <Icon className={className} path={icnItm} size={size} />;
+  return <Icon color={color} className={className} path={icnItm} size={size} />;
 }

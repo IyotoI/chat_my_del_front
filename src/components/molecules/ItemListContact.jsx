@@ -12,12 +12,13 @@ export default function ItemListContact({
 }) {
   return (
     <div className={`${className}  py-3  flex`}>
-      <div className="w-[47px] h-[47px] rounded-full bg-[#1aad5e1c] mr-2 border border-[#1AAD5E] flex justify-center items-center">
+      <div className="w-[47px] h-[47px] rounded-full bg-[#CFD8DF] mr-2 border border-[#CFD8DF] flex justify-center items-center overflow-hidden">
         {/* <IconItem nameIcon="account" className="text-[#1AAD5E]" /> */}
+        <IconItem color="white" nameIcon="account" size={1.4} />
       </div>
       <div className="flex w-[83%] justify-between">
         <div>
-          <div>{userName}</div>
+          <div className="font-bold ">{userName}</div>
           <div>{email}</div>
         </div>
         {sendRequestContact && (
