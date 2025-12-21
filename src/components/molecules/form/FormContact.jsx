@@ -1,15 +1,46 @@
 import Button from "../../atoms/Button";
 import imgOnlineCommunity from "../../../assets/images/online-community.svg";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useGlobal } from "../../../context/GlobalContext";
 import authController from "../../../controllers/authController";
 import Input from "../../atoms/Input";
 import imgBackground from "../../../assets/images/taken_mshk.svg";
+import { useLocation } from "react-router-dom";
+import ItemListContact from "../ItemListContact";
+import contactController from "../../../controllers/contactController";
 
 const FormContact = ({ onHandleActionsButtons }) => {
   const [payload, setPayload] = useState("");
+  const { pathname } = useLocation();
   const { setInitialState, dataUser } = useGlobal();
   const [userFound, setUserFound] = useState("");
+  const [sendRequestContact, setSendRequestContact] = useState(false);
+
+  useEffect(() => {
+    if (pathname === "/contact") {
+      setSendRequestContact(true);
+    }
+  }, []);
+
+  const addContactList = async () => {
+    setInitialState({
+      type: "SET_INITIAL_STATE",
+      key: "loading",
+      payload: true,
+    });
+
+    const data = await contactController.post.one({
+      ...userFound,
+      userIdLogeado: dataUser.id,
+    });
+    alert("Amigo agregado");
+
+    setInitialState({
+      type: "SET_INITIAL_STATE",
+      key: "loading",
+      payload: false,
+    });
+  };
 
   const searchContact = async () => {
     // setInitialState({
@@ -47,7 +78,7 @@ const FormContact = ({ onHandleActionsButtons }) => {
             <div className="border border-gray-400 mt-9"></div>
             <ItemListContact
               sendRequestContact={sendRequestContact}
-              onAddContactList={onAddContactList}
+              onAddContactList={addContactList}
               email={userFound && userFound.email}
               userName={userFound && userFound.userName}
             />
