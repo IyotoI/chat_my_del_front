@@ -57,12 +57,6 @@ export default function LoginPage() {
     });
     const data = await authController.post.login(payload);
 
-    setInitialState({
-      type: "SET_INITIAL_STATE",
-      key: "loading",
-      payload: false,
-    });
-
     if (data && !data.id) return alert("Contraseña o correo incorrecto");
     // setInitialState({
     //   type: "SET_INITIAL_STATE",

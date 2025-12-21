@@ -63,13 +63,9 @@ export default function ContactPage() {
   };
 
   const getAllContacts = async () => {
-    setInitialState({
-      type: "SET_INITIAL_STATE",
-      key: "loading",
-      payload: true,
-    });
-
-    const data = await contactController.get.all();
+    const data = await contactController.get.allById(
+      localStorage.getItem("idUser")
+    );
     setContactsList(data);
 
     setInitialState({

@@ -17,6 +17,20 @@ const contactController = {
         console.error("Message server:", error.message);
       }
     },
+    allById: async (id) => {
+      try {
+        const res = await fetch(`${VITE_URL_BACKEND_CHAT}/api/contact/${id}`, {
+          method: "GET",
+          credentials: "include",
+        });
+
+        const data = await res.json();
+
+        return data;
+      } catch (error) {
+        console.error("Message server:", error.message);
+      }
+    },
   },
   post: {
     one: async (payload) => {
