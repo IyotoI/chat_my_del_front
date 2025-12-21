@@ -2,6 +2,7 @@ export const initialState = {
   loading: false,
   dataUser: {},
   isModal: false,
+  listItemsContacts: [],
 };
 
 export const appReducer = (state, action) => {

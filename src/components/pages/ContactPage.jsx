@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import { useGlobal } from "../../context/GlobalContext";
 
 export default function ContactPage() {
-  const { setInitialState, dataUser } = useGlobal();
+  const { setInitialState, dataUser, listItemsContacts } = useGlobal();
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const [sendRequestContact, setSendRequestContact] = useState(false);
@@ -63,7 +63,13 @@ export default function ContactPage() {
     const data = await contactController.get.allById(
       localStorage.getItem("idUser")
     );
-    setContactsList(data);
+    // setContactsList(data);
+
+    setInitialState({
+      type: "SET_INITIAL_STATE",
+      key: "listItemsContacts",
+      payload: data,
+    });
 
     setInitialState({
       type: "SET_INITIAL_STATE",
@@ -87,7 +93,7 @@ export default function ContactPage() {
         setPayload={setPayload}
         payload={payload}
         userFound={userFound}
-        itemsContact={contactsList}
+        itemsContact={listItemsContacts}
         onViewConnectedUsers={viewConnectedUsers}
         onSearchContact={searchContact}
         onAddContactList={addContactList}

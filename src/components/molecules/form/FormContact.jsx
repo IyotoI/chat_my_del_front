@@ -12,13 +12,11 @@ import contactController from "../../../controllers/contactController";
 const FormContact = ({ onHandleActionsButtons }) => {
   const [payload, setPayload] = useState("");
   const { pathname } = useLocation();
-  const { setInitialState, dataUser } = useGlobal();
+  const { setInitialState, dataUser, listItemsContacts } = useGlobal();
   const [userFound, setUserFound] = useState("");
   const itemPayloadContact = {
     key: "formContact",
   };
-  debugger;
-  console.log("🚀 ~ FormContact ~ itemPayloadContact:", itemPayloadContact);
 
   const addContactList = async () => {
     // setInitialState({
@@ -31,7 +29,16 @@ const FormContact = ({ onHandleActionsButtons }) => {
       ...userFound,
       userIdLogeado: idUser,
     });
-    console.log("🚀 ~ addContactList ~ data:", data);
+    setInitialState({
+      type: "SET_INITIAL_STATE",
+      key: "listItemsContacts",
+      payload: [...listItemsContacts, data],
+    });
+    setInitialState({
+      type: "SET_INITIAL_STATE",
+      key: "isModal",
+      payload: false,
+    });
     alert("Amigo agregado");
 
     // setInitialState({
