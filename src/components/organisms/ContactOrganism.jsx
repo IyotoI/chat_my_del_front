@@ -61,7 +61,11 @@ const ContactOrganism = forwardRef(
         <div className="h-[calc(100dvh-93px)] overflow-y-auto">
           {itemsContact ? (
             itemsContact.map((item, index) => (
-              <ItemListContact key={index} userName={item.userName} />
+              <ItemListContact
+                key={index}
+                userName={item.userName}
+                email={item.email}
+              />
             ))
           ) : (
             <MessageIsEmpty
