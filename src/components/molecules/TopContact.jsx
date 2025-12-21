@@ -20,7 +20,7 @@ export default function TopContact({
           className="px-[6px] h-9 flex justify-center items-center mr-3"
           onClick={onOpenModal}
         >
-          <IconItem nameIcon="accountGroup" size={1} />
+          <IconItem nameIcon="accountPlus" size={1} />
         </Button>
         <Button
           color="bg-[#1AAD5E]"

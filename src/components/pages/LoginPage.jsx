@@ -64,11 +64,12 @@ export default function LoginPage() {
     });
 
     if (data && !data.id) return alert("Contraseña o correo incorrecto");
-    setInitialState({
-      type: "SET_INITIAL_STATE",
-      key: "dataUser",
-      payload: data,
-    });
+    // setInitialState({
+    //   type: "SET_INITIAL_STATE",
+    //   key: "dataUser",
+    //   payload: data,
+    // });
+    localStorage.setItem("idUser", data.id);
     navigate("/contact");
     alert("Logeado");
   };

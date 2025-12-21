@@ -23,23 +23,24 @@ const FormContact = ({ onHandleActionsButtons }) => {
   }, []);
 
   const addContactList = async () => {
-    setInitialState({
-      type: "SET_INITIAL_STATE",
-      key: "loading",
-      payload: true,
-    });
-
+    // setInitialState({
+    //   type: "SET_INITIAL_STATE",
+    //   key: "loading",
+    //   payload: true,
+    // });
+    const idUser = localStorage.getItem("idUser");
     const data = await contactController.post.one({
       ...userFound,
-      userIdLogeado: dataUser.id,
+      userIdLogeado: idUser,
     });
+    console.log("🚀 ~ addContactList ~ data:", data);
     alert("Amigo agregado");
 
-    setInitialState({
-      type: "SET_INITIAL_STATE",
-      key: "loading",
-      payload: false,
-    });
+    // setInitialState({
+    //   type: "SET_INITIAL_STATE",
+    //   key: "loading",
+    //   payload: false,
+    // });
   };
 
   const searchContact = async () => {
