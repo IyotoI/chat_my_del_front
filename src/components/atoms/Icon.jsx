@@ -12,6 +12,7 @@ import {
   mdiAccountGroup,
   mdiSendCheck,
   mdiAccountPlus,
+  mdiEmailFast,
 } from "@mdi/js";
 
 export default function IconItem({ color, className, nameIcon, size = 1.2 }) {
@@ -37,6 +38,8 @@ export default function IconItem({ color, className, nameIcon, size = 1.2 }) {
     icnItm = mdiSendCheck;
   } else if (nameIcon === "accountPlus") {
     icnItm = mdiAccountPlus;
+  } else if (nameIcon === "emailFast") {
+    icnItm = mdiEmailFast;
   } else {
     icnItm = mdiTooltipImageOutline;
   }

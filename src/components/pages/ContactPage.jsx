@@ -16,9 +16,6 @@ export default function ContactPage() {
   const [contactsList, setContactsList] = useState([]);
 
   useEffect(() => {
-    if (pathname === "/contact") {
-      setSendRequestContact(true);
-    }
     getAllContacts();
   }, []);
 

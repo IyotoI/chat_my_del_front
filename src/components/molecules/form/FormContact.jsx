@@ -14,13 +14,11 @@ const FormContact = ({ onHandleActionsButtons }) => {
   const { pathname } = useLocation();
   const { setInitialState, dataUser } = useGlobal();
   const [userFound, setUserFound] = useState("");
-  const [sendRequestContact, setSendRequestContact] = useState(false);
-
-  useEffect(() => {
-    if (pathname === "/contact") {
-      setSendRequestContact(true);
-    }
-  }, []);
+  const itemPayloadContact = {
+    key: "formContact",
+  };
+  debugger;
+  console.log("🚀 ~ FormContact ~ itemPayloadContact:", itemPayloadContact);
 
   const addContactList = async () => {
     // setInitialState({
@@ -78,7 +76,7 @@ const FormContact = ({ onHandleActionsButtons }) => {
           <>
             <div className="border border-gray-400 mt-9"></div>
             <ItemListContact
-              sendRequestContact={sendRequestContact}
+              itemPayloadContact={itemPayloadContact && itemPayloadContact.key}
               onAddContactList={addContactList}
               email={userFound && userFound.email}
               userName={userFound && userFound.userName}
