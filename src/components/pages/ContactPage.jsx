@@ -14,6 +14,9 @@ export default function ContactPage() {
   const [payload, setPayload] = useState("");
   const [userFound, setUserFound] = useState("");
   const [contactsList, setContactsList] = useState([]);
+  const itemPayloadContact = {
+    key: "sendMessege",
+  };
 
   useEffect(() => {
     getAllContacts();
@@ -86,9 +89,14 @@ export default function ContactPage() {
     });
   };
 
+  const exitApp = () => {
+    navigate("/login");
+  };
+
   return (
     <ContactTemplate>
       <ContactOrganism
+        itemPayloadContact={itemPayloadContact}
         sendRequestContact={sendRequestContact}
         setPayload={setPayload}
         payload={payload}
@@ -98,6 +106,7 @@ export default function ContactPage() {
         onSearchContact={searchContact}
         onAddContactList={addContactList}
         onOpenModal={openModal}
+        onExitApp={exitApp}
       />
     </ContactTemplate>
   );

@@ -45,7 +45,9 @@ const ContactOrganism = forwardRef(
       payload,
       userFound,
       onOpenModal,
+      onExitApp,
       contactsList,
+      itemPayloadContact,
     },
     ref
   ) => {
@@ -57,6 +59,7 @@ const ContactOrganism = forwardRef(
           className="mb-5"
           onViewConnectedUsers={onViewConnectedUsers}
           onOpenModal={onOpenModal}
+          onExitApp={onExitApp}
         />
         <div className="h-[calc(100dvh-93px)] overflow-y-auto">
           {itemsContact ? (
@@ -78,6 +81,9 @@ const ContactOrganism = forwardRef(
             <>
               <div className="border border-gray-400 mt-9"></div>
               <ItemListContact
+                itemPayloadContact={
+                  itemPayloadContact && itemPayloadContact.key
+                }
                 sendRequestContact={sendRequestContact}
                 onAddContactList={onAddContactList}
                 email={userFound && userFound.email}

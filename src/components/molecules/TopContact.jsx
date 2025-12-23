@@ -9,6 +9,7 @@ export default function TopContact({
   onEnableNotifications,
   onViewConnectedUsers,
   onOpenModal,
+  onExitApp,
 }) {
   const { pathname } = useLocation();
 
@@ -44,7 +45,7 @@ export default function TopContact({
         <Button
           color="bg-[#1AAD5E]"
           className="px-[6px] h-9 flex justify-center items-center"
-          onClick={onExitChat}
+          onClick={onExitApp}
         >
           <IconItem nameIcon="exitToApp" size={1} />
         </Button>
