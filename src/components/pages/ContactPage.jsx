@@ -89,7 +89,8 @@ export default function ContactPage() {
     });
   };
 
-  const exitApp = () => {
+  const exitApp = async () => {
+    await authController.post.logout();
     navigate("/login");
   };
 

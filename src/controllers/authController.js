@@ -1,3 +1,5 @@
+import { mdiLogout } from "@mdi/js";
+
 const VITE_URL_BACKEND_CHAT = import.meta.env.VITE_URL_BACKEND_CHAT;
 // import { useGlobal } from "../context/GlobalContext";
 
@@ -30,6 +32,20 @@ const authController = {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(payload),
+        });
+
+        const data = await res.json();
+
+        return data;
+      } catch (error) {
+        console.error("Message server:", error.message);
+      }
+    },
+    logout: async (payload) => {
+      try {
+        const res = await fetch(`${VITE_URL_BACKEND_CHAT}/api/auth/logout`, {
+          method: "POST",
+          credentials: "include",
         });
 
         const data = await res.json();
@@ -86,5 +102,6 @@ const authController = {
     },
   },
 };
+console.log("🚀 ~ authController.post.login:", authController.post.login);
 
 export default authController;
