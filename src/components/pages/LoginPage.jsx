@@ -57,12 +57,20 @@ export default function LoginPage() {
     });
     const data = await authController.post.login(payload);
 
-    if (data && !data.id) return alert("Contraseña o correo incorrecto");
+    if (data && !data.id) {
+      setInitialState({
+        type: "SET_INITIAL_STATE",
+        key: "loading",
+        payload: false,
+      });
+      return alert("Contraseña o correo incorrecto");
+    }
     // setInitialState({
     //   type: "SET_INITIAL_STATE",
     //   key: "dataUser",
     //   payload: data,
     // });
+
     localStorage.setItem("idUser", data.id);
     navigate("/contact");
     alert("Logeado");
