@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 const ProtectedRoute = () => {
   const cookies = Cookies.get();
 
-  if (!cookies.token) return <Navigate to="/login" replace />;
+  // if (!cookies.token) return <Navigate to="/login" replace />;
 
   return <Outlet />;
 };
