@@ -4,6 +4,7 @@ import FormLogin from "../molecules/form/FormLogin";
 import LoginTemplate from "../templates/LoginTemplate";
 import { useGlobal } from "../../context/GlobalContext";
 import authController from "../../controllers/authController";
+import AlertCard from "../molecules/AlertCard";
 
 export default function LoginPage() {
   const { socket, setInitialState } = useGlobal();
@@ -78,6 +79,7 @@ export default function LoginPage() {
 
   return (
     <LoginTemplate>
+      <AlertCard />
       <FormLogin
         handleLogin={handleLogin}
         payload={payload}
