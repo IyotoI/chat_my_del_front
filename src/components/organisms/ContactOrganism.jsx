@@ -3,6 +3,7 @@ import TopChat from "../molecules/TopChat";
 import CardMessages from "../molecules/CardMessages";
 import { forwardRef } from "react";
 import TopContact from "../molecules/TopContact";
+import FormContact from "../molecules/form/FormContact";
 import ItemListContact from "../molecules/ItemListContact";
 import imgBackground from "../../assets/images/taken_mshk.svg";
 import Button from "../atoms/Button";
@@ -62,7 +63,7 @@ const ContactOrganism = forwardRef(
           onExitApp={onExitApp}
         />
         <div className="h-[calc(100dvh-93px)] overflow-y-auto">
-          {itemsContact ? (
+          {itemsContact.length ? (
             itemsContact.map((item, index) => (
               <ItemListContact
                 key={index}
@@ -71,25 +72,9 @@ const ContactOrganism = forwardRef(
               />
             ))
           ) : (
-            <MessageIsEmpty
-              onSearchContact={onSearchContact}
-              setPayload={setPayload}
-              payload={payload}
-            />
-          )}
-          {userFound && (
-            <>
-              <div className="border border-gray-400 mt-9"></div>
-              <ItemListContact
-                itemPayloadContact={
-                  itemPayloadContact && itemPayloadContact.key
-                }
-                sendRequestContact={sendRequestContact}
-                onAddContactList={onAddContactList}
-                email={userFound && userFound.email}
-                userName={userFound && userFound.userName}
-              />
-            </>
+            <div className="w-[90%] mx-auto mt-20">
+              <FormContact />
+            </div>
           )}
         </div>
       </div>
