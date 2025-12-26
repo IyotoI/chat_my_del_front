@@ -10,6 +10,7 @@ export default function ItemListContact({
   sendRequestContact,
   onSearchContact,
   onAddContactList,
+  onActionButtonItem,
   itemPayloadContact,
 }) {
   const { pathname } = useLocation();
@@ -39,7 +40,7 @@ export default function ItemListContact({
               <Button
                 color="bg-[#1AAD5E]"
                 className="px-[6px] h-9 mr-auto flex justify-center items-center "
-                onClick={onAddContactList}
+                onClick={onActionButtonItem}
               >
                 <IconItem nameIcon="emailFast" size={1} />
               </Button>

@@ -89,6 +89,10 @@ export default function ContactPage() {
     });
   };
 
+  const actionButtonItem = () => {
+    navigate("/chat");
+  };
+
   const openModal = () => {
     setInitialState({
       type: "SET_INITIAL_STATE",
@@ -116,6 +120,7 @@ export default function ContactPage() {
         onAddContactList={addContactList}
         onOpenModal={openModal}
         onExitApp={exitApp}
+        onActionButtonItem={actionButtonItem}
       />
     </ContactTemplate>
   );

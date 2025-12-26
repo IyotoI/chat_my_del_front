@@ -47,6 +47,7 @@ const ContactOrganism = forwardRef(
       userFound,
       onOpenModal,
       onExitApp,
+      onActionButtonItem,
       contactsList,
       itemPayloadContact,
     },
@@ -69,6 +70,7 @@ const ContactOrganism = forwardRef(
                 key={index}
                 userName={item.userName}
                 email={item.email}
+                onActionButtonItem={onActionButtonItem}
               />
             ))
           ) : (
