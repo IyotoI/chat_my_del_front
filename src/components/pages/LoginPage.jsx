@@ -53,8 +53,8 @@ export default function LoginPage() {
     if (!validate()) return;
     setInitialState({
       type: "SET_INITIAL_STATE",
-      key: "loading",
-      payload: true,
+      key: "modalGeneral",
+      payload: { isOpenModal: true, nameComponentContent: "loader" },
     });
     const data = await authController.post.login(payload);
 
@@ -64,22 +64,19 @@ export default function LoginPage() {
         key: "loading",
         payload: false,
       });
-      return alert("Contraseña o correo incorrecto");
+      setInitialState({
+        type: "SET_INITIAL_STATE",
+        key: "modalGeneral",
+        payload: { isOpenModal: true, nameComponentContent: "alertCard" },
+      });
+      return;
     }
-    // setInitialState({
-    //   type: "SET_INITIAL_STATE",
-    //   key: "dataUser",
-    //   payload: data,
-    // });
-
     localStorage.setItem("idUser", data.id);
     navigate("/contact");
-    alert("Logeado");
   };
 
   return (
     <LoginTemplate>
-      <AlertCard />
       <FormLogin
         handleLogin={handleLogin}
         payload={payload}

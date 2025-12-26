@@ -3,6 +3,10 @@ export const initialState = {
   dataUser: {},
   isModal: false,
   listItemsContacts: [],
+  modalGeneral: {
+    isOpenModal: false,
+    nameComponentContent: "alertCard",
+  },
 };
 
 export const appReducer = (state, action) => {

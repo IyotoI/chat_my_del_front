@@ -19,11 +19,7 @@ const FormContact = ({ onHandleActionsButtons }) => {
   };
 
   const addContactList = async () => {
-    // setInitialState({
-    //   type: "SET_INITIAL_STATE",
-    //   key: "loading",
-    //   payload: true,
-    // });
+    debugger;
     const idUser = localStorage.getItem("idUser");
     const data = await contactController.post.one({
       ...userFound,
@@ -36,16 +32,14 @@ const FormContact = ({ onHandleActionsButtons }) => {
     });
     setInitialState({
       type: "SET_INITIAL_STATE",
-      key: "isModal",
-      payload: false,
+      key: "modalGeneral",
+      payload: { isOpenModal: false, nameComponentContent: "formContact" },
     });
-    alert("Amigo agregado");
-
-    // setInitialState({
-    //   type: "SET_INITIAL_STATE",
-    //   key: "loading",
-    //   payload: false,
-    // });
+    setInitialState({
+      type: "SET_INITIAL_STATE",
+      key: "modalGeneral",
+      payload: { isOpenModal: true, nameComponentContent: "alertCard" },
+    });
   };
 
   const searchContact = async () => {
@@ -54,9 +48,23 @@ const FormContact = ({ onHandleActionsButtons }) => {
     //   key: "loading",
     //   payload: true,
     // });
+    setInitialState({
+      type: "SET_INITIAL_STATE",
+      key: "modalGeneral",
+      payload: { isOpenModal: true, nameComponentContent: "loader" },
+    });
     const data = await authController.get.userIdConnected(payload);
     setUserFound(data);
-    alert("Amigo encontrado");
+    setInitialState({
+      type: "SET_INITIAL_STATE",
+      key: "modalGeneral",
+      payload: { isOpenModal: false, nameComponentContent: "loader" },
+    });
+    setInitialState({
+      type: "SET_INITIAL_STATE",
+      key: "modalGeneral",
+      payload: { isOpenModal: true, nameComponentContent: "alertCard" },
+    });
     // setInitialState({
     //   type: "SET_INITIAL_STATE",
     //   key: "loading",

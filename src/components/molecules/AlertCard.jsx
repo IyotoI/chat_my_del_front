@@ -3,7 +3,7 @@ import IconItem from "../atoms/Icon";
 
 const AlertCard = ({ titulo, description }) => {
   return (
-    <div class="w-sm flex flex-col items-center py-15 rounded-xl bg-white shadow-sm">
+    <div class="flex flex-col items-center">
       <IconItem color={"#1AAD5E"} size={3} className={"mb-8"} />
       <h4 class="font-semibold text-2xl flex items-center gap-2 text-gray-700">
         Titulo

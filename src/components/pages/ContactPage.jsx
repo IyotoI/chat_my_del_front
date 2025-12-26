@@ -29,36 +29,44 @@ export default function ContactPage() {
   const searchContact = async () => {
     setInitialState({
       type: "SET_INITIAL_STATE",
-      key: "loading",
-      payload: true,
+      key: "modalGeneral",
+      payload: { isOpenModal: true, nameComponentContent: "loader" },
     });
     const data = await authController.get.userIdConnected(payload);
     setUserFound(data);
-    alert("Amigo encontrado");
     setInitialState({
       type: "SET_INITIAL_STATE",
-      key: "loading",
-      payload: false,
+      key: "modalGeneral",
+      payload: { isOpenModal: false, nameComponentContent: "loader" },
+    });
+    setInitialState({
+      type: "SET_INITIAL_STATE",
+      key: "modalGeneral",
+      payload: { isOpenModal: true, nameComponentContent: "alertCard" },
     });
   };
 
   const addContactList = async () => {
     setInitialState({
       type: "SET_INITIAL_STATE",
-      key: "loading",
-      payload: true,
+      key: "modalGeneral",
+      payload: { isOpenModal: true, nameComponentContent: "loader" },
     });
 
     const data = await contactController.post.one({
       ...userFound,
       userIdLogeado: dataUser.id,
     });
-    alert("Amigo agregado");
 
     setInitialState({
       type: "SET_INITIAL_STATE",
-      key: "loading",
-      payload: false,
+      key: "modalGeneral",
+      payload: { isOpenModal: false, nameComponentContent: "loader" },
+    });
+    setInitialState({
+      type: "SET_INITIAL_STATE",
+      key: "modalGeneral",
+      payload: { isOpenModal: true, nameComponentContent: "alertCard" },
     });
   };
 
@@ -76,16 +84,16 @@ export default function ContactPage() {
 
     setInitialState({
       type: "SET_INITIAL_STATE",
-      key: "loading",
-      payload: false,
+      key: "modalGeneral",
+      payload: { isOpenModal: false, nameComponentContent: "loader" },
     });
   };
 
   const openModal = () => {
     setInitialState({
       type: "SET_INITIAL_STATE",
-      key: "isModal",
-      payload: true,
+      key: "modalGeneral",
+      payload: { isOpenModal: true, nameComponentContent: "formContact" },
     });
   };
 
