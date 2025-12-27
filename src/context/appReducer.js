@@ -5,7 +5,7 @@ export const initialState = {
   listItemsContacts: [],
   modalGeneral: {
     isOpenModal: false,
-    nameComponentContent: "alertCard",
+    nameComponentContent: "",
   },
 };
 
