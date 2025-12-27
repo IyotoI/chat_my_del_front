@@ -14,7 +14,7 @@ const AlertCard = ({ titulo, description }) => {
   };
 
   return (
-    <div class="flex flex-col items-center">
+    <div class="flex flex-col items-center bg-white mx-2 py-8 w-xs rounded-xl">
       <IconItem color={"#1AAD5E"} size={3} className={"mb-8"} />
       <h4 class="font-semibold text-2xl flex items-center gap-2 text-gray-700">
         Titulo

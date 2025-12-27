@@ -28,11 +28,13 @@ const ModalGeneralOrganism = () => {
   return (
     <>
       {modalGeneral.isOpenModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 ">
           <div
             className={`${
-              modalGeneral.nameComponentContent !== "loader" && "bg-white"
-            } p-8 w-sm rounded-xl text-center`}
+              !["alertCard", "loader"].includes(
+                modalGeneral.nameComponentContent
+              ) && "bg-white p-8 rounded-xl text-center @md:flex-row mx-4"
+            } `}
           >
             {Component && Component}
           </div>
