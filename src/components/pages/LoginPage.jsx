@@ -81,6 +81,7 @@ export default function LoginPage() {
     }
 
     localStorage.setItem("idUser", data.id);
+    localStorage.setItem("role", data.role.name);
     navigate("/contact");
   };
 

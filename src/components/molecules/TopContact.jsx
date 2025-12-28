@@ -12,6 +12,7 @@ export default function TopContact({
   onExitApp,
 }) {
   const { pathname } = useLocation();
+  const roleName = localStorage.getItem("role");
 
   return (
     <div className={`flex justify-between items-center ${className}`}>
@@ -28,13 +29,16 @@ export default function TopContact({
             <IconItem nameIcon="accountPlus" size={1} />
           </Button>
         )}
-        <Button
-          color="bg-[#1AAD5E]"
-          className="px-[6px] h-9 flex justify-center items-center mr-3"
-          onClick={onViewConnectedUsers}
-        >
-          <IconItem nameIcon="accountGroup" size={1} />
-        </Button>
+
+        {roleName === "admin" && (
+          <Button
+            color="bg-[#1AAD5E]"
+            className="px-[6px] h-9 flex justify-center items-center mr-3"
+            onClick={onViewConnectedUsers}
+          >
+            <IconItem nameIcon="accountGroup" size={1} />
+          </Button>
+        )}
         <Button
           color="bg-[#1AAD5E]"
           className="px-[6px] h-9 flex justify-center items-center mr-3"
