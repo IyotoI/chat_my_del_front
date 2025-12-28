@@ -61,16 +61,25 @@ export default function LoginPage() {
     if (data && !data.id) {
       setInitialState({
         type: "SET_INITIAL_STATE",
-        key: "loading",
-        payload: false,
+        key: "modalGeneral",
+        payload: { isOpenModal: false, nameComponentContent: "loader" },
       });
       setInitialState({
         type: "SET_INITIAL_STATE",
         key: "modalGeneral",
-        payload: { isOpenModal: true, nameComponentContent: "alertCard" },
+        payload: {
+          isOpenModal: true,
+          nameComponentContent: "alertCard",
+          payload: {
+            title: "Ups!",
+            description: "Correo o contraseña incorrecta",
+            type: "error",
+          },
+        },
       });
       return;
     }
+
     localStorage.setItem("idUser", data.id);
     navigate("/contact");
   };

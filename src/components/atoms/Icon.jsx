@@ -14,6 +14,7 @@ import {
   mdiAccountPlus,
   mdiEmailFast,
   mdiCheckCircleOutline,
+  mdiCloseCircleOutline,
 } from "@mdi/js";
 
 export default function IconItem({ color, className, nameIcon, size = 1.2 }) {
@@ -43,6 +44,8 @@ export default function IconItem({ color, className, nameIcon, size = 1.2 }) {
     icnItm = mdiEmailFast;
   } else if (nameIcon === "checkCircleOutline") {
     icnItm = mdiCheckCircleOutline;
+  } else if (nameIcon === "closeCircleOutline") {
+    icnItm = mdiCloseCircleOutline;
   } else {
     icnItm = mdiTooltipImageOutline;
   }

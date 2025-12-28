@@ -8,6 +8,7 @@ export function GlobalProvider({ children }) {
   const socket = useSocket();
 
   const [state, dispatch] = useReducer(appReducer, initialState);
+  debugger;
 
   const setInitialState = (value) => dispatch(value);
 

@@ -43,18 +43,30 @@ export default function RegisterPage() {
     if (!validate()) return;
     setInitialState({
       type: "SET_INITIAL_STATE",
-      key: "loading",
-      payload: true,
+      key: "modalGeneral",
+      payload: { isOpenModal: true, nameComponentContent: "loader" },
     });
     await authController.post.register(payload);
 
     setInitialState({
       type: "SET_INITIAL_STATE",
-      key: "loading",
-      payload: false,
+      key: "modalGeneral",
+      payload: { isOpenModal: false, nameComponentContent: "loader" },
+    });
+    setInitialState({
+      type: "SET_INITIAL_STATE",
+      key: "modalGeneral",
+      payload: {
+        isOpenModal: true,
+        nameComponentContent: "alertCard",
+        payload: {
+          title: "Excelente!",
+          description: "Cuenta creada exitosamente",
+          type: "success",
+        },
+      },
     });
     navigate("/login");
-    alert("Cuenta creada");
   };
 
   return (

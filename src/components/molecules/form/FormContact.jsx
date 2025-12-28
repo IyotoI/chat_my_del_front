@@ -63,7 +63,15 @@ const FormContact = ({ onHandleActionsButtons }) => {
     setInitialState({
       type: "SET_INITIAL_STATE",
       key: "modalGeneral",
-      payload: { isOpenModal: true, nameComponentContent: "alertCard" },
+      payload: {
+        isOpenModal: true,
+        nameComponentContent: "alertCard",
+        payload: {
+          title: "Perfecto!",
+          description: "Tu amigo a sido encontrado",
+          type: "success",
+        },
+      },
     });
     // setInitialState({
     //   type: "SET_INITIAL_STATE",
