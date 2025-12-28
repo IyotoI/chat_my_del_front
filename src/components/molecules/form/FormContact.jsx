@@ -10,10 +10,12 @@ import ItemListContact from "../ItemListContact";
 import contactController from "../../../controllers/contactController";
 
 const FormContact = ({ onHandleActionsButtons }) => {
-  const [payload, setPayload] = useState("");
+  const [payload, setPayload] = useState({ email: "" });
   const { pathname } = useLocation();
   const { setInitialState, dataUser, listItemsContacts } = useGlobal();
   const [userFound, setUserFound] = useState("");
+  const [errors, setErrors] = useState({});
+
   const itemPayloadContact = {
     key: "formContact",
   };
@@ -42,56 +44,88 @@ const FormContact = ({ onHandleActionsButtons }) => {
     });
   };
 
-  const searchContact = async () => {
-    // setInitialState({
-    //   type: "SET_INITIAL_STATE",
-    //   key: "loading",
-    //   payload: true,
-    // });
+  const validate = () => {
+    const newErrors = {};
+
+    if (!payload.email) {
+      newErrors.email = "El correo es obligatorio";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email)) {
+      newErrors.email = "Correo no válido";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const searchContact = async (e) => {
+    e.preventDefault();
+    if (!validate()) return;
+
     setInitialState({
       type: "SET_INITIAL_STATE",
       key: "modalGeneral",
       payload: { isOpenModal: true, nameComponentContent: "loader" },
     });
-    const data = await authController.get.userIdConnected(payload);
-    setUserFound(data);
-    setInitialState({
-      type: "SET_INITIAL_STATE",
-      key: "modalGeneral",
-      payload: { isOpenModal: false, nameComponentContent: "loader" },
-    });
-    setInitialState({
-      type: "SET_INITIAL_STATE",
-      key: "modalGeneral",
-      payload: {
-        isOpenModal: true,
-        nameComponentContent: "alertCard",
+
+    const data = await authController.get.userIdConnected(payload.email);
+
+    if (data && data.id) {
+      setInitialState({
+        type: "SET_INITIAL_STATE",
+        key: "modalGeneral",
         payload: {
-          title: "Perfecto!",
-          description: "Tu amigo a sido encontrado",
-          type: "success",
+          isOpenModal: true,
+          nameComponentContent: "alertCard",
+          payload: {
+            title: "Perfecto!",
+            description: "Tu amigo a sido encontrado",
+            type: "success",
+          },
         },
-      },
-    });
-    // setInitialState({
-    //   type: "SET_INITIAL_STATE",
-    //   key: "loading",
-    //   payload: false,
-    // });
+      });
+    } else {
+      setInitialState({
+        type: "SET_INITIAL_STATE",
+        key: "modalGeneral",
+        payload: {
+          isOpenModal: true,
+          nameComponentContent: "alertCard",
+          payload: {
+            title: "Lo siento",
+            description: "Tu amigo no esta registrado aun",
+            type: "error",
+          },
+        },
+      });
+    }
   };
 
   return (
     <div className="text-center md:w-[320px]">
       <div className="flex flex-col">
-        <form className="text-center mt-5">
+        <form className="text-center mt-5" onSubmit={searchContact}>
           <img src={imgBackground} className="mx-auto w-1/2 mb-12" />
-          <Input
-            onChange={(e) => setPayload(e.target.value)}
-            value={payload}
-            placeholder="Correo electronico"
-            className="mb-6"
-          />
-          <Button color="bg-[#1AAD5E]" onClick={searchContact}>
+          <div className="mb-6">
+            <Input
+              name="email"
+              value={payload.email}
+              placeholder="Correo electronico"
+              onChange={(e) =>
+                setPayload((prev) => ({
+                  ...prev,
+                  [e.target.name]: e.target.value,
+                }))
+              }
+            />
+            <p
+              className={`text-red-500 text-start ${
+                !errors.email && "invisible"
+              }`}
+            >
+              {errors.email ? errors.email : "error"}
+            </p>
+          </div>
+          <Button color="bg-[#1AAD5E]" type="submit">
             Buscar amigo
           </Button>
         </form>
