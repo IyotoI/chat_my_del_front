@@ -74,7 +74,7 @@ const ContactOrganism = forwardRef(
               />
             ))
           ) : (
-            <div className="w-[90%] mx-auto mt-20">
+            <div className="w-[90%] md:w-[24%] mx-auto mt-20  flex items-center">
               <FormContact />
             </div>
           )}
