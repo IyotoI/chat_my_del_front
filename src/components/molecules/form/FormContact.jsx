@@ -21,7 +21,6 @@ const FormContact = ({ onHandleActionsButtons }) => {
   };
 
   const addContactList = async () => {
-    debugger;
     const idUser = localStorage.getItem("idUser");
     const data = await contactController.post.one({
       ...userFound,
@@ -40,7 +39,7 @@ const FormContact = ({ onHandleActionsButtons }) => {
     setInitialState({
       type: "SET_INITIAL_STATE",
       key: "modalGeneral",
-      payload: { isOpenModal: true, nameComponentContent: "alertCard" },
+      payload: { isOpenModal: true, nameComponentContent: "loader" },
     });
   };
 
@@ -70,6 +69,7 @@ const FormContact = ({ onHandleActionsButtons }) => {
     const data = await authController.get.userIdConnected(payload.email);
 
     if (data && data.id) {
+      setUserFound(data);
       setInitialState({
         type: "SET_INITIAL_STATE",
         key: "modalGeneral",
