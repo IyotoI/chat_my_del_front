@@ -3,6 +3,8 @@ import ChatTemplate from "../templates/ChatTemplate";
 import { useEffect, useState, useRef, useLayoutEffect } from "react";
 import { useGlobal } from "../../context/GlobalContext";
 import { useNavigate } from "react-router-dom";
+import roomsApi from "../../api/rooms";
+import { useLocation } from "react-router-dom";
 
 export default function ChatPage() {
   const { socket, setIsOpen } = useGlobal();
@@ -14,6 +16,7 @@ export default function ChatPage() {
   const navigate = useNavigate();
   const VITE_PUBLIC_VAPID_KEY = import.meta.env.VITE_PUBLIC_VAPID_KEY;
   const VITE_URL_BACKEND_CHAT = import.meta.env.VITE_URL_BACKEND_CHAT;
+  const { state } = useLocation();
 
   const handleSetFieldChat = (value) => {
     setFieldChat(value);
@@ -109,6 +112,12 @@ export default function ChatPage() {
       },
     });
   };
+
+  const getRoom = async (participants) => {
+    const data = await roomsApi.getByParticipants(participants);
+    console.log("🚀 ~ getRoom ~ data:", data);
+  };
+
   useLayoutEffect(() => {
     if (refListChats.current) {
       refListChats.current.scrollTop = refListChats.current.scrollHeight;
@@ -120,6 +129,7 @@ export default function ChatPage() {
     // refListChats.current.scrollTop = refListChats.current.scrollHeight;
 
     if (!socket) return;
+    getRoom(state.participants);
 
     socket.on("chat:message", ({ idReceiver, message, idSocket2 }) => {
       const idSocket3 = localStorage.getItem("idSocket");

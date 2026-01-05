@@ -9,6 +9,7 @@ export default function ItemListContact({
   email = "Indefinido",
   sendRequestContact,
   onSearchContact,
+  idUser,
   onAddContactList,
   onActionButtonItem,
   itemPayloadContact,
@@ -40,7 +41,7 @@ export default function ItemListContact({
               <Button
                 color="bg-[#1AAD5E]"
                 className="px-[6px] h-9 mr-auto flex justify-center items-center "
-                onClick={onActionButtonItem}
+                onClick={() => onActionButtonItem(idUser)}
               >
                 <IconItem nameIcon="emailFast" size={1} />
               </Button>

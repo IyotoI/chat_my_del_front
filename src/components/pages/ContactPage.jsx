@@ -89,8 +89,12 @@ export default function ContactPage() {
     });
   };
 
-  const actionButtonItem = () => {
-    navigate("/chat");
+  const actionButtonItem = (idUserReceptor) => {
+    const idUserEmisor = localStorage.getItem("idUser");
+    const participants = idUserEmisor + "-" + idUserReceptor;
+    navigate("/chat", {
+      state: { participants },
+    });
   };
 
   const openModal = () => {
