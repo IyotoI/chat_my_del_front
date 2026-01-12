@@ -4,11 +4,13 @@ import { useEffect, useState, useRef, useLayoutEffect } from "react";
 import { useGlobal } from "../../context/GlobalContext";
 import { useNavigate } from "react-router-dom";
 import roomsApi from "../../api/rooms";
+import messagesApi from "../../api/messages";
 import { useLocation } from "react-router-dom";
 
 export default function ChatPage() {
   const { socket, setIsOpen } = useGlobal();
   const [isFieldWriting, setIsFieldWriting] = useState(false);
+  const [idRoomChat, setIdRoomChat] = useState("");
   const [fieldChat, setFieldChat] = useState("");
   const [conversation, setConversation] = useState([]);
   const documentoRef = useRef(null);
@@ -31,7 +33,7 @@ export default function ChatPage() {
     });
   };
 
-  const handleChat = () => {
+  const handleChat = async () => {
     if (fieldChat === "") {
       return;
     }
@@ -39,17 +41,28 @@ export default function ChatPage() {
     const idSocket2 = localStorage.getItem("idSocket");
     const keyRoom = localStorage.getItem("keyRoom");
 
-    socket.emit("chat:message", {
-      idReceiver: keyRoom,
+    const { data } = await messagesApi.post({
       message: fieldChat,
-      idSocket2,
+      user: localStorage.getItem("idUser"),
     });
 
-    socket.emit("chat:fieldWriting", {
-      idReceiver: keyRoom,
-      message: "",
-      idSocket2,
+    const room = await roomsApi.put({
+      conversation: data.id,
+      idRoom: idRoomChat,
     });
+    console.log("🚀 ~ handleChat ~ room:", room);
+
+    // socket.emit("chat:message", {
+    //   idReceiver: keyRoom,
+    //   message: fieldChat,
+    //   idSocket2,
+    // });
+
+    // socket.emit("chat:fieldWriting", {
+    //   idReceiver: keyRoom,
+    //   message: "",
+    //   idSocket2,
+    // });
 
     setFieldChat("");
     documentoRef.current.focus();
@@ -117,6 +130,7 @@ export default function ChatPage() {
   const getRoom = async (participants) => {
     const { data } = await roomsApi.getByParticipants(participants);
     setConversation(data.conversation);
+    setIdRoomChat(data.id);
   };
 
   useLayoutEffect(() => {

@@ -14,6 +14,26 @@ const roomsApi = {
     const data = res.json();
     return data;
   },
+  put: async (payload) => {
+    try {
+      const res = await fetch(
+        `${VITE_URL_BACKEND_CHAT}/api/${path}/${payload.idRoom}`,
+        {
+          method: "PUT",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      const data = res.json();
+      return data;
+    } catch (error) {
+      console.log(error.messages);
+    }
+  },
 };
 
 export default roomsApi;
