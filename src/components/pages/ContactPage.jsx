@@ -74,7 +74,7 @@ export default function ContactPage() {
     const data = await contactController.get.allById(
       localStorage.getItem("idUser")
     );
-    // setContactsList(data);
+    setContactsList(data);
 
     setInitialState({
       type: "SET_INITIAL_STATE",

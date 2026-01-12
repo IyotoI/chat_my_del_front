@@ -10,6 +10,7 @@ export default function ChatPage() {
   const { socket, setIsOpen } = useGlobal();
   const [isFieldWriting, setIsFieldWriting] = useState(false);
   const [fieldChat, setFieldChat] = useState("");
+  const [conversation, setConversation] = useState([]);
   const documentoRef = useRef(null);
   const refListChats = useRef(null);
   const [messagesChat, setMessagesChat] = useState([]);
@@ -114,8 +115,8 @@ export default function ChatPage() {
   };
 
   const getRoom = async (participants) => {
-    const data = await roomsApi.getByParticipants(participants);
-    console.log("🚀 ~ getRoom ~ data:", data);
+    const { data } = await roomsApi.getByParticipants(participants);
+    setConversation(data.conversation);
   };
 
   useLayoutEffect(() => {
@@ -177,6 +178,7 @@ export default function ChatPage() {
         setFieldChat={handleSetFieldChat}
         ref={documentoRef}
         ref2={refListChats}
+        conversation={conversation}
         messagesChat={messagesChat}
         onExitChat={exitChat}
         onEnableNotifications={enableNotifications}

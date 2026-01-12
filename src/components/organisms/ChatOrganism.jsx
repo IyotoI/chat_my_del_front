@@ -12,6 +12,7 @@ const ChatOrganism = forwardRef(
       setFieldChat,
       messagesChat,
       ref2,
+      conversation,
       onExitChat,
       onEnableNotifications,
     },
@@ -34,15 +35,15 @@ const ChatOrganism = forwardRef(
           ref={ref2}
           className="flex-1 flex-col flex  bg-[#F5F2EB] px-2 pt-2 overflow-y-auto "
         >
-          {messagesChat.map((value, index) => {
+          {conversation.map((value, index) => {
             return (
               <div
                 key={index}
-                className={`${
-                  value.idSocket2 === idSocketUser
-                    ? "flex justify-end"
-                    : "flex justify-start"
-                } mb-3`}
+                // className={`${
+                //   value.idSocket2 === idSocketUser
+                //     ? "flex justify-end"
+                //     : "flex justify-start"
+                // } mb-3`}
               >
                 <CardMessages
                   className={
@@ -50,7 +51,7 @@ const ChatOrganism = forwardRef(
                       ? "bg-white"
                       : "bg-[#D9FCD2]"
                   }
-                  value={value}
+                  message={value.message}
                 />
               </div>
             );

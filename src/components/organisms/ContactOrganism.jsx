@@ -66,13 +66,16 @@ const ContactOrganism = forwardRef(
         <div className="h-[calc(100dvh-93px)] overflow-y-auto">
           {itemsContact.length ? (
             itemsContact.map((item, index) => (
-              <ItemListContact
-                key={index}
-                idUser={item.id}
-                userName={item.userName}
-                email={item.email}
-                onActionButtonItem={onActionButtonItem}
-              />
+              <>
+                {JSON.stringify(item)}
+                <ItemListContact
+                  key={index}
+                  idUser={item.user.id}
+                  userName={item.userName}
+                  email={item.email}
+                  onActionButtonItem={onActionButtonItem}
+                />
+              </>
             ))
           ) : (
             <div className="w-[90%] md:w-[24%] mx-auto mt-20  flex items-center">
