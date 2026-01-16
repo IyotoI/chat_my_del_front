@@ -5,9 +5,10 @@ import contactController from "../../controllers/contactController";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useGlobal } from "../../context/GlobalContext";
+import roomsApi from "../../api/rooms";
 
 export default function ContactPage() {
-  const { setInitialState, dataUser, listItemsContacts } = useGlobal();
+  const { socket, setInitialState, dataUser, listItemsContacts } = useGlobal();
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const [sendRequestContact, setSendRequestContact] = useState(false);
@@ -17,6 +18,8 @@ export default function ContactPage() {
   const itemPayloadContact = {
     key: "sendMessege",
   };
+  const [conversation, setConversation] = useState([]);
+  const [idRoomChat, setIdRoomChat] = useState("");
 
   useEffect(() => {
     getAllContacts();
@@ -89,11 +92,34 @@ export default function ContactPage() {
     });
   };
 
-  const actionButtonItem = (idUserReceptor) => {
+  const getRoom = async (participants) => {
+    setInitialState({
+      type: "SET_INITIAL_STATE",
+      key: "modalGeneral",
+      payload: { isOpenModal: true, nameComponentContent: "loader" },
+    });
+    const { data } = await roomsApi.getByParticipants(participants);
+    setConversation(data.conversation);
+    setInitialState({
+      type: "SET_INITIAL_STATE",
+      key: "modalGeneral",
+      payload: { isOpenModal: false, nameComponentContent: "loader" },
+    });
+
+    return data;
+  };
+
+  const actionButtonItem = async (idUserReceptor) => {
     const idUserEmisor = localStorage.getItem("idUser");
     const participants = idUserEmisor + "-" + idUserReceptor;
+    const { id } = await getRoom(participants);
+    setIdRoomChat(id);
+    socket.emit("join-room", {
+      idsoketUser: idUserEmisor,
+      IdSocketReceiver: id,
+    });
     navigate("/chat", {
-      state: { participants },
+      state: { participants, conversation, idRoomChat: id },
     });
   };
 

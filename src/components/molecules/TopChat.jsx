@@ -3,12 +3,22 @@ import Button from "../atoms/Button";
 
 export default function TopChat({
   isFieldWriting,
+  onGoBack,
   onExitChat,
   onEnableNotifications,
 }) {
   return (
     <div className="flex justify-between">
       <div className="flex">
+        <div className="mt-1 mr-5">
+          <Button
+            color="bg-[#1AAD5E]"
+            className="px-[6px] h-9 flex justify-center items-center"
+            onClick={onGoBack}
+          >
+            <IconItem nameIcon="arrowLeft" size={1} />
+          </Button>
+        </div>
         <div className="w-[47px] h-[47px] rounded-full bg-[#1aad5e1c] mr-2 border border-[#1AAD5E] flex justify-center items-center">
           <IconItem nameIcon="account" className="text-[#1AAD5E]" />
         </div>

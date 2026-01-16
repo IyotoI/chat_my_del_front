@@ -14,6 +14,7 @@ const ChatOrganism = forwardRef(
       ref2,
       conversation,
       onExitChat,
+      onGoBack,
       onEnableNotifications,
     },
     ref
@@ -27,6 +28,7 @@ const ChatOrganism = forwardRef(
           <TopChat
             isFieldWriting={isFieldWriting}
             onExitChat={onExitChat}
+            onGoBack={onGoBack}
             onEnableNotifications={onEnableNotifications}
           />
         </div>
@@ -39,11 +41,11 @@ const ChatOrganism = forwardRef(
             return (
               <div
                 key={index}
-                // className={`${
-                //   value.idSocket2 === idSocketUser
-                //     ? "flex justify-end"
-                //     : "flex justify-start"
-                // } mb-3`}
+                className={`${
+                  value.idSocket2 === idSocketUser
+                    ? "flex justify-end"
+                    : "flex justify-start"
+                } mb-3`}
               >
                 <CardMessages
                   className={

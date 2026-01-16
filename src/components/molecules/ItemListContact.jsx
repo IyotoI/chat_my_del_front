@@ -15,7 +15,6 @@ export default function ItemListContact({
   itemPayloadContact,
 }) {
   const { pathname } = useLocation();
-  console.log("🚀 ~ ItemListContact ~ pathname:", itemPayloadContact);
   return (
     <div className={`${className}  py-3  flex`}>
       <div className="w-[47px] h-[47px] rounded-full bg-[#CFD8DF] mr-2 border border-[#CFD8DF] flex justify-center items-center overflow-hidden">

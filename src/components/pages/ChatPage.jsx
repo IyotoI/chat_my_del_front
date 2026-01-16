@@ -27,7 +27,7 @@ export default function ChatPage() {
     const idSocket = localStorage.getItem("idSocket");
 
     socket.emit("chat:fieldWriting", {
-      idReceiver: keyRoom,
+      idReceiver: state.idRoomChat,
       message: value,
       idSocket,
     });
@@ -41,28 +41,27 @@ export default function ChatPage() {
     const idSocket2 = localStorage.getItem("idSocket");
     const keyRoom = localStorage.getItem("keyRoom");
 
-    const { data } = await messagesApi.post({
-      message: fieldChat,
-      user: localStorage.getItem("idUser"),
-    });
-
-    const room = await roomsApi.put({
-      conversation: data.id,
-      idRoom: idRoomChat,
-    });
-    console.log("🚀 ~ handleChat ~ room:", room);
-
-    // socket.emit("chat:message", {
-    //   idReceiver: keyRoom,
+    // const { data } = await messagesApi.post({
     //   message: fieldChat,
-    //   idSocket2,
+    //   user: localStorage.getItem("idUser"),
     // });
 
-    // socket.emit("chat:fieldWriting", {
-    //   idReceiver: keyRoom,
-    //   message: "",
-    //   idSocket2,
+    // const room = await roomsApi.put({
+    //   conversation: data.id,
+    //   idRoom: idRoomChat,
     // });
+
+    socket.emit("chat:message", {
+      idReceiver: state.idRoomChat,
+      message: fieldChat,
+      idSocket2,
+    });
+
+    socket.emit("chat:fieldWriting", {
+      idReceiver: state.idRoomChat,
+      message: "",
+      idSocket2,
+    });
 
     setFieldChat("");
     documentoRef.current.focus();
@@ -127,6 +126,10 @@ export default function ChatPage() {
     });
   };
 
+  const goBack = () => {
+    navigate("/contact");
+  };
+
   const getRoom = async (participants) => {
     const { data } = await roomsApi.getByParticipants(participants);
     setConversation(data.conversation);
@@ -144,23 +147,24 @@ export default function ChatPage() {
     // refListChats.current.scrollTop = refListChats.current.scrollHeight;
 
     if (!socket) return;
-    getRoom(state.participants);
+    setConversation(state.conversation);
+    // getRoom(state.participants);
 
     socket.on("chat:message", ({ idReceiver, message, idSocket2 }) => {
       const idSocket3 = localStorage.getItem("idSocket");
       const messageUser = { message, idSocket2, idSocket3 };
-      setMessagesChat((prev) => [...prev, messageUser]);
+      // setMessagesChat((prev) => [...prev, messageUser]);
+      setConversation((prev) => [...prev, messageUser]);
     });
 
     socket.on("join-room", (value) => {
-      if (value === localStorage.getItem("idSocket")) {
-        return;
-      }
-      setIsOpen(false);
-
-      socket.emit("closeModal", {
-        isOpen: false,
-      });
+      // if (value === localStorage.getItem("idSocket")) {
+      //   return;
+      // }
+      // setIsOpen(false);
+      // socket.emit("closeModal", {
+      //   isOpen: false,
+      // });
     });
 
     socket.on("closeModal", (value) => {
@@ -195,6 +199,7 @@ export default function ChatPage() {
         conversation={conversation}
         messagesChat={messagesChat}
         onExitChat={exitChat}
+        onGoBack={goBack}
         onEnableNotifications={enableNotifications}
       />
     </ChatTemplate>

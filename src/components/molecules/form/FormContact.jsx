@@ -22,24 +22,29 @@ const FormContact = ({ onHandleActionsButtons }) => {
 
   const addContactList = async () => {
     const idUser = localStorage.getItem("idUser");
+    setInitialState({
+      type: "SET_INITIAL_STATE",
+      key: "modalGeneral",
+      payload: { isOpenModal: true, nameComponentContent: "loader" },
+    });
     const data = await contactController.post.one({
       ...userFound,
-      userIdLogeado: idUser,
+      user: idUser,
     });
     setInitialState({
       type: "SET_INITIAL_STATE",
       key: "listItemsContacts",
       payload: [...listItemsContacts, data],
     });
+    // setInitialState({
+    //   type: "SET_INITIAL_STATE",
+    //   key: "modalGeneral",
+    //   payload: { isOpenModal: false, nameComponentContent: "formContact" },
+    // });
     setInitialState({
       type: "SET_INITIAL_STATE",
       key: "modalGeneral",
-      payload: { isOpenModal: false, nameComponentContent: "formContact" },
-    });
-    setInitialState({
-      type: "SET_INITIAL_STATE",
-      key: "modalGeneral",
-      payload: { isOpenModal: true, nameComponentContent: "loader" },
+      payload: { isOpenModal: false, nameComponentContent: "loader" },
     });
   };
 

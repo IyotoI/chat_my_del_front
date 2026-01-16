@@ -67,12 +67,11 @@ const ContactOrganism = forwardRef(
           {itemsContact.length ? (
             itemsContact.map((item, index) => (
               <>
-                {JSON.stringify(item)}
                 <ItemListContact
                   key={index}
-                  idUser={item.user.id}
-                  userName={item.userName}
-                  email={item.email}
+                  idUser={item.contact.id}
+                  userName={item.contact.userName}
+                  email={item.contact.email}
                   onActionButtonItem={onActionButtonItem}
                 />
               </>
