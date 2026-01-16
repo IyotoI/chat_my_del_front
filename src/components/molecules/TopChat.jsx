@@ -1,5 +1,6 @@
 import IconItem from "../atoms/Icon";
 import Button from "../atoms/Button";
+import { Link } from "react-router-dom";
 
 export default function TopChat({
   isFieldWriting,
@@ -10,19 +11,23 @@ export default function TopChat({
   return (
     <div className="flex justify-between">
       <div className="flex">
-        <div className="mt-1 mr-5">
-          <Button
-            color="bg-[#1AAD5E]"
+        <div className="mt-1 mr-4 ml-2">
+          {/* <Button
+            color="bg-[#ffffff]"
             className="px-[6px] h-9 flex justify-center items-center"
             onClick={onGoBack}
-          >
-            <IconItem nameIcon="arrowLeft" size={1} />
-          </Button>
+          > */}
+          <Link to="/contact">
+            <IconItem color="#1AAD5E" nameIcon="arrowLeft" size={1} />
+          </Link>
+          {/* </Button> */}
         </div>
-        <div className="w-[47px] h-[47px] rounded-full bg-[#1aad5e1c] mr-2 border border-[#1AAD5E] flex justify-center items-center">
-          <IconItem nameIcon="account" className="text-[#1AAD5E]" />
+        <div className="w-[35px] h-[35px] rounded-full bg-[#1aad5e1c] mr-2 border border-[#1AAD5E] flex justify-center items-center">
+          <IconItem nameIcon="account" className="text-[#1AAD5E]" size={0.9} />
         </div>
-        <div className={`${isFieldWriting ? "leading-[1.2]" : "leading-[2]"}`}>
+        <div
+          className={`${isFieldWriting ? "leading-[1.2]" : "leading-[1.5]"}`}
+        >
           <div className="text-[1.3rem]">Amigo</div>
           {isFieldWriting && (
             <div className="text-[0.9rem] text-[#1AAD5E]">Escribiendo...</div>
