@@ -30,7 +30,7 @@ export default function TopChat({
           {/* <div className="text-[0.9rem] text-[#1AAD5E]">Escribiendo...</div> */}
         </div>
       </div>
-      <div className="flex">
+      {/* <div className="flex">
         <div className="flex justify-center items-center mr-5">
           <Button
             color="bg-[#1AAD5E]"
@@ -52,7 +52,7 @@ export default function TopChat({
             <IconItem nameIcon="exitToApp" size={1} />
           </Button>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
