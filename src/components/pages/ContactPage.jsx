@@ -75,7 +75,7 @@ export default function ContactPage() {
 
   const getAllContacts = async () => {
     const data = await contactController.get.allById(
-      localStorage.getItem("idUser")
+      localStorage.getItem("idUser"),
     );
     setContactsList(data);
 
@@ -109,18 +109,48 @@ export default function ContactPage() {
     return data;
   };
 
+  const createRoom = async (participants) => {
+    setInitialState({
+      type: "SET_INITIAL_STATE",
+      key: "modalGeneral",
+      payload: { isOpenModal: true, nameComponentContent: "loader" },
+    });
+
+    const { data } = await roomsApi.post({ participants, conversation: [] });
+
+    setConversation(data.conversation);
+    setInitialState({
+      type: "SET_INITIAL_STATE",
+      key: "modalGeneral",
+      payload: { isOpenModal: false, nameComponentContent: "loader" },
+    });
+
+    return data;
+  };
+
   const actionButtonItem = async (idUserReceptor) => {
     const idUserEmisor = localStorage.getItem("idUser");
-    const participants = idUserEmisor + "-" + idUserReceptor;
-    const { id } = await getRoom(participants);
-    setIdRoomChat(id);
-    socket.emit("join-room", {
-      idsoketUser: idUserEmisor,
-      IdSocketReceiver: id,
-    });
-    navigate("/chat", {
-      state: { participants, conversation, idRoomChat: id },
-    });
+    const participants = idUserEmisor + "," + idUserReceptor;
+
+    try {
+      const { id, conversation } = await getRoom(participants);
+      socket.emit("join-room", {
+        idsoketUser: idUserEmisor,
+        IdSocketReceiver: id,
+      });
+      navigate("/chat", {
+        state: { participants, conversation, idRoomChat: id },
+      });
+    } catch (error) {
+      const { id, conversation } = await createRoom(participants);
+      socket.emit("join-room", {
+        idsoketUser: idUserEmisor,
+        IdSocketReceiver: id,
+      });
+      navigate("/chat", {
+        state: { participants, conversation, idRoomChat: id },
+      });
+    }
   };
 
   const openModal = () => {

@@ -78,21 +78,16 @@ const authController = {
       //   payload: true,
       // });
 
-      try {
-        const res = await fetch(
-          `${VITE_URL_BACKEND_CHAT}/api/user/connected/${id}`,
-          {
-            method: "GET",
-            credentials: "include",
-          }
-        );
-        const data = await res.json();
-        console.log("🚀 ~ data:", data);
+      const res = await fetch(
+        `${VITE_URL_BACKEND_CHAT}/api/user/connected/${id}`,
+        {
+          method: "GET",
+          credentials: "include",
+        },
+      );
 
-        return data;
-      } catch (error) {
-        console.error("Message server:", error.message);
-      }
+      const data = res.json();
+      return data;
 
       // setInitialState({
       //   type: "SET_INITIAL_STATE",

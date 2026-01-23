@@ -46,6 +46,19 @@ const FormContact = ({ onHandleActionsButtons }) => {
       key: "modalGeneral",
       payload: { isOpenModal: false, nameComponentContent: "loader" },
     });
+    setInitialState({
+      type: "SET_INITIAL_STATE",
+      key: "modalGeneral",
+      payload: {
+        isOpenModal: true,
+        nameComponentContent: "alertCard",
+        payload: {
+          title: "Muy bien!",
+          description: "Amigo agregado",
+          type: "success",
+        },
+      },
+    });
   };
 
   const validate = () => {
@@ -65,43 +78,46 @@ const FormContact = ({ onHandleActionsButtons }) => {
     e.preventDefault();
     if (!validate()) return;
 
-    setInitialState({
-      type: "SET_INITIAL_STATE",
-      key: "modalGeneral",
-      payload: { isOpenModal: true, nameComponentContent: "loader" },
-    });
+    // setInitialState({
+    //   type: "SET_INITIAL_STATE",
+    //   key: "modalGeneral",
+    //   payload: { isOpenModal: true, nameComponentContent: "loader" },
+    // });
 
     const data = await authController.get.userIdConnected(payload.email);
 
     if (data && data.id) {
       setUserFound(data);
-      setInitialState({
-        type: "SET_INITIAL_STATE",
-        key: "modalGeneral",
-        payload: {
-          isOpenModal: true,
-          nameComponentContent: "alertCard",
-          payload: {
-            title: "Perfecto!",
-            description: "Tu amigo a sido encontrado",
-            type: "success",
-          },
-        },
-      });
+      // setInitialState({
+      //   type: "SET_INITIAL_STATE",
+      //   key: "modalGeneral",
+      //   payload: {
+      //     isOpenModal: true,
+      //     nameComponentContent: "alertCard",
+      //     payload: {
+      //       title: "Perfecto!",
+      //       description: "Tu amigo a sido encontrado",
+      //       type: "success",
+      //     },
+      //   },
+      // });
     } else {
-      setInitialState({
-        type: "SET_INITIAL_STATE",
-        key: "modalGeneral",
-        payload: {
-          isOpenModal: true,
-          nameComponentContent: "alertCard",
-          payload: {
-            title: "Lo siento",
-            description: "Tu amigo no esta registrado aun",
-            type: "error",
-          },
-        },
-      });
+      alert("Tu amigo no esta registrado aun");
+      setUserFound("");
+
+      // setInitialState({
+      //   type: "SET_INITIAL_STATE",
+      //   key: "modalGeneral",
+      //   payload: {
+      //     isOpenModal: true,
+      //     nameComponentContent: "alertCard",
+      //     payload: {
+      //       title: "Lo siento",
+      //       description: "Tu amigo no esta registrado aun",
+      //       type: "error",
+      //     },
+      //   },
+      // });
     }
   };
 
