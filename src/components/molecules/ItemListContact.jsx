@@ -10,6 +10,7 @@ export default function ItemListContact({
   sendRequestContact,
   onSearchContact,
   idUser,
+  item,
   onAddContactList,
   onActionButtonItem,
   itemPayloadContact,
@@ -40,7 +41,7 @@ export default function ItemListContact({
               <Button
                 color="bg-[#1AAD5E]"
                 className="px-[6px] h-9 mr-auto flex justify-center items-center "
-                onClick={() => onActionButtonItem(idUser)}
+                onClick={() => onActionButtonItem(idUser, item)}
               >
                 <IconItem nameIcon="emailFast" size={1} />
               </Button>

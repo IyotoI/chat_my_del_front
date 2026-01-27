@@ -51,7 +51,7 @@ const ContactOrganism = forwardRef(
       contactsList,
       itemPayloadContact,
     },
-    ref
+    ref,
   ) => {
     // const idSocketUser = localStorage.getItem("idSocket");
 
@@ -62,6 +62,7 @@ const ContactOrganism = forwardRef(
           onViewConnectedUsers={onViewConnectedUsers}
           onOpenModal={onOpenModal}
           onExitApp={onExitApp}
+          onEnableNotifications={onEnableNotifications}
         />
         <div className="h-[calc(100dvh-93px)] overflow-y-auto">
           {itemsContact.length ? (
@@ -72,6 +73,7 @@ const ContactOrganism = forwardRef(
                   idUser={item.contact.id}
                   userName={item.contact.userName}
                   email={item.contact.email}
+                  item={item}
                   onActionButtonItem={onActionButtonItem}
                 />
               </>
@@ -84,7 +86,7 @@ const ContactOrganism = forwardRef(
         </div>
       </div>
     );
-  }
+  },
 );
 
 export default ContactOrganism;

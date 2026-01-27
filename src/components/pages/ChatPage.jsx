@@ -38,6 +38,8 @@ export default function ChatPage() {
       return;
     }
 
+    console.log(state);
+
     const idSocket2 = localStorage.getItem("idSocket");
     const keyRoom = localStorage.getItem("keyRoom");
 
@@ -51,11 +53,27 @@ export default function ChatPage() {
     //   idRoom: idRoomChat,
     // });
 
+    const reg = await navigator.serviceWorker.register("/serviceWorker.js", {
+      scope: "/",
+    });
+
+    const sub = await reg.pushManager.subscribe({
+      userVisibleOnly: true,
+      applicationServerKey: convertUrlBase64ToUint8Array(VITE_PUBLIC_VAPID_KEY),
+    });
+
     socket.emit("chat:message", {
       idReceiver: state.idRoomChat,
       message: fieldChat,
       idSocket2,
+      subscription: sub,
+      idUser: localStorage.getItem("idUser"),
     });
+
+    // socket.emit("notification", {
+    //   subscription: state.subscription,
+    //   message: fieldChat,
+    // });
 
     socket.emit("chat:fieldWriting", {
       idReceiver: state.idRoomChat,
@@ -184,6 +202,7 @@ export default function ChatPage() {
 
     return () => {
       socket.off("join-room");
+      socket.off("chat:message ");
     };
   }, []);
 

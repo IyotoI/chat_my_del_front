@@ -20,6 +20,8 @@ export default function ContactPage() {
   };
   const [conversation, setConversation] = useState([]);
   const [idRoomChat, setIdRoomChat] = useState("");
+  const VITE_PUBLIC_VAPID_KEY = import.meta.env.VITE_PUBLIC_VAPID_KEY;
+  const VITE_URL_BACKEND_CHAT = import.meta.env.VITE_URL_BACKEND_CHAT;
 
   useEffect(() => {
     getAllContacts();
@@ -128,9 +130,13 @@ export default function ContactPage() {
     return data;
   };
 
-  const actionButtonItem = async (idUserReceptor) => {
+  const actionButtonItem = async (...data) => {
+    verify();
+    const idUserReceptor = data[0];
     const idUserEmisor = localStorage.getItem("idUser");
     const participants = idUserEmisor + "," + idUserReceptor;
+
+    console.log(data[1].contact.subscription);
 
     try {
       const { id, conversation } = await getRoom(participants);
@@ -138,8 +144,14 @@ export default function ContactPage() {
         idsoketUser: idUserEmisor,
         IdSocketReceiver: id,
       });
+
       navigate("/chat", {
-        state: { participants, conversation, idRoomChat: id },
+        state: {
+          participants,
+          conversation,
+          idRoomChat: id,
+          subscription: data[1].contact.subscription,
+        },
       });
     } catch (error) {
       const { id, conversation } = await createRoom(participants);
@@ -148,9 +160,99 @@ export default function ContactPage() {
         IdSocketReceiver: id,
       });
       navigate("/chat", {
-        state: { participants, conversation, idRoomChat: id },
+        state: {
+          participants,
+          conversation,
+          idRoomChat: id,
+          subscription: data[1].contact.subscription,
+        },
       });
     }
+  };
+
+  const convertUrlBase64ToUint8Array = (base64String) => {
+    const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
+    const base64 = (base64String + padding)
+      .replace(/-/g, "+")
+      .replace(/_/g, "/");
+
+    const rawData = atob(base64);
+    return Uint8Array.from([...rawData].map((c) => c.charCodeAt(0)));
+  };
+
+  const verify = async () => {
+    const existsRegisterServiceWorker =
+      await navigator.serviceWorker.getRegistration();
+    console.log(
+      "🚀 ~ verify ~ existsRegisterServiceWorker:",
+      existsRegisterServiceWorker,
+    );
+
+    // if (existsRegisterServiceWorker) {
+    //   console.log("Ya hay un service worker registrado");
+    //   return existsRegisterServiceWorker;
+    // }
+  };
+
+  const registerServiceWorker = async () => {
+    // await verify();
+
+    const reg = await navigator.serviceWorker.register("/serviceWorker.js", {
+      scope: "/",
+    });
+
+    const subscription = await reg.pushManager.subscribe({
+      userVisibleOnly: true,
+      applicationServerKey: convertUrlBase64ToUint8Array(VITE_PUBLIC_VAPID_KEY),
+    });
+
+    const data = {
+      subscription,
+      idUser: localStorage.getItem("idUser"),
+    };
+
+    socket.emit("notification", data);
+
+    // const res = await fetch(
+    //   `${VITE_URL_BACKEND_CHAT}/api/auth/login/${localStorage.getItem("idUser")}`,
+    //   {
+    //     method: "PUT",
+    //     body: JSON.stringify({
+    //       subscription: sub,
+    //     }),
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //   },
+    // );
+    // console.log("🚀 ~ registerServiceWorker ~ res:", res);
+
+    // console.log("🚀 ~ registerServiceWorker ~ sub:", sub);
+
+    // await fetch(`${VITE_URL_BACKEND_CHAT}/suscription`, {
+    //   method: "POST",
+    //   body: JSON.stringify({
+    //     idSocket: localStorage.getItem("idSocket"),
+    //     subscription: sub,
+    //   }),
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // });
+  };
+
+  const enableNotifications = async () => {
+    const permissionNotificationResponse =
+      await Notification.requestPermission();
+
+    if (permissionNotificationResponse !== "granted") {
+      alert("Debes permitir las notificaciones");
+      return;
+    }
+
+    await registerServiceWorker();
+
+    alert("Las notificaciones ya estan activadas");
   };
 
   const openModal = () => {
@@ -181,6 +283,7 @@ export default function ContactPage() {
         onOpenModal={openModal}
         onExitApp={exitApp}
         onActionButtonItem={actionButtonItem}
+        onEnableNotifications={enableNotifications}
       />
     </ContactTemplate>
   );
