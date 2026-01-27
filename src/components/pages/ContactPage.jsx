@@ -38,17 +38,19 @@ export default function ContactPage() {
       payload: { isOpenModal: true, nameComponentContent: "loader" },
     });
     const data = await authController.get.userIdConnected(payload);
-    setUserFound(data);
-    setInitialState({
-      type: "SET_INITIAL_STATE",
-      key: "modalGeneral",
-      payload: { isOpenModal: false, nameComponentContent: "loader" },
-    });
-    setInitialState({
-      type: "SET_INITIAL_STATE",
-      key: "modalGeneral",
-      payload: { isOpenModal: true, nameComponentContent: "alertCard" },
-    });
+    console.log("🚀 ~ searchContact ~ data:", data);
+    // console.log("🚀 ~ searchContact ~ data:", data);
+    // setUserFound(data);
+    // setInitialState({
+    //   type: "SET_INITIAL_STATE",
+    //   key: "modalGeneral",
+    //   payload: { isOpenModal: false, nameComponentContent: "loader" },
+    // });
+    // setInitialState({
+    //   type: "SET_INITIAL_STATE",
+    //   key: "modalGeneral",
+    //   payload: { isOpenModal: true, nameComponentContent: "alertCard" },
+    // });
   };
 
   const addContactList = async () => {
@@ -132,7 +134,7 @@ export default function ContactPage() {
 
   const actionButtonItem = async (...data) => {
     verify();
-    const idUserReceptor = data[0];
+    const idUserReceptor = data[1].contact._id;
     const idUserEmisor = localStorage.getItem("idUser");
     const participants = idUserEmisor + "," + idUserReceptor;
 
@@ -206,26 +208,26 @@ export default function ContactPage() {
       applicationServerKey: convertUrlBase64ToUint8Array(VITE_PUBLIC_VAPID_KEY),
     });
 
-    const data = {
-      subscription,
-      idUser: localStorage.getItem("idUser"),
-    };
+    // const data = {
+    //   subscription,
+    //   idUser: localStorage.getItem("idUser"),
+    // };
 
-    socket.emit("notification", data);
+    // socket.emit("notification", data);
 
-    // const res = await fetch(
-    //   `${VITE_URL_BACKEND_CHAT}/api/auth/login/${localStorage.getItem("idUser")}`,
-    //   {
-    //     method: "PUT",
-    //     body: JSON.stringify({
-    //       subscription: sub,
-    //     }),
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //   },
-    // );
-    // console.log("🚀 ~ registerServiceWorker ~ res:", res);
+    const res = await fetch(
+      `${VITE_URL_BACKEND_CHAT}/api/auth/login/${localStorage.getItem("idUser")}`,
+      {
+        method: "PUT",
+        body: JSON.stringify({
+          subscription: subscription,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
+    console.log("🚀 ~ registerServiceWorker ~ res:", res);
 
     // console.log("🚀 ~ registerServiceWorker ~ sub:", sub);
 

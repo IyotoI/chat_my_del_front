@@ -97,6 +97,5 @@ const authController = {
     },
   },
 };
-console.log("🚀 ~ authController.post.login:", authController.post.login);
 
 export default authController;

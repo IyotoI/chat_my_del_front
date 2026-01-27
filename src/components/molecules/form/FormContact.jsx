@@ -28,7 +28,7 @@ const FormContact = ({ onHandleActionsButtons }) => {
       payload: { isOpenModal: true, nameComponentContent: "loader" },
     });
     const data = await contactController.post.one({
-      ...userFound,
+      contact: userFound._id,
       user: idUser,
     });
     setInitialState({
@@ -86,8 +86,8 @@ const FormContact = ({ onHandleActionsButtons }) => {
 
     const data = await authController.get.userIdConnected(payload.email);
 
-    if (data && data.id) {
-      setUserFound(data);
+    if (data.data && data.data._id) {
+      setUserFound(data.data);
       // setInitialState({
       //   type: "SET_INITIAL_STATE",
       //   key: "modalGeneral",

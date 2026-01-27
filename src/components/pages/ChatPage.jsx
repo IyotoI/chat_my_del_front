@@ -53,20 +53,20 @@ export default function ChatPage() {
     //   idRoom: idRoomChat,
     // });
 
-    const reg = await navigator.serviceWorker.register("/serviceWorker.js", {
-      scope: "/",
-    });
+    // const reg = await navigator.serviceWorker.register("/serviceWorker.js", {
+    //   scope: "/",
+    // });
 
-    const sub = await reg.pushManager.subscribe({
-      userVisibleOnly: true,
-      applicationServerKey: convertUrlBase64ToUint8Array(VITE_PUBLIC_VAPID_KEY),
-    });
+    // const sub = await reg.pushManager.subscribe({
+    //   userVisibleOnly: true,
+    //   applicationServerKey: convertUrlBase64ToUint8Array(VITE_PUBLIC_VAPID_KEY),
+    // });
 
     socket.emit("chat:message", {
       idReceiver: state.idRoomChat,
       message: fieldChat,
       idSocket2,
-      subscription: sub,
+      subscription: state.subscription,
       idUser: localStorage.getItem("idUser"),
     });
 
