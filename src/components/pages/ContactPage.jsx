@@ -25,6 +25,7 @@ export default function ContactPage() {
 
   useEffect(() => {
     getAllContacts();
+    enableNotifications();
   }, []);
 
   const viewConnectedUsers = () => {
@@ -254,7 +255,7 @@ export default function ContactPage() {
 
     await registerServiceWorker();
 
-    alert("Las notificaciones ya estan activadas");
+    // alert("Las notificaciones ya estan activadas");
   };
 
   const openModal = () => {
