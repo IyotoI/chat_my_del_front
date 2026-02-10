@@ -16,8 +16,9 @@ const ChatOrganism = forwardRef(
       onExitChat,
       onGoBack,
       onEnableNotifications,
+      contactSelected,
     },
-    ref
+    ref,
   ) => {
     const idSocketUser = localStorage.getItem("idSocket");
 
@@ -27,6 +28,7 @@ const ChatOrganism = forwardRef(
         <div className="p-2 bg-white ">
           <TopChat
             isFieldWriting={isFieldWriting}
+            contactSelected={contactSelected}
             onExitChat={onExitChat}
             onGoBack={onGoBack}
             onEnableNotifications={onEnableNotifications}
@@ -70,7 +72,7 @@ const ChatOrganism = forwardRef(
         </div>
       </>
     );
-  }
+  },
 );
 
 export default ChatOrganism;

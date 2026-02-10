@@ -7,6 +7,7 @@ export default function TopChat({
   onGoBack,
   onExitChat,
   onEnableNotifications,
+  contactSelected,
 }) {
   return (
     <div className="flex justify-between">
@@ -28,7 +29,7 @@ export default function TopChat({
         <div
           className={`${isFieldWriting ? "leading-[1.2]" : "leading-[1.5]"}`}
         >
-          <div className="text-[1.3rem]">Amigo</div>
+          <div className="text-[1.3rem]">{contactSelected}</div>
           {isFieldWriting && (
             <div className="text-[0.9rem] text-[#1AAD5E]">Escribiendo...</div>
           )}

@@ -13,6 +13,7 @@ export default function ChatPage() {
   const [idRoomChat, setIdRoomChat] = useState("");
   const [fieldChat, setFieldChat] = useState("");
   const [conversation, setConversation] = useState([]);
+  const [contactSelected, setContactSelected] = useState("Amigo");
   const documentoRef = useRef(null);
   const refListChats = useRef(null);
   const [messagesChat, setMessagesChat] = useState([]);
@@ -166,6 +167,7 @@ export default function ChatPage() {
 
     if (!socket) return;
     setConversation(state.conversation);
+    setContactSelected(state.userNameContact);
     // getRoom(state.participants);
 
     socket.on("chat:message", ({ idReceiver, message, idSocket2 }) => {
@@ -220,6 +222,7 @@ export default function ChatPage() {
         onExitChat={exitChat}
         onGoBack={goBack}
         onEnableNotifications={enableNotifications}
+        contactSelected={contactSelected}
       />
     </ChatTemplate>
   );

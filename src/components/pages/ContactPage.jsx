@@ -139,8 +139,6 @@ export default function ContactPage() {
     const idUserEmisor = localStorage.getItem("idUser");
     const participants = idUserEmisor + "," + idUserReceptor;
 
-    console.log(data[1].contact.subscription);
-
     try {
       const { id, conversation } = await getRoom(participants);
       socket.emit("join-room", {
@@ -154,6 +152,7 @@ export default function ContactPage() {
           conversation,
           idRoomChat: id,
           subscription: data[1].contact.subscription,
+          userNameContact: data[1].contact.userName,
         },
       });
     } catch (error) {
