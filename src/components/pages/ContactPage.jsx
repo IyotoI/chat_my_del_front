@@ -134,6 +134,7 @@ export default function ContactPage() {
   };
 
   const actionButtonItem = async (...data) => {
+    // return
     verify();
     const idUserReceptor = data[1].contact._id;
     const idUserEmisor = localStorage.getItem("idUser");
@@ -145,6 +146,7 @@ export default function ContactPage() {
         idsoketUser: idUserEmisor,
         IdSocketReceiver: id,
       });
+      console.log("🚀 ~ actionButtonItem ~ data:", data)
 
       navigate("/chat", {
         state: {
@@ -167,6 +169,7 @@ export default function ContactPage() {
           conversation,
           idRoomChat: id,
           subscription: data[1].contact.subscription,
+          userNameContact: data[1].contact.userName,
         },
       });
     }

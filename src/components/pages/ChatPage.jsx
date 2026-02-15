@@ -167,6 +167,8 @@ export default function ChatPage() {
   useEffect(() => {
 
     if (!socket) return;
+    console.log('state:',state);
+    
     setConversation(state.conversation);
     setContactSelected(state.userNameContact);
     getRoom(state.participants);
