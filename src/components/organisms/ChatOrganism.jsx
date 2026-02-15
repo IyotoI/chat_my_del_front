@@ -21,6 +21,7 @@ const ChatOrganism = forwardRef(
     ref,
   ) => {
     const idSocketUser = localStorage.getItem("idSocket");
+    const idUser = localStorage.getItem("idUser");
 
     return (
       <>
@@ -41,17 +42,19 @@ const ChatOrganism = forwardRef(
         >
           {conversation.map((value, index) => {
             return (
+              
               <div
                 key={index}
                 className={`${
-                  value.idSocket2 === idSocketUser
+                  value.user === idUser
                     ? "flex justify-end"
                     : "flex justify-start"
                 } mb-3`}
               >
+              {/* {JSON.stringify(value.user)} */}
                 <CardMessages
                   className={
-                    value.idSocket2 !== idSocketUser
+                    value.user !== idUser
                       ? "bg-white"
                       : "bg-[#D9FCD2]"
                   }

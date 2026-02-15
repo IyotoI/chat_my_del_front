@@ -44,16 +44,17 @@ export default function ChatPage() {
     const idSocket2 = localStorage.getItem("idSocket");
     const keyRoom = localStorage.getItem("keyRoom");
 
-    // const { data } = await messagesApi.post({
-    //   message: fieldChat,
-    //   user: localStorage.getItem("idUser"),
-    // });
+    const { data } = await messagesApi.post({
+      message: fieldChat,
+      user: localStorage.getItem("idUser"),
+    });
 
-    // const room = await roomsApi.put({
-    //   conversation: data.id,
-    //   idRoom: idRoomChat,
-    // });
+    const room = await roomsApi.put({
+      conversation: data.id,
+      idRoom:  state.idRoomChat,
+    });
 
+    // console.log(room)
     // const reg = await navigator.serviceWorker.register("/serviceWorker.js", {
     //   scope: "/",
     // });
@@ -68,7 +69,7 @@ export default function ChatPage() {
       message: fieldChat,
       idSocket2,
       subscription: state.subscription,
-      idUser: localStorage.getItem("idUser"),
+      user: localStorage.getItem("idUser"),
     });
 
     // socket.emit("notification", {
@@ -151,6 +152,7 @@ export default function ChatPage() {
 
   const getRoom = async (participants) => {
     const { data } = await roomsApi.getByParticipants(participants);
+    console.log("🚀 ~ getRoom ~ data:", data)
     setConversation(data.conversation);
     setIdRoomChat(data.id);
   };
@@ -163,16 +165,15 @@ export default function ChatPage() {
 
   /* Sokets */
   useEffect(() => {
-    // refListChats.current.scrollTop = refListChats.current.scrollHeight;
 
     if (!socket) return;
     setConversation(state.conversation);
     setContactSelected(state.userNameContact);
-    // getRoom(state.participants);
+    getRoom(state.participants);
 
-    socket.on("chat:message", ({ idReceiver, message, idSocket2 }) => {
+    socket.on("chat:message", ({ idReceiver, message, idSocket2, user }) => {
       const idSocket3 = localStorage.getItem("idSocket");
-      const messageUser = { message, idSocket2, idSocket3 };
+      const messageUser = { message, idSocket2, idSocket3, user };
       // setMessagesChat((prev) => [...prev, messageUser]);
       setConversation((prev) => [...prev, messageUser]);
     });
