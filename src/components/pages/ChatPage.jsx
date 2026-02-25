@@ -165,11 +165,10 @@ export default function ChatPage() {
 
   /* Sokets */
   useEffect(() => {
-    if (contactSelected === "Amigo") {
-      navigate("/login");
-      return;
-    }
-
+    // if (contactSelected === "Amigo") {
+    //   navigate("/login");
+    //   return;
+    // }
     if (!socket) return;
 
     setConversation(state.conversation);
@@ -181,6 +180,7 @@ export default function ChatPage() {
       const messageUser = { message, idSocket2, idSocket3, user };
       // setMessagesChat((prev) => [...prev, messageUser]);
       setConversation((prev) => [...prev, messageUser]);
+      refListChats.current.scrollTop = refListChats.current.scrollHeight;
     });
 
     socket.on("join-room", (value) => {
