@@ -23,7 +23,10 @@ const contactController = {
           method: "GET",
           credentials: "include",
         });
-
+        if (res.status === 401) {
+          window.location.href = "/login";
+          return;
+        }
         const data = await res.json();
 
         return data;
