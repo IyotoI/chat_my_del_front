@@ -51,7 +51,7 @@ export default function ChatPage() {
 
     const room = await roomsApi.put({
       conversation: data.id,
-      idRoom:  state.idRoomChat,
+      idRoom: state.idRoomChat,
     });
 
     // console.log(room)
@@ -152,7 +152,7 @@ export default function ChatPage() {
 
   const getRoom = async (participants) => {
     const { data } = await roomsApi.getByParticipants(participants);
-    console.log("🚀 ~ getRoom ~ data:", data)
+    console.log("🚀 ~ getRoom ~ data:", data);
     setConversation(data.conversation);
     setIdRoomChat(data.id);
   };
@@ -165,10 +165,13 @@ export default function ChatPage() {
 
   /* Sokets */
   useEffect(() => {
+    if (contactSelected === "Amigo") {
+      navigate("/login");
+      return;
+    }
 
     if (!socket) return;
-    console.log('state:',state);
-    
+
     setConversation(state.conversation);
     setContactSelected(state.userNameContact);
     getRoom(state.participants);
