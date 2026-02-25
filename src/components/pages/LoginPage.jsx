@@ -57,6 +57,7 @@ export default function LoginPage() {
       payload: { isOpenModal: true, nameComponentContent: "loader" },
     });
     const data = await authController.post.login(payload);
+    localStorage.setItem("userData", JSON.stringify(data));
 
     if (data && !data.id) {
       setInitialState({

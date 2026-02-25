@@ -36,6 +36,7 @@ const ContactOrganism = forwardRef(
       messagesChat,
       ref2,
       onExitChat,
+      userProfile,
       onEnableNotifications,
       itemsContact,
       onViewConnectedUsers,
@@ -48,6 +49,8 @@ const ContactOrganism = forwardRef(
       onOpenModal,
       onExitApp,
       onActionButtonItem,
+      onViewProfile,
+      onCloseWindowProfile,
       contactsList,
       itemPayloadContact,
     },
@@ -62,7 +65,10 @@ const ContactOrganism = forwardRef(
           onViewConnectedUsers={onViewConnectedUsers}
           onOpenModal={onOpenModal}
           onExitApp={onExitApp}
+          userProfile={userProfile}
+          onViewProfile={onViewProfile}
           onEnableNotifications={onEnableNotifications}
+          onCloseWindowProfile={onCloseWindowProfile}
         />
         <div className="h-[calc(100dvh-93px)] overflow-y-auto">
           {itemsContact.length ? (

@@ -16,6 +16,7 @@ import {
   mdiCheckCircleOutline,
   mdiCloseCircleOutline,
   mdiArrowLeft,
+  mdiBadgeAccount,
 } from "@mdi/js";
 
 export default function IconItem({ color, className, nameIcon, size = 1.2 }) {
@@ -49,6 +50,8 @@ export default function IconItem({ color, className, nameIcon, size = 1.2 }) {
     icnItm = mdiCloseCircleOutline;
   } else if (nameIcon === "arrowLeft") {
     icnItm = mdiArrowLeft;
+  } else if (nameIcon === "badgeAccount") {
+    icnItm = mdiBadgeAccount;
   } else {
     icnItm = mdiTooltipImageOutline;
   }

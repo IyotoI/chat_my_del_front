@@ -15,6 +15,7 @@ export default function ContactPage() {
   const [payload, setPayload] = useState("");
   const [userFound, setUserFound] = useState("");
   const [contactsList, setContactsList] = useState([]);
+  const [userProfile, setUserProfile] = useState({});
   const itemPayloadContact = {
     key: "sendMessege",
   };
@@ -146,7 +147,7 @@ export default function ContactPage() {
         idsoketUser: idUserEmisor,
         IdSocketReceiver: id,
       });
-      console.log("🚀 ~ actionButtonItem ~ data:", data)
+      console.log("🚀 ~ actionButtonItem ~ data:", data);
 
       navigate("/chat", {
         state: {
@@ -273,9 +274,27 @@ export default function ContactPage() {
     navigate("/login");
   };
 
+  const viewProfile = () => {
+    const userData = JSON.parse(localStorage.getItem("userData"));
+    const email = userData.email;
+    const userName = userData.userName;
+    setUserProfile({
+      email,
+      userName,
+    });
+  };
+
+  const closeWindowProfile = () => {
+    setUserProfile({
+      email: "",
+      userName: "",
+    });
+  };
+
   return (
     <ContactTemplate>
       <ContactOrganism
+        userProfile={userProfile}
         itemPayloadContact={itemPayloadContact}
         sendRequestContact={sendRequestContact}
         setPayload={setPayload}
@@ -289,6 +308,8 @@ export default function ContactPage() {
         onExitApp={exitApp}
         onActionButtonItem={actionButtonItem}
         onEnableNotifications={enableNotifications}
+        onViewProfile={viewProfile}
+        onCloseWindowProfile={closeWindowProfile}
       />
     </ContactTemplate>
   );
