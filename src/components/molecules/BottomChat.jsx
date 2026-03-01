@@ -6,7 +6,7 @@ import IconItem from "../atoms/Icon";
 const BottomChat = forwardRef(
   ({ handleChat, fieldChat, setFieldChat }, ref) => {
     return (
-      <div className="flex">
+      <form className="flex" onSubmit={handleChat}>
         <Input
           className="bg-white px-5 mr-2 text-black shadow-[0px_3px_8px_-4px_#777777] border-0"
           placeholder="Mensaje"
@@ -14,12 +14,12 @@ const BottomChat = forwardRef(
           onChange={(e) => setFieldChat(e.target.value)}
           ref={ref}
         />
-        <Button color="bg-[#1AAD5E]" className="px-[11px]" onClick={handleChat}>
+        <Button type="submit" color="bg-[#1AAD5E]" className="px-[11px]">
           <IconItem nameIcon="send" />
         </Button>
-      </div>
+      </form>
     );
-  }
+  },
 );
 
 export default BottomChat;

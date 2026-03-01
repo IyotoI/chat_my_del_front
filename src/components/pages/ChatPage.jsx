@@ -34,7 +34,8 @@ export default function ChatPage() {
     });
   };
 
-  const handleChat = async () => {
+  const handleChat = async (e) => {
+    e.preventDefault();
     if (fieldChat === "") {
       return;
     }
