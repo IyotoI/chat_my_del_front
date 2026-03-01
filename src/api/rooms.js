@@ -3,7 +3,6 @@ const path = "rooms";
 
 const roomsApi = {
   getByParticipants: async (participants) => {
-    console.log("🚀 ~ participants:", participants);
     const res = await fetch(
       `${VITE_URL_BACKEND_CHAT}/api/${path}/${participants}`,
       {

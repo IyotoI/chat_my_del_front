@@ -17,7 +17,10 @@ export default function ItemListContact({
 }) {
   const { pathname } = useLocation();
   return (
-    <div className={`${className}  py-3  flex`}>
+    <div
+      onClick={() => onActionButtonItem(idUser, item)}
+      className={`${className}  py-3  flex active:bg-gray-200`}
+    >
       <div className="w-[47px] h-[47px] rounded-full bg-[#CFD8DF] mr-2 border border-[#CFD8DF] flex justify-center items-center overflow-hidden">
         {/* <IconItem nameIcon="account" className="text-[#1AAD5E]" /> */}
         <IconItem color="white" nameIcon="account" size={1.4} />
@@ -38,13 +41,14 @@ export default function ItemListContact({
                 <IconItem nameIcon="sendCheck" size={1} />
               </Button>
             ) : (
-              <Button
-                color="bg-[#1AAD5E]"
-                className="px-[6px] h-9 mr-auto flex justify-center items-center "
-                onClick={() => onActionButtonItem(idUser, item)}
-              >
-                <IconItem nameIcon="emailFast" size={1} />
-              </Button>
+              // <Button
+              //   color="bg-[#1AAD5E]"
+              //   className="px-[6px] h-9 mr-auto flex justify-center items-center "
+              //   onClick={() => onActionButtonItem(idUser, item)}
+              // >
+              //   <IconItem nameIcon="emailFast" size={1} />
+              // </Button>
+              <div></div>
             )}
           </div>
         )}

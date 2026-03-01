@@ -40,8 +40,6 @@ export default function ChatPage() {
       return;
     }
 
-    console.log(state);
-
     const idSocket2 = localStorage.getItem("idSocket");
     const keyRoom = localStorage.getItem("keyRoom");
 
@@ -153,7 +151,6 @@ export default function ChatPage() {
 
   const getRoom = async (participants) => {
     const { data } = await roomsApi.getByParticipants(participants);
-    console.log("🚀 ~ getRoom ~ data:", data);
     setConversation(data.conversation);
     setIdRoomChat(data.id);
   };

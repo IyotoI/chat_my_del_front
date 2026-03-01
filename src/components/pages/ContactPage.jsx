@@ -40,8 +40,6 @@ export default function ContactPage() {
       payload: { isOpenModal: true, nameComponentContent: "loader" },
     });
     const data = await authController.get.userIdConnected(payload);
-    console.log("🚀 ~ searchContact ~ data:", data);
-    // console.log("🚀 ~ searchContact ~ data:", data);
     // setUserFound(data);
     // setInitialState({
     //   type: "SET_INITIAL_STATE",
@@ -147,7 +145,6 @@ export default function ContactPage() {
         idsoketUser: idUserEmisor,
         IdSocketReceiver: id,
       });
-      console.log("🚀 ~ actionButtonItem ~ data:", data);
 
       navigate("/chat", {
         state: {
@@ -189,10 +186,6 @@ export default function ContactPage() {
   const verify = async () => {
     const existsRegisterServiceWorker =
       await navigator.serviceWorker.getRegistration();
-    console.log(
-      "🚀 ~ verify ~ existsRegisterServiceWorker:",
-      existsRegisterServiceWorker,
-    );
 
     // if (existsRegisterServiceWorker) {
     //   console.log("Ya hay un service worker registrado");
@@ -231,9 +224,6 @@ export default function ContactPage() {
         },
       },
     );
-    console.log("🚀 ~ registerServiceWorker ~ res:", res);
-
-    // console.log("🚀 ~ registerServiceWorker ~ sub:", sub);
 
     // await fetch(`${VITE_URL_BACKEND_CHAT}/suscription`, {
     //   method: "POST",
