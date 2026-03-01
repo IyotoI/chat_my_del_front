@@ -157,6 +157,13 @@ export default function ChatPage() {
     setIdRoomChat(data.id);
   };
 
+  /* Bajar el scroll completamente */
+  const scrollDownCompletely = () => {
+    requestAnimationFrame(() => {
+      refListChats.current.scrollTop = refListChats.current.scrollHeight;
+    });
+  };
+
   useLayoutEffect(() => {
     if (refListChats.current) {
       refListChats.current.scrollTop = refListChats.current.scrollHeight;
@@ -175,12 +182,15 @@ export default function ChatPage() {
     setContactSelected(state.userNameContact);
     getRoom(state.participants);
 
+    scrollDownCompletely();
+
     socket.on("chat:message", ({ idReceiver, message, idSocket2, user }) => {
       const idSocket3 = localStorage.getItem("idSocket");
       const messageUser = { message, idSocket2, idSocket3, user };
       // setMessagesChat((prev) => [...prev, messageUser]);
       setConversation((prev) => [...prev, messageUser]);
-      refListChats.current.scrollTop = refListChats.current.scrollHeight;
+
+      scrollDownCompletely();
     });
 
     socket.on("join-room", (value) => {
