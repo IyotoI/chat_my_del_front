@@ -19,7 +19,7 @@ export default function ItemListContact({
   return (
     <div
       onClick={() => onActionButtonItem(idUser, item)}
-      className={`${className}  py-3  flex active:bg-gray-200`}
+      className={`${className}  py-3  flex active:bg-gray-200 px-4`}
     >
       <div className="w-[47px] h-[47px] rounded-full bg-[#CFD8DF] mr-2 border border-[#CFD8DF] flex justify-center items-center overflow-hidden">
         {/* <IconItem nameIcon="account" className="text-[#1AAD5E]" /> */}

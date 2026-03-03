@@ -61,7 +61,7 @@ const ContactOrganism = forwardRef(
     return (
       <div>
         <TopContact
-          className="mb-5"
+          className="mb-5 px-4"
           onViewConnectedUsers={onViewConnectedUsers}
           onOpenModal={onOpenModal}
           onExitApp={onExitApp}
