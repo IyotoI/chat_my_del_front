@@ -61,6 +61,7 @@ const ContactOrganism = forwardRef(
     return (
       <div>
         <TopContact
+          itemsContactLength={itemsContact.length}
           className="mb-5 px-4"
           onViewConnectedUsers={onViewConnectedUsers}
           onOpenModal={onOpenModal}

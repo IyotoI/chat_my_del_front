@@ -13,6 +13,7 @@ export default function TopContact({
   onExitApp,
   onViewProfile,
   onCloseWindowProfile,
+  itemsContactLength,
 }) {
   const { pathname } = useLocation();
   const roleName = localStorage.getItem("role");
@@ -23,7 +24,9 @@ export default function TopContact({
         <span className="text-[#1AAD5E]">C</span>hatmyd
       </p>
       <div className="flex ">
-        {pathname !== "/userConnected" && (
+        {pathname !== "/userConnected" && !itemsContactLength ? (
+          ""
+        ) : (
           <Button
             color="bg-white"
             className="px-[6px] h-9 flex justify-center items-center mr-3"
