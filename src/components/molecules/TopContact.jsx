@@ -19,37 +19,49 @@ export default function TopContact({
 
   return (
     <div className={`flex justify-between items-center ${className}`}>
-      <p className="text-3xl font-[Arial]">
+      <p className="text-3xl text-[#1AAD5E] font-[Arial] font-bold">
         <span className="text-[#1AAD5E]">C</span>hatmyd
       </p>
       <div className="flex ">
         {pathname !== "/userConnected" && (
           <Button
-            color="bg-[#1AAD5E]"
+            color="bg-white"
             className="px-[6px] h-9 flex justify-center items-center mr-3"
             onClick={onOpenModal}
           >
-            <IconItem nameIcon="accountPlus" size={1} />
+            <IconItem
+              className="text-gray-600"
+              nameIcon="accountPlus"
+              size={1}
+            />
           </Button>
         )}
 
         {roleName === "admin" && (
           <Button
-            color="bg-[#1AAD5E]"
+            color="bg-white"
             className="px-[6px] h-9 flex justify-center items-center mr-3"
             onClick={onViewConnectedUsers}
           >
-            <IconItem nameIcon="accountGroup" size={1} />
+            <IconItem
+              className="text-gray-600"
+              nameIcon="accountGroup"
+              size={1}
+            />
           </Button>
         )}
         {/* Boton - Ver perfil */}
         <div>
           <Button
-            color="bg-[#1AAD5E]"
+            color="bg-white"
             className="px-[6px] h-9 flex justify-center items-center mr-3"
             onClick={onViewProfile}
           >
-            <IconItem nameIcon="badgeAccount" size={1} />
+            <IconItem
+              className="text-gray-600"
+              nameIcon="badgeAccount"
+              size={1}
+            />
           </Button>
 
           {/* <div className="relative">
@@ -92,18 +104,18 @@ export default function TopContact({
           )}
         </div>
         <Button
-          color="bg-[#1AAD5E]"
+          color="bg-white"
           className="px-[6px] h-9 flex justify-center items-center mr-3"
           onClick={onEnableNotifications}
         >
-          <IconItem nameIcon="bell" size={1} />
+          <IconItem className="text-gray-600" nameIcon="bell" size={1} />
         </Button>
         <Button
-          color="bg-[#1AAD5E]"
+          color="bg-white"
           className="px-[6px] h-9 flex justify-center items-center"
           onClick={onExitApp}
         >
-          <IconItem nameIcon="exitToApp" size={1} />
+          <IconItem className="text-gray-600" nameIcon="exitToApp" size={1} />
         </Button>
       </div>
     </div>
