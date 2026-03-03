@@ -165,8 +165,8 @@ export default function ChatPage() {
   };
 
   useLayoutEffect(() => {
-    if (refListChats.current) {
-      refListChats.current.scrollTop = refListChats.current.scrollHeight;
+    if (refListChats) {
+      scrollDownCompletely();
     }
   }, [messagesChat]);
 
