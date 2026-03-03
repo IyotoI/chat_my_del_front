@@ -70,6 +70,7 @@ export default function ChatPage() {
       idSocket2,
       subscription: state.subscription,
       user: localStorage.getItem("idUser"),
+      time: data.createdAt,
     });
 
     // socket.emit("notification", {
@@ -158,7 +159,8 @@ export default function ChatPage() {
   /* Bajar el scroll completamente */
   const scrollDownCompletely = () => {
     requestAnimationFrame(() => {
-      refListChats.current.scrollTop = refListChats.current.scrollHeight;
+      refListChats.current.scrollTop =
+        refListChats.current && refListChats.current.scrollHeight;
     });
   };
 
@@ -182,14 +184,24 @@ export default function ChatPage() {
 
     scrollDownCompletely();
 
-    socket.on("chat:message", ({ idReceiver, message, idSocket2, user }) => {
-      const idSocket3 = localStorage.getItem("idSocket");
-      const messageUser = { message, idSocket2, idSocket3, user };
-      // setMessagesChat((prev) => [...prev, messageUser]);
-      setConversation((prev) => [...prev, messageUser]);
+    socket.on(
+      "chat:message",
+      ({ idReceiver, message, idSocket2, user, time }) => {
+        console.log("🚀 ~ ChatPage ~ time:", time);
+        const idSocket3 = localStorage.getItem("idSocket");
+        const messageUser = {
+          message,
+          idSocket2,
+          idSocket3,
+          user,
+          createdAt: time,
+        };
+        setMessagesChat((prev) => [...prev, messageUser]);
+        setConversation((prev) => [...prev, messageUser]);
 
-      scrollDownCompletely();
-    });
+        scrollDownCompletely();
+      },
+    );
 
     socket.on("join-room", (value) => {
       // if (value === localStorage.getItem("idSocket")) {

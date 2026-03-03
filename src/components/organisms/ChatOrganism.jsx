@@ -23,6 +23,16 @@ const ChatOrganism = forwardRef(
     const idSocketUser = localStorage.getItem("idSocket");
     const idUser = localStorage.getItem("idUser");
 
+    const getTime = (isoDate) => {
+      const date = new Date(isoDate);
+      return new Intl.DateTimeFormat("es-CO", {
+        timeZone: "America/Bogota",
+        hour: "numeric",
+        minute: "2-digit",
+        hour12: true,
+      }).format(date);
+    };
+
     return (
       <>
         {/* Parte superior - chat */}
@@ -42,7 +52,6 @@ const ChatOrganism = forwardRef(
         >
           {conversation.map((value, index) => {
             return (
-              
               <div
                 key={index}
                 className={`${
@@ -51,14 +60,13 @@ const ChatOrganism = forwardRef(
                     : "flex justify-start"
                 } mb-3`}
               >
-              {/* {JSON.stringify(value.user)} */}
+                {/* {JSON.stringify(value.user)} */}
                 <CardMessages
                   className={
-                    value.user !== idUser
-                      ? "bg-white"
-                      : "bg-[#D9FCD2]"
+                    value.user !== idUser ? "bg-white" : "bg-[#D9FCD2]"
                   }
                   message={value.message}
+                  time={getTime(value.createdAt)}
                 />
               </div>
             );
