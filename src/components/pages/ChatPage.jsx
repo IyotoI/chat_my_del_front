@@ -39,6 +39,7 @@ export default function ChatPage() {
     if (fieldChat === "") {
       return;
     }
+    documentoRef.current?.focus();
 
     const idSocket2 = localStorage.getItem("idSocket");
     const keyRoom = localStorage.getItem("keyRoom");
@@ -83,7 +84,6 @@ export default function ChatPage() {
     });
 
     setFieldChat("");
-    documentoRef.current.focus();
   };
 
   const exitChat = () => {
