@@ -8,13 +8,17 @@ const BottomChat = forwardRef(
     return (
       <form className="flex" onSubmit={handleChat}>
         <Input
-          className="bg-white px-5 mr-2 text-black shadow-[0px_3px_8px_-4px_#777777] border-0"
+          className="bg-white h-12 px-5 mr-2 text-black shadow-[0px_3px_8px_-4px_#777777] border-0"
           placeholder="Mensaje"
           value={fieldChat}
           onChange={(e) => setFieldChat(e.target.value)}
           ref={ref}
         />
-        <Button type="submit" color="bg-[#1AAD5E]" className="px-[11px]">
+        <Button
+          type="submit"
+          color="bg-[#1AAD5E]"
+          className="px-[11px] h-12 w-12"
+        >
           <IconItem nameIcon="send" />
         </Button>
       </form>
