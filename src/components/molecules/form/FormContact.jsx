@@ -121,10 +121,20 @@ const FormContact = ({ onHandleActionsButtons }) => {
     }
   };
 
+  const closeModalForm = () => {
+    console.log("ok");
+
+    setInitialState({
+      type: "SET_INITIAL_STATE",
+      key: "modalGeneral",
+      payload: { isOpenModal: false, nameComponentContent: "formContact" },
+    });
+  };
+
   return (
     <div className="text-center md:w-[320px]">
       <div className="flex flex-col">
-        <form className="text-center mt-5" onSubmit={searchContact}>
+        <form className="text-center mt-5 w-75" onSubmit={searchContact}>
           <img src={imgBackground} className="mx-auto w-1/2 mb-12" />
           <div className="mb-6">
             <Input
@@ -146,9 +156,16 @@ const FormContact = ({ onHandleActionsButtons }) => {
               {errors.email ? errors.email : "error"}
             </p>
           </div>
-          <Button color="bg-[#1AAD5E]" type="submit">
-            Buscar amigo
-          </Button>
+          <div className="flex  justify-center gap-2">
+            {listItemsContacts.length > 0 && (
+              <Button color="bg-[#2F2E41]" onClick={() => closeModalForm()}>
+                Cancelar
+              </Button>
+            )}
+            <Button color="bg-[#1AAD5E]" type="submit">
+              Buscar amigo
+            </Button>
+          </div>
         </form>
         {userFound && (
           <>
