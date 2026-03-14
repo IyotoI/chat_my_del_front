@@ -29,7 +29,7 @@ export default function TopContact({
         ) : (
           <Button
             color="bg-white"
-            className="px-[6px] h-9 flex justify-center items-center mr-3"
+            className="px-[6px] h-9 flex justify-center items-center mr-3 active:bg-[#dbdfe5]"
             onClick={onOpenModal}
           >
             <IconItem
@@ -43,7 +43,7 @@ export default function TopContact({
         {roleName === "admin" && (
           <Button
             color="bg-white"
-            className="px-[6px] h-9 flex justify-center items-center mr-3"
+            className="px-[6px] h-9 flex justify-center items-center mr-3 active:bg-[#dbdfe5]"
             onClick={onViewConnectedUsers}
           >
             <IconItem
@@ -57,7 +57,7 @@ export default function TopContact({
         <div>
           <Button
             color="bg-white"
-            className="px-[6px] h-9 flex justify-center items-center mr-3"
+            className="px-[6px] h-9 flex justify-center items-center mr-3 active:bg-[#dbdfe5]"
             onClick={onViewProfile}
           >
             <IconItem
@@ -108,14 +108,14 @@ export default function TopContact({
         </div>
         <Button
           color="bg-white"
-          className="px-[6px] h-9 flex justify-center items-center mr-3"
+          className="px-[6px] h-9 flex justify-center items-center mr-3 active:bg-[#dbdfe5]"
           onClick={onEnableNotifications}
         >
           <IconItem className="text-gray-600" nameIcon="bell" size={1} />
         </Button>
         <Button
           color="bg-white"
-          className="px-[6px] h-9 flex justify-center items-center"
+          className="px-[6px] h-9 flex justify-center items-center active:bg-[#dbdfe5]"
           onClick={onExitApp}
         >
           <IconItem className="text-gray-600" nameIcon="exitToApp" size={1} />
