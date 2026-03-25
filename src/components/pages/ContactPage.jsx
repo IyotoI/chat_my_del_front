@@ -6,6 +6,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useGlobal } from "../../context/GlobalContext";
 import roomsApi from "../../api/rooms";
+import { useMessaging } from "../../hooks/useMessaging";
 
 export default function ContactPage() {
   const { socket, setInitialState, dataUser, listItemsContacts } = useGlobal();
@@ -16,6 +17,7 @@ export default function ContactPage() {
   const [userFound, setUserFound] = useState("");
   const [contactsList, setContactsList] = useState([]);
   const [userProfile, setUserProfile] = useState({});
+  const { requestPermission } = useMessaging();
   const itemPayloadContact = {
     key: "sendMessege",
   };
@@ -24,9 +26,11 @@ export default function ContactPage() {
   const VITE_PUBLIC_VAPID_KEY = import.meta.env.VITE_PUBLIC_VAPID_KEY;
   const VITE_URL_BACKEND_CHAT = import.meta.env.VITE_URL_BACKEND_CHAT;
 
+  // useMessaging();
+
   useEffect(() => {
     getAllContacts();
-    enableNotifications();
+    // enableNotifications();
   }, []);
 
   const viewConnectedUsers = () => {
@@ -237,17 +241,16 @@ export default function ContactPage() {
     // });
   };
 
-  const enableNotifications = async () => {
-    const permissionNotificationResponse =
-      await Notification.requestPermission();
-
-    if (permissionNotificationResponse !== "granted") {
-      alert("Debes permitir las notificaciones");
-      return;
-    }
-
-    await registerServiceWorker();
-
+  const enableNotifications = () => {
+    requestPermission();
+    // useMessaging();
+    // const permissionNotificationResponse =
+    //   await Notification.requestPermission();
+    // if (permissionNotificationResponse !== "granted") {
+    //   alert("Debes permitir las notificaciones");
+    //   return;
+    // }
+    // await registerServiceWorker();
     // alert("Las notificaciones ya estan activadas");
   };
 
