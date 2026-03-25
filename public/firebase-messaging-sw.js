@@ -50,6 +50,7 @@ messaging.onBackgroundMessage((payload) => {
   const notificationOptions = {
     body: payload.data.body,
     icon: payload.data.icon,
+    tag: Date.now().toString(), // evita agrupación
   };
 
   self.registration.showNotification(notificationTitle, notificationOptions);
