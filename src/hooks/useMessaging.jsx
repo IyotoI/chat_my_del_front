@@ -2,9 +2,12 @@ import {
   requestPermissionAndToken,
   onMessageListener,
 } from "../services/firebase/messaging";
-const VITE_URL_BACKEND_CHAT = import.meta.env.VITE_URL_BACKEND_CHAT;
+import { useGlobal } from "../context/GlobalContext";
 
 export const useMessaging = () => {
+  const VITE_URL_BACKEND_CHAT = import.meta.env.VITE_URL_BACKEND_CHAT;
+  const { socket, setInitialState, dataUser, listItemsContacts } = useGlobal();
+
   const requestPermission = async () => {
     const token = await requestPermissionAndToken();
     if (token) {
@@ -20,6 +23,19 @@ export const useMessaging = () => {
           },
         },
       );
+      setInitialState({
+        type: "SET_INITIAL_STATE",
+        key: "modalGeneral",
+        payload: {
+          isOpenModal: true,
+          nameComponentContent: "alertCard",
+          payload: {
+            title: "Perfecto",
+            description: "Las notificaciones estan activas",
+            type: "success",
+          },
+        },
+      });
     }
 
     onMessageListener((payload) => {
