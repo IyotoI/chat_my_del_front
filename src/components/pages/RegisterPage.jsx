@@ -46,27 +46,48 @@ export default function RegisterPage() {
       key: "modalGeneral",
       payload: { isOpenModal: true, nameComponentContent: "loader" },
     });
-    await authController.post.register(payload);
 
-    setInitialState({
-      type: "SET_INITIAL_STATE",
-      key: "modalGeneral",
-      payload: { isOpenModal: false, nameComponentContent: "loader" },
-    });
-    setInitialState({
-      type: "SET_INITIAL_STATE",
-      key: "modalGeneral",
-      payload: {
-        isOpenModal: true,
-        nameComponentContent: "alertCard",
+    const data = await authController.post.register(payload);
+    if (data && data.id) {
+      setInitialState({
+        type: "SET_INITIAL_STATE",
+        key: "modalGeneral",
+        payload: { isOpenModal: false, nameComponentContent: "loader" },
+      });
+      setInitialState({
+        type: "SET_INITIAL_STATE",
+        key: "modalGeneral",
         payload: {
-          title: "Excelente!",
-          description: "Cuenta creada exitosamente",
-          type: "success",
+          isOpenModal: true,
+          nameComponentContent: "alertCard",
+          payload: {
+            title: "Excelente!",
+            description: "Cuenta creada exitosamente",
+            type: "success",
+          },
         },
-      },
-    });
-    navigate("/login");
+      });
+      navigate("/login");
+    } else {
+      setInitialState({
+        type: "SET_INITIAL_STATE",
+        key: "modalGeneral",
+        payload: { isOpenModal: false, nameComponentContent: "loader" },
+      });
+      setInitialState({
+        type: "SET_INITIAL_STATE",
+        key: "modalGeneral",
+        payload: {
+          isOpenModal: true,
+          nameComponentContent: "alertCard",
+          payload: {
+            title: "Ups!",
+            description: "Correo ya esta en uso",
+            type: "error",
+          },
+        },
+      });
+    }
   };
 
   return (
