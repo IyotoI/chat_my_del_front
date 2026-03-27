@@ -78,7 +78,7 @@ export default function TopContact({
         )}
       </div> */}
           {userProfile.email && (
-            <div className=" bg-white rounded-xl shadow-md p-4 gap-4 flex flex-col absolute right-2 text-center">
+            <div className=" bg-white rounded-xl shadow-md py-4 px-5 gap-4 flex flex-col absolute right-2 text-center w-[180px]">
               <div className="w-[80px] h-[80px] rounded-full bg-[#CFD8DF] mx-auto border border-[#CFD8DF] flex justify-center items-center overflow-hidden">
                 {/* <IconItem nameIcon="account" className="text-[#1AAD5E]" /> */}
                 <IconItem color="white" nameIcon="account" size={2.5} />
