@@ -17,6 +17,7 @@ const BottomChat = forwardRef(
         />
         <Button
           onClick={handleChat}
+          onMouseDown={(e) => e.preventDefault()}
           color="bg-[#1AAD5E]"
           className="px-[11px] h-12 w-12"
         >
