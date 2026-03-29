@@ -19,7 +19,7 @@ export default function TopChat({
             onClick={onGoBack}
           > */}
           <Link to="/contact">
-            <IconItem color="#1AAD5E" nameIcon="arrowLeft" size={1} />
+            <IconItem nameIcon="arrowLeft" size={1} />
           </Link>
           {/* </Button> */}
         </div>
@@ -27,7 +27,7 @@ export default function TopChat({
           <IconItem nameIcon="account" className="text-[#1AAD5E]" size={0.9} />
         </div>
         <div
-          className={`${isFieldWriting ? "leading-[1.2]" : "leading-[1.5]"}`}
+          className={`${isFieldWriting ? "leading-[1.2]" : "leading-[1.6]"}`}
         >
           <div className="text-[1.3rem]">{contactSelected}</div>
           {isFieldWriting && (
