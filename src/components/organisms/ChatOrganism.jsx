@@ -2,6 +2,7 @@ import BottomChat from "../molecules/BottomChat";
 import TopChat from "../molecules/TopChat";
 import CardMessages from "../molecules/CardMessages";
 import { forwardRef } from "react";
+import walpapperMobile from "../../assets/images/walpapperMobile.jpeg";
 
 const ChatOrganism = forwardRef(
   (
@@ -49,7 +50,8 @@ const ChatOrganism = forwardRef(
         {/* Conversacion - chat */}
         <div
           ref={ref2}
-          className="flex-1 flex-col flex  bg-[#F5F2EB] px-2 pt-2 overflow-y-auto "
+          style={{ backgroundImage: `url(${walpapperMobile})` }}
+          className="flex-1 flex-col flex  bg-cover bg-center bg-no-repeat   px-2 pt-2 overflow-y-auto "
         >
           {conversation.map((value, index) => {
             return (
@@ -74,7 +76,7 @@ const ChatOrganism = forwardRef(
           })}
         </div>
         {/* Parte inferior - chat */}
-        <div className="p-2 bg-[#F5F2EB]  ">
+        <div className="p-2 bg-[#EBE6E0]  ">
           <BottomChat
             handleChat={handleChat}
             onKeyDown={onKeyDown}
