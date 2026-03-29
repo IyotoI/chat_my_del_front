@@ -35,7 +35,6 @@ export default function ChatPage() {
   };
 
   const handleChat = async (e) => {
-    e.preventDefault();
     if (fieldChat === "") {
       return;
     }
@@ -85,6 +84,13 @@ export default function ChatPage() {
     });
 
     setFieldChat("");
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleChat();
+    }
   };
 
   const exitChat = () => {
@@ -187,7 +193,6 @@ export default function ChatPage() {
     socket.on(
       "chat:message",
       ({ idReceiver, message, idSocket2, user, time }) => {
-        console.log("🚀 ~ ChatPage ~ time:", time);
         const idSocket3 = localStorage.getItem("idSocket");
         const messageUser = {
           message,
@@ -239,6 +244,7 @@ export default function ChatPage() {
       <ChatOrganism
         isFieldWriting={isFieldWriting}
         handleChat={handleChat}
+        onKeyDown={handleKeyDown}
         fieldChat={fieldChat}
         setFieldChat={handleSetFieldChat}
         ref={documentoRef}

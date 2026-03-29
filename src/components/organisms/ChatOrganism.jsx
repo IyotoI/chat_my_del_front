@@ -14,6 +14,7 @@ const ChatOrganism = forwardRef(
       ref2,
       conversation,
       onExitChat,
+      onKeyDown,
       onGoBack,
       onEnableNotifications,
       contactSelected,
@@ -76,6 +77,7 @@ const ChatOrganism = forwardRef(
         <div className="p-2 bg-[#F5F2EB]  ">
           <BottomChat
             handleChat={handleChat}
+            onKeyDown={onKeyDown}
             fieldChat={fieldChat}
             setFieldChat={setFieldChat}
             ref={ref}
