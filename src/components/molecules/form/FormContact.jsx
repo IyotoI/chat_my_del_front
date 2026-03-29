@@ -66,8 +66,8 @@ const FormContact = ({ onHandleActionsButtons }) => {
 
     if (!payload.email) {
       newErrors.email = "El correo es obligatorio";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email)) {
-      newErrors.email = "Correo no válido";
+    } else if (!/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(payload.email)) {
+      newErrors.email = "Correo no válido; solo minusculas";
     }
 
     setErrors(newErrors);
