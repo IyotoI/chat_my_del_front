@@ -10,7 +10,7 @@ export default function TopChat({
   contactSelected,
 }) {
   return (
-    <div className="flex justify-between">
+    <div className="flex justify-between ">
       <div className="flex">
         <div className="mt-1 mr-4 ml-2">
           {/* <Button
