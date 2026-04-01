@@ -38,7 +38,7 @@ const ChatOrganism = forwardRef(
     return (
       <>
         {/* Parte superior - chat */}
-        <div className="p-2 bg-white ">
+        <div className="p-2 bg-white  border-gray-300 border-1">
           <TopChat
             isFieldWriting={isFieldWriting}
             contactSelected={contactSelected}
