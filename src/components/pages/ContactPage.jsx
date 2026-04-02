@@ -137,7 +137,7 @@ export default function ContactPage() {
   };
 
   const actionButtonItem = async (...data) => {
-    // return
+    if (data[2]) return;
     verify();
     const idUserReceptor = data[1].contact._id;
     const idUserEmisor = localStorage.getItem("idUser");
