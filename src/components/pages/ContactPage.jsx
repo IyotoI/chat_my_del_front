@@ -137,7 +137,22 @@ export default function ContactPage() {
   };
 
   const actionButtonItem = async (...data) => {
-    if (data[2]) return;
+    console.log("🚀 ~ actionButtonItem ~ data:", data);
+    if (data[2]) {
+      setInitialState({
+        type: "SET_INITIAL_STATE",
+        key: "modalGeneral",
+        payload: {
+          isOpenModal: true,
+          nameComponentContent: "cardProfile",
+          userSelected: {
+            name: data[1].contact.userName,
+            email: data[1].contact.email,
+          },
+        },
+      });
+      return;
+    }
     verify();
     const idUserReceptor = data[1].contact._id;
     const idUserEmisor = localStorage.getItem("idUser");

@@ -28,14 +28,14 @@ export default function ItemListContact({
       }
       className={`${className}  py-3  flex active:bg-gray-200 px-4`}
     >
-      <div className="w-[47px] selectAvatar h-[47px] rounded-full bg-[#CFD8DF] mr-2 border border-[#CFD8DF] flex justify-center items-center overflow-hidden">
+      <div className="w-[55px] selectAvatar cursor-pointer h-[47px] rounded-full bg-[#CFD8DF] mr-2 border border-[#CFD8DF] flex justify-center items-center overflow-hidden">
         {/* <IconItem nameIcon="account" className="text-[#1AAD5E]" /> */}
         <IconItem color="white" nameIcon="account" size={1.4} />
       </div>
       <div className="flex w-full justify-between">
         <div>
-          <div className="font-bold ">{userName}</div>
-          <div>{email}</div>
+          <div className="font-semibold ">{userName}</div>
+          {/* <div>{email}</div> */}
         </div>
         {pathname === "/contact" && (
           <div>

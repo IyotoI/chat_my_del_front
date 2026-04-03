@@ -2,6 +2,7 @@ import { RiseLoader } from "react-spinners";
 import { useGlobal } from "../../context/GlobalContext";
 import FormContact from "../molecules/form/FormContact";
 import AlertCard from "../molecules/AlertCard";
+import CardProfile from "../molecules/CardProfile";
 
 const Loader = () => {
   return (
@@ -17,6 +18,7 @@ const Loader = () => {
 const componentsMap = {
   loader: <Loader />,
   formContact: <FormContact />,
+  cardProfile: <CardProfile />,
   alertCard: <AlertCard />,
 };
 
@@ -32,8 +34,8 @@ const ModalGeneralOrganism = () => {
           <div
             className={`${
               !["alertCard", "loader"].includes(
-                modalGeneral.nameComponentContent
-              ) && "bg-white p-8 rounded-xl text-center @md:flex-row mx-4"
+                modalGeneral.nameComponentContent,
+              ) && "bg-white px-1 py-8 rounded-xl text-center @md:flex-row mx-4"
             } `}
           >
             {Component && Component}
