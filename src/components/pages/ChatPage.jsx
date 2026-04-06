@@ -83,6 +83,16 @@ export default function ChatPage() {
       idSocket2,
     });
 
+    /* Enviar ultimo mensaje a la vista de contactos */
+    socket.emit("frontend:last-message-sent", {
+      idReceiver: state.idSocket,
+      message: fieldChat,
+      // idSocket2,
+      // subscription: state.subscription,
+      // user: localStorage.getItem("idUser"),
+      // time: data.createdAt,
+    });
+
     setFieldChat("");
   };
 
@@ -182,6 +192,7 @@ export default function ChatPage() {
     //   navigate("/login");
     //   return;
     // }
+
     if (!socket) return;
 
     setConversation(state.conversation);

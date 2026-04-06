@@ -31,6 +31,9 @@ export default function ContactPage() {
   useEffect(() => {
     getAllContacts();
     // enableNotifications();
+    socket.on("backend:last-message-sent", (message) => {
+      console.log("🚀 ~ ContactPage ~ message:", message);
+    });
   }, []);
 
   const viewConnectedUsers = () => {
@@ -172,6 +175,7 @@ export default function ContactPage() {
           idRoomChat: id,
           subscription: data[1].contact.subscription,
           userNameContact: data[1].contact.userName,
+          idSocket: localStorage.getItem("idSocket"),
         },
       });
     } catch (error) {

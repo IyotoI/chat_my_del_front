@@ -39,6 +39,7 @@ export default function RegisterPage() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    const idSocket = localStorage.getItem("idSocket");
 
     if (!validate()) return;
     setInitialState({
@@ -47,7 +48,7 @@ export default function RegisterPage() {
       payload: { isOpenModal: true, nameComponentContent: "loader" },
     });
 
-    const data = await authController.post.register(payload);
+    const data = await authController.post.register({ ...payload, idSocket });
     if (data && data.id) {
       setInitialState({
         type: "SET_INITIAL_STATE",

@@ -15,21 +15,6 @@ export default function LoginPage() {
     password: "",
   });
 
-  useEffect(() => {
-    if (!socket) return;
-
-    socket.on("chat:idSocket", (idSocket) => {
-      const validateIdSoket = localStorage.getItem("idSocket");
-      if (!validateIdSoket) {
-        localStorage.setItem("idSocket", idSocket);
-      }
-    });
-
-    return () => {
-      socket.off("chat:idSocket");
-    };
-  }, [socket]);
-
   const validate = () => {
     const newErrors = {};
 
