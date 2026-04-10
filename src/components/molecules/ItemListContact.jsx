@@ -35,7 +35,7 @@ export default function ItemListContact({
       <div className="flex w-full justify-between">
         <div>
           <div className="font-semibold ">{userName}</div>
-          {/* <div>{email}</div> */}
+          <div className="text-gray-500">{item.lastMessage}</div>
         </div>
         {pathname === "/contact" && (
           <div>

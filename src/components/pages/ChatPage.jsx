@@ -84,9 +84,10 @@ export default function ChatPage() {
     });
 
     /* Enviar ultimo mensaje a la vista de contactos */
-    socket.emit("frontend:last-message-sent", {
-      idReceiver: state.idSocket,
+    socket.emit("frontend:notification-last-message", {
+      idReceiver: state.idRoomChat,
       message: fieldChat,
+      idContact: state.idContact,
       // idSocket2,
       // subscription: state.subscription,
       // user: localStorage.getItem("idUser"),

@@ -29,12 +29,28 @@ export default function ContactPage() {
   // useMessaging();
 
   useEffect(() => {
+    if (!socket) return;
+
     getAllContacts();
     // enableNotifications();
-    socket.on("backend:last-message-sent", (message) => {
-      console.log("🚀 ~ ContactPage ~ message:", message);
+    socket.on("backend:notification-last-message", (data) => {
+      const arr = listItemsContacts.map((itemContact) => {
+        return itemContact.contact._id === data.idContact
+          ? itemContact
+          : { ...itemContact, lastMessage: data.message };
+      });
+
+      setInitialState({
+        type: "SET_INITIAL_STATE",
+        key: "listItemsContacts",
+        payload: arr,
+      });
     });
-  }, []);
+
+    return () => {
+      socket.off("backend:notification-last-message");
+    };
+  }, [socket]);
 
   const viewConnectedUsers = () => {
     navigate("/userConnected");
@@ -140,7 +156,6 @@ export default function ContactPage() {
   };
 
   const actionButtonItem = async (...data) => {
-    console.log("🚀 ~ actionButtonItem ~ data:", data);
     if (data[2]) {
       setInitialState({
         type: "SET_INITIAL_STATE",
@@ -176,7 +191,18 @@ export default function ContactPage() {
           subscription: data[1].contact.subscription,
           userNameContact: data[1].contact.userName,
           idSocket: localStorage.getItem("idSocket"),
+          userNameContact: data[1].contact.userName,
+          idContact: data[1].contact._id,
         },
+      });
+
+      socket.emit("frontend:last-message-sent", {
+        idReceiver: id,
+        // message: fieldChat,
+        // idSocket2,
+        // subscription: state.subscription,
+        // user: localStorage.getItem("idUser"),
+        // time: data.createdAt,
       });
     } catch (error) {
       const { id, conversation } = await createRoom(participants);
