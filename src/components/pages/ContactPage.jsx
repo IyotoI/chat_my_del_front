@@ -49,6 +49,7 @@ export default function ContactPage() {
 
     return () => {
       socket.off("backend:notification-last-message");
+      socket.off("frontend:join-last-message-sent");
     };
   }, [socket]);
 
@@ -175,6 +176,7 @@ export default function ContactPage() {
     const idUserReceptor = data[1].contact._id;
     const idUserEmisor = localStorage.getItem("idUser");
     const participants = idUserEmisor + "," + idUserReceptor;
+    const idSocket = localStorage.getItem("idSocket");
 
     try {
       const { id, conversation } = await getRoom(participants);
@@ -193,17 +195,19 @@ export default function ContactPage() {
           idSocket: localStorage.getItem("idSocket"),
           userNameContact: data[1].contact.userName,
           idContact: data[1].contact._id,
+          idElement: data[1].id,
+          idSocketOrigin: data[1].contact.idSocket,
         },
       });
 
-      socket.emit("frontend:last-message-sent", {
-        idReceiver: id,
-        // message: fieldChat,
-        // idSocket2,
-        // subscription: state.subscription,
-        // user: localStorage.getItem("idUser"),
-        // time: data.createdAt,
-      });
+      // socket.emit("frontend:join-last-message-sent", {
+      //   idReceiver: id,
+      // message: fieldChat,
+      // idSocket2,
+      // subscription: state.subscription,
+      // user: localStorage.getItem("idUser"),
+      // time: data.createdAt,
+      // });
     } catch (error) {
       const { id, conversation } = await createRoom(participants);
       socket.emit("join-room", {

@@ -55,6 +55,31 @@ const contactController = {
       }
     },
   },
+  put: {
+    one: async (payload) => {
+      console.log("🚀 ~ payload:", payload);
+      console.log("ingrese en contact controller put");
+      try {
+        const res = await fetch(
+          `${VITE_URL_BACKEND_CHAT}/api/contact/${payload.idElement}`,
+          {
+            method: "PUT",
+            credentials: "include",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ lastMessage: payload.lastMessage }),
+          },
+        );
+
+        const data = await res.json();
+
+        return data;
+      } catch (error) {
+        console.error("Message server:", error.message);
+      }
+    },
+  },
 };
 
 export default contactController;

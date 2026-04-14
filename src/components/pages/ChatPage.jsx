@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import roomsApi from "../../api/rooms";
 import messagesApi from "../../api/messages";
 import { useLocation } from "react-router-dom";
+import contactController from "../../controllers/contactController";
 
 export default function ChatPage() {
   const { socket, setIsOpen } = useGlobal();
@@ -35,6 +36,7 @@ export default function ChatPage() {
   };
 
   const handleChat = async (e) => {
+    console.log(state);
     if (fieldChat === "") {
       return;
     }
@@ -63,6 +65,11 @@ export default function ChatPage() {
     //   applicationServerKey: convertUrlBase64ToUint8Array(VITE_PUBLIC_VAPID_KEY),
     // });
 
+    await contactController.put.one({
+      idElement: state.idElement,
+      lastMessage: fieldChat,
+    });
+
     socket.emit("chat:message", {
       idReceiver: state.idRoomChat,
       message: fieldChat,
@@ -88,12 +95,13 @@ export default function ChatPage() {
       idReceiver: state.idRoomChat,
       message: fieldChat,
       idContact: state.idContact,
+      idSocket: state.idSocketOrigin,
       // idSocket2,
       // subscription: state.subscription,
       // user: localStorage.getItem("idUser"),
       // time: data.createdAt,
     });
-
+    console.log(state.idSocketOrigin);
     setFieldChat("");
   };
 
