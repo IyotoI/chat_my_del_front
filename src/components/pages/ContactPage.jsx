@@ -47,6 +47,10 @@ export default function ContactPage() {
       });
     });
 
+    socket.emit("frontend:join-last-message-sent", {
+      idUser: localStorage.getItem("idUser"),
+    });
+
     return () => {
       socket.off("backend:notification-last-message");
       socket.off("frontend:join-last-message-sent");
